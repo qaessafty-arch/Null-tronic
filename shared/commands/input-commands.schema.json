@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://null-tech.local/schemas/input-commands.schema.json",
+  "title": "NULL-TECH shared input command protocol",
+  "description": "Messages sent by any non-DOM input source (the Python hand-tracking service) to the application input system over a local WebSocket (default ws://127.0.0.1:8765). Input sources only describe intent; they never modify engineering data. The active tool decides what a command means.",
+  "oneOf": [
+    {
+      "type": "object",
+      "title": "pointer",
+      "required": ["type", "phase", "x", "y"],
+      "properties": {
+        "type": { "const": "pointer" },
+        "phase": { "enum": ["move", "down", "up"] },
+        "x": { "type": "number", "minimum": 0, "maximum": 1, "description": "Normalised horizontal position in the active viewport (0 = left)" },
+        "y": { "type": "number", "minimum": 0, "maximum": 1, "description": "Normalised vertical position in the active viewport (0 = top)" },
+        "hand": { "enum": ["Left", "Right"] },
+        "t": { "type": "number", "description": "Sender timestamp, seconds" }
+      }
+    },
+    {
+      "type": "object",
+      "title": "command",
+      "required": ["type", "name"],
+      "properties": {
+        "type": { "const": "command" },
+        "name": { "enum": ["cancel", "confirm", "reject", "pause", "resume", "undo", "redo", "delete", "rotate"] },
+        "t": { "type": "number" }
+      }
+    },
+    {
+      "type": "object",
+      "title": "zoom",
+      "required": ["type", "factor"],
+      "properties": {
+        "type": { "const": "zoom" },
+        "factor": { "type": "number", "exclusiveMinimum": 0, "description": "Multiplicative zoom about the current pointer (>1 zooms in)" },
+        "t": { "type": "number" }
+      }
+    },
+    {
+      "type": "object",
+      "title": "pan",
+      "required": ["type", "dx", "dy"],
+      "properties": {
+        "type": { "const": "pan" },
+        "dx": { "type": "number", "description": "Normalised viewport delta" },
+        "dy": { "type": "number" },
+        "t": { "type": "number" }
+      }
+    },
+    {
+      "type": "object",
+      "title": "status",
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "status" },
+        "camera": { "enum": ["ok", "unavailable", "disconnected", "permission-denied", "replay"] },
+        "fps": { "type": "number" },
+        "hands": { "type": "integer" },
+        "gesture": { "type": "string" },
+        "paused": { "type": "boolean" },
+        "landmarks": { "type": "array", "description": "Optional list of hands, each a list of 21 [x, y, z] normalised landmarks for visualisation" },
+        "message": { "type": "string" }
+      }
+    }
+  ]
+}
