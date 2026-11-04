@@ -171,13 +171,6 @@ class PlaceTool implements Tool {
     this.last = null;
   }
 
-  private ghost(at: Vec2) {
-    const s = store.get();
-    if (!s.placeType) return null;
-    const c = makeComponent(s.project, s.placeType, snapW(at), { rotation: s.placeRotation });
-    return c;
-  }
-
   private validate(project: Project, type: string, at: Vec2): Preview {
     const def = getDef(type);
     const c = makeComponent(project, type, at, { rotation: store.get().placeRotation });

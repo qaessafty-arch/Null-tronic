@@ -56,7 +56,7 @@ export function defaultSheet(type: ProjectType): DrawingSheet {
     kind: type === 'installation' ? 'installation-plan' : 'schematic',
     paper: 'A3',
     orientation: 'landscape',
-    scale: type === 'installation' ? 100 : 0,
+    scale: type === 'installation' ? 50 : 0,
     marginMm: 10,
     lineWeightScale: 1,
     showWatermark: false,

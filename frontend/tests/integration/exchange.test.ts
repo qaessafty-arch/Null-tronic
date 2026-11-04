@@ -51,12 +51,12 @@ describe('native project format', () => {
 });
 
 describe('drawing sheets and vector exports', () => {
-  it('composes an A3 installation plan at 1:100 with a title block', () => {
+  it('composes an A3 installation plan at 1:50 with a title block', () => {
     const p = sampleInstallation();
     const s = composeSheet(p, p.sheets[0]);
     expect(s.width).toBe(420);
     expect(s.height).toBe(297);
-    expect(s.scaleLabel).toBe('1:100');
+    expect(s.scaleLabel).toBe('1:50');
     expect(s.prims.some((x) => x.k === 'text' && x.text === p.meta.name)).toBe(true);
     expect(s.warnings).toEqual([]);
   });
