@@ -3,13 +3,13 @@
   "schemaVersion": 1,
   "type": "electronic",
   "meta": {
-    "id": "prj_64689b3707e3",
+    "id": "prj_25f075ec00b5",
     "name": "LED with series resistor",
     "author": "",
     "organisation": "",
     "description": "",
-    "createdAt": "2026-11-04T08:58:03.602Z",
-    "modifiedAt": "2026-11-04T08:58:03.603Z",
+    "createdAt": "2026-11-04T09:10:21.825Z",
+    "modifiedAt": "2026-11-04T09:10:21.826Z",
     "revision": "A",
     "revisions": [
       {
@@ -44,11 +44,14 @@
       "control": "#d64545",
       "power": "#e5534b"
     },
-    "alwaysConfirm": false
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
   },
   "components": {
-    "cmp_09b0523abc88": {
-      "id": "cmp_09b0523abc88",
+    "cmp_c8b1e8f62687": {
+      "id": "cmp_c8b1e8f62687",
       "type": "vdc",
       "ref": "V1",
       "position": {
@@ -63,8 +66,8 @@
       },
       "layer": "components"
     },
-    "cmp_0d3b2349e426": {
-      "id": "cmp_0d3b2349e426",
+    "cmp_9926beab002e": {
+      "id": "cmp_9926beab002e",
       "type": "resistor",
       "ref": "R1",
       "position": {
@@ -81,8 +84,8 @@
       },
       "layer": "components"
     },
-    "cmp_85a6f1726b9c": {
-      "id": "cmp_85a6f1726b9c",
+    "cmp_8ee507f96892": {
+      "id": "cmp_8ee507f96892",
       "type": "led",
       "ref": "D1",
       "position": {
@@ -99,8 +102,8 @@
       },
       "layer": "components"
     },
-    "cmp_dff771f46a76": {
-      "id": "cmp_dff771f46a76",
+    "cmp_e1f7e68f404c": {
+      "id": "cmp_e1f7e68f404c",
       "type": "ground",
       "ref": "GND1",
       "position": {
@@ -113,8 +116,8 @@
       "properties": {},
       "layer": "components"
     },
-    "cmp_cdb5d946cc84": {
-      "id": "cmp_cdb5d946cc84",
+    "cmp_dbb6319b202b": {
+      "id": "cmp_dbb6319b202b",
       "type": "ground",
       "ref": "GND2",
       "position": {
@@ -129,64 +132,64 @@
     }
   },
   "wires": {
-    "w_084e2d99e354": {
-      "id": "w_084e2d99e354",
+    "w_a217a4f64e89": {
+      "id": "w_a217a4f64e89",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_09b0523abc88",
+        "componentId": "cmp_c8b1e8f62687",
         "pinId": "+"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_0d3b2349e426",
+        "componentId": "cmp_9926beab002e",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_ff3d9242f9f0": {
-      "id": "w_ff3d9242f9f0",
+    "w_e4158958d3f8": {
+      "id": "w_e4158958d3f8",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_0d3b2349e426",
+        "componentId": "cmp_9926beab002e",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_85a6f1726b9c",
+        "componentId": "cmp_8ee507f96892",
         "pinId": "A"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_94f76b4b3342": {
-      "id": "w_94f76b4b3342",
+    "w_52abb0da3a40": {
+      "id": "w_52abb0da3a40",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_85a6f1726b9c",
+        "componentId": "cmp_8ee507f96892",
         "pinId": "K"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_cdb5d946cc84",
+        "componentId": "cmp_dbb6319b202b",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_91420b7bc8ab": {
-      "id": "w_91420b7bc8ab",
+    "w_b7fff2048194": {
+      "id": "w_b7fff2048194",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_09b0523abc88",
+        "componentId": "cmp_c8b1e8f62687",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_dff771f46a76",
+        "componentId": "cmp_e1f7e68f404c",
         "pinId": "1"
       },
       "vertices": [],
@@ -231,7 +234,7 @@
   ],
   "sheets": [
     {
-      "id": "sheet_bbbb472a89b3",
+      "id": "sheet_984b10464796",
       "title": "Circuit schematic",
       "number": "E-001",
       "kind": "schematic",

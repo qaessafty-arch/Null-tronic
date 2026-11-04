@@ -3,13 +3,13 @@
   "schemaVersion": 1,
   "type": "electronic",
   "meta": {
-    "id": "prj_31f9688b5fd5",
+    "id": "prj_cbf4a4d019e9",
     "name": "RC charging (time constant)",
     "author": "",
     "organisation": "",
     "description": "",
-    "createdAt": "2026-11-04T08:58:03.603Z",
-    "modifiedAt": "2026-11-04T08:58:03.603Z",
+    "createdAt": "2026-11-04T09:10:21.826Z",
+    "modifiedAt": "2026-11-04T09:10:21.827Z",
     "revision": "A",
     "revisions": [
       {
@@ -44,11 +44,14 @@
       "control": "#d64545",
       "power": "#e5534b"
     },
-    "alwaysConfirm": false
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
   },
   "components": {
-    "cmp_2aee7b2c2524": {
-      "id": "cmp_2aee7b2c2524",
+    "cmp_add1e7dd3e98": {
+      "id": "cmp_add1e7dd3e98",
       "type": "vdc",
       "ref": "V1",
       "position": {
@@ -63,8 +66,8 @@
       },
       "layer": "components"
     },
-    "cmp_a8eb08fe0fb4": {
-      "id": "cmp_a8eb08fe0fb4",
+    "cmp_3e02397aa40f": {
+      "id": "cmp_3e02397aa40f",
       "type": "resistor",
       "ref": "R1",
       "position": {
@@ -81,8 +84,8 @@
       },
       "layer": "components"
     },
-    "cmp_afa278e8e51d": {
-      "id": "cmp_afa278e8e51d",
+    "cmp_5fd8937f322c": {
+      "id": "cmp_5fd8937f322c",
       "type": "capacitor_polarized",
       "ref": "C1",
       "position": {
@@ -98,8 +101,8 @@
       },
       "layer": "components"
     },
-    "cmp_2e89d4483291": {
-      "id": "cmp_2e89d4483291",
+    "cmp_ac92d2496d28": {
+      "id": "cmp_ac92d2496d28",
       "type": "probe",
       "ref": "P1",
       "position": {
@@ -114,8 +117,8 @@
       },
       "layer": "components"
     },
-    "cmp_09e7821dfe63": {
-      "id": "cmp_09e7821dfe63",
+    "cmp_5074d349a6da": {
+      "id": "cmp_5074d349a6da",
       "type": "ground",
       "ref": "GND1",
       "position": {
@@ -130,16 +133,16 @@
     }
   },
   "wires": {
-    "w_4b8fccbabf1c": {
-      "id": "w_4b8fccbabf1c",
+    "w_6a81bca25884": {
+      "id": "w_6a81bca25884",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_2aee7b2c2524",
+        "componentId": "cmp_add1e7dd3e98",
         "pinId": "+"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_a8eb08fe0fb4",
+        "componentId": "cmp_3e02397aa40f",
         "pinId": "1"
       },
       "vertices": [
@@ -151,16 +154,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_53c38cf4a93f": {
-      "id": "w_53c38cf4a93f",
+    "w_8d159a33dad2": {
+      "id": "w_8d159a33dad2",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_a8eb08fe0fb4",
+        "componentId": "cmp_3e02397aa40f",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_afa278e8e51d",
+        "componentId": "cmp_5fd8937f322c",
         "pinId": "+"
       },
       "vertices": [
@@ -172,16 +175,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_c5cd9418bc3b": {
-      "id": "w_c5cd9418bc3b",
+    "w_b7eb9d706001": {
+      "id": "w_b7eb9d706001",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_afa278e8e51d",
+        "componentId": "cmp_5fd8937f322c",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_2aee7b2c2524",
+        "componentId": "cmp_add1e7dd3e98",
         "pinId": "-"
       },
       "vertices": [
@@ -197,32 +200,32 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_54e56a2d7e74": {
-      "id": "w_54e56a2d7e74",
+    "w_a97d587d692d": {
+      "id": "w_a97d587d692d",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_2aee7b2c2524",
+        "componentId": "cmp_add1e7dd3e98",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_09e7821dfe63",
+        "componentId": "cmp_5074d349a6da",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_5b99f4559180": {
-      "id": "w_5b99f4559180",
+    "w_4c061dd0f404": {
+      "id": "w_4c061dd0f404",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_2e89d4483291",
+        "componentId": "cmp_ac92d2496d28",
         "pinId": "1"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_afa278e8e51d",
+        "componentId": "cmp_5fd8937f322c",
         "pinId": "+"
       },
       "vertices": [],
@@ -267,7 +270,7 @@
   ],
   "sheets": [
     {
-      "id": "sheet_fbb110f1c70b",
+      "id": "sheet_fadf39851b8d",
       "title": "Circuit schematic",
       "number": "E-001",
       "kind": "schematic",

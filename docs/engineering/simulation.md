@@ -28,6 +28,8 @@ solvable; nets with no DC path to ground are reported as `FLOATING_NODE` warning
 | Op-amp | tanh-limited VCVS: `Vmid + Vhalf·tanh(A·Vd/Vhalf)` | open-loop gain, output limits |
 | Transformer | ideal (Vp = n·Vs, Is = −n·Ip) | turns ratio |
 | Switches, contacts | Ron 10 mΩ / Roff 1 GΩ | state |
+| Logic gate | zero-delay: inputs read against VIL/VIH (CMOS 0.3/0.7·Vcc; 74LS 0.8/2.0 V), output VOH/VOL through an output resistance; undefined levels and oscillation reported | family, Vcc, Rout (assumed) |
+| PLC | Structured Text scan per iteration: inputs from node voltage ≥ threshold, outputs switch a sourcing supply onto their terminal | program (Tools ▸ PLC program) |
 | Relay / coil | resistor; energised above pick-up, de-energised below drop-out; iterated to a consistent state, oscillation detected | coil V, R, pick-up %, drop-out % |
 
 Thermal voltage: kT/q at 300.15 K (SPICE TNOM = 27 °C).
@@ -41,7 +43,10 @@ transformer power balance, relay seal-in logic).
 and requires node-voltage agreement within 0.1 mV + 0.01 %, plus the rectifier (2 %) and
 inverting amplifier transients. The suite is skipped — not passed — when ngspice is missing.
 
+Relays, gates and the PLC share one discrete-update loop: solve → update states → re-solve until
+nothing changes (oscillation, e.g. an inverter ring, is detected and reported).
+
 ## Not simulated
 
-Logic gates, generic ICs and microcontrollers (reported as *not evaluated*), device capacitances,
+Gate propagation delay, flip-flops, generic ICs and microcontrollers (reported as *not evaluated*), PLC timers/counters, device capacitances,
 temperature effects, noise, Monte Carlo.

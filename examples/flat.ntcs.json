@@ -3,13 +3,13 @@
   "schemaVersion": 1,
   "type": "installation",
   "meta": {
-    "id": "prj_b146b7f97ad9",
+    "id": "prj_9f29efbac67f",
     "name": "Residential flat — sample installation",
     "author": "",
     "organisation": "",
     "description": "",
-    "createdAt": "2026-11-04T08:58:03.607Z",
-    "modifiedAt": "2026-11-04T08:58:03.608Z",
+    "createdAt": "2026-11-04T09:10:21.835Z",
+    "modifiedAt": "2026-11-04T09:10:21.838Z",
     "revision": "A",
     "revisions": [
       {
@@ -44,11 +44,14 @@
       "control": "#d64545",
       "power": "#e5534b"
     },
-    "alwaysConfirm": false
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
   },
   "components": {
-    "cmp_948126104f2f": {
-      "id": "cmp_948126104f2f",
+    "cmp_c112b921f528": {
+      "id": "cmp_c112b921f528",
       "type": "db",
       "ref": "DB1",
       "position": {
@@ -65,8 +68,8 @@
       },
       "layer": "components"
     },
-    "cmp_1a00844670e9": {
-      "id": "cmp_1a00844670e9",
+    "cmp_7557991f1b84": {
+      "id": "cmp_7557991f1b84",
       "type": "light",
       "ref": "L1",
       "position": {
@@ -83,8 +86,8 @@
       },
       "layer": "components"
     },
-    "cmp_b7a010dd1af2": {
-      "id": "cmp_b7a010dd1af2",
+    "cmp_34b65f733898": {
+      "id": "cmp_34b65f733898",
       "type": "light",
       "ref": "L2",
       "position": {
@@ -101,8 +104,8 @@
       },
       "layer": "components"
     },
-    "cmp_b7dfb583f1cc": {
-      "id": "cmp_b7dfb583f1cc",
+    "cmp_539dcc4e908a": {
+      "id": "cmp_539dcc4e908a",
       "type": "light",
       "ref": "L3",
       "position": {
@@ -119,8 +122,8 @@
       },
       "layer": "components"
     },
-    "cmp_8e53cb92b379": {
-      "id": "cmp_8e53cb92b379",
+    "cmp_9a611c4a73c8": {
+      "id": "cmp_9a611c4a73c8",
       "type": "light",
       "ref": "L4",
       "position": {
@@ -137,8 +140,8 @@
       },
       "layer": "components"
     },
-    "cmp_8019ebf7b0b5": {
-      "id": "cmp_8019ebf7b0b5",
+    "cmp_a0055d09b006": {
+      "id": "cmp_a0055d09b006",
       "type": "light",
       "ref": "L5",
       "position": {
@@ -155,8 +158,8 @@
       },
       "layer": "components"
     },
-    "cmp_09c87a17370c": {
-      "id": "cmp_09c87a17370c",
+    "cmp_5d4fb95aa188": {
+      "id": "cmp_5d4fb95aa188",
       "type": "light",
       "ref": "L6",
       "position": {
@@ -173,8 +176,8 @@
       },
       "layer": "components"
     },
-    "cmp_8847b69e72ae": {
-      "id": "cmp_8847b69e72ae",
+    "cmp_b8f6aaaa0767": {
+      "id": "cmp_b8f6aaaa0767",
       "type": "switch_1way",
       "ref": "SW1",
       "position": {
@@ -189,8 +192,8 @@
       },
       "layer": "components"
     },
-    "cmp_ead754a0f95a": {
-      "id": "cmp_ead754a0f95a",
+    "cmp_f151eea68211": {
+      "id": "cmp_f151eea68211",
       "type": "switch_1way",
       "ref": "SW2",
       "position": {
@@ -205,8 +208,8 @@
       },
       "layer": "components"
     },
-    "cmp_e05e4c2de21b": {
-      "id": "cmp_e05e4c2de21b",
+    "cmp_7cc86aff1261": {
+      "id": "cmp_7cc86aff1261",
       "type": "switch_1way",
       "ref": "SW3",
       "position": {
@@ -221,8 +224,8 @@
       },
       "layer": "components"
     },
-    "cmp_4ac9c0e8b9c3": {
-      "id": "cmp_4ac9c0e8b9c3",
+    "cmp_22a49f94b5c6": {
+      "id": "cmp_22a49f94b5c6",
       "type": "socket",
       "ref": "SO1",
       "position": {
@@ -239,8 +242,8 @@
       },
       "layer": "components"
     },
-    "cmp_bb57662f7ad2": {
-      "id": "cmp_bb57662f7ad2",
+    "cmp_bb6c9eb822e6": {
+      "id": "cmp_bb6c9eb822e6",
       "type": "socket",
       "ref": "SO2",
       "position": {
@@ -257,8 +260,8 @@
       },
       "layer": "components"
     },
-    "cmp_862035192ddf": {
-      "id": "cmp_862035192ddf",
+    "cmp_a69b66bfb260": {
+      "id": "cmp_a69b66bfb260",
       "type": "socket",
       "ref": "SO3",
       "position": {
@@ -275,8 +278,8 @@
       },
       "layer": "components"
     },
-    "cmp_c47a8f85def9": {
-      "id": "cmp_c47a8f85def9",
+    "cmp_05244f04aeb0": {
+      "id": "cmp_05244f04aeb0",
       "type": "socket",
       "ref": "SO4",
       "position": {
@@ -293,8 +296,8 @@
       },
       "layer": "components"
     },
-    "cmp_cf497286b1e5": {
-      "id": "cmp_cf497286b1e5",
+    "cmp_2d4adfd8b1d1": {
+      "id": "cmp_2d4adfd8b1d1",
       "type": "socket",
       "ref": "SO5",
       "position": {
@@ -311,8 +314,8 @@
       },
       "layer": "components"
     },
-    "cmp_dbd13415f1e5": {
-      "id": "cmp_dbd13415f1e5",
+    "cmp_6c04442c1d76": {
+      "id": "cmp_6c04442c1d76",
       "type": "socket",
       "ref": "SO6",
       "position": {
@@ -329,8 +332,8 @@
       },
       "layer": "components"
     },
-    "cmp_e1c2e1d29a7e": {
-      "id": "cmp_e1c2e1d29a7e",
+    "cmp_56461af5ab4b": {
+      "id": "cmp_56461af5ab4b",
       "type": "socket",
       "ref": "SO7",
       "position": {
@@ -347,8 +350,8 @@
       },
       "layer": "components"
     },
-    "cmp_3799319671bc": {
-      "id": "cmp_3799319671bc",
+    "cmp_4e87d30812bc": {
+      "id": "cmp_4e87d30812bc",
       "type": "ac_unit",
       "ref": "AC1",
       "position": {
@@ -364,8 +367,8 @@
       },
       "layer": "components"
     },
-    "cmp_217e009cf074": {
-      "id": "cmp_217e009cf074",
+    "cmp_62b9aa73718e": {
+      "id": "cmp_62b9aa73718e",
       "type": "water_heater",
       "ref": "WH1",
       "position": {
@@ -385,8 +388,8 @@
   "wires": {},
   "junctions": {},
   "rooms": {
-    "room_fb107d32a3a5": {
-      "id": "room_fb107d32a3a5",
+    "room_9e0d5b404717": {
+      "id": "room_9e0d5b404717",
       "name": "Living room",
       "polygon": [
         {
@@ -410,8 +413,8 @@
       "height": 3000,
       "wallThickness": 150
     },
-    "room_b94a6a290f6f": {
-      "id": "room_b94a6a290f6f",
+    "room_0cfd1987db50": {
+      "id": "room_0cfd1987db50",
       "name": "Bedroom",
       "polygon": [
         {
@@ -435,8 +438,8 @@
       "height": 3000,
       "wallThickness": 150
     },
-    "room_d537e9a75aae": {
-      "id": "room_d537e9a75aae",
+    "room_29174c1c3b29": {
+      "id": "room_29174c1c3b29",
       "name": "Kitchen",
       "polygon": [
         {
@@ -460,8 +463,8 @@
       "height": 3000,
       "wallThickness": 150
     },
-    "room_6e2e28e8dec4": {
-      "id": "room_6e2e28e8dec4",
+    "room_a60bf4090bd7": {
+      "id": "room_a60bf4090bd7",
       "name": "Hall",
       "polygon": [
         {
@@ -485,8 +488,8 @@
       "height": 3000,
       "wallThickness": 150
     },
-    "room_4220b325c4fc": {
-      "id": "room_4220b325c4fc",
+    "room_583aa2f105d8": {
+      "id": "room_583aa2f105d8",
       "name": "Bathroom",
       "polygon": [
         {
@@ -512,17 +515,17 @@
     }
   },
   "circuits": {
-    "cct_f65c3e6501df": {
-      "id": "cct_f65c3e6501df",
+    "cct_5383458b1ab6": {
+      "id": "cct_5383458b1ab6",
       "name": "C1",
-      "boardId": "cmp_948126104f2f",
+      "boardId": "cmp_c112b921f528",
       "deviceIds": [
-        "cmp_8019ebf7b0b5",
-        "cmp_8e53cb92b379",
-        "cmp_1a00844670e9",
-        "cmp_b7a010dd1af2",
-        "cmp_8847b69e72ae",
-        "cmp_e05e4c2de21b"
+        "cmp_a0055d09b006",
+        "cmp_9a611c4a73c8",
+        "cmp_7557991f1b84",
+        "cmp_34b65f733898",
+        "cmp_b8f6aaaa0767",
+        "cmp_7cc86aff1261"
       ],
       "phase": "L1",
       "category": "lighting",
@@ -543,14 +546,14 @@
       "demandFactor": 1,
       "notes": "Lighting — kitchen, living, hall"
     },
-    "cct_5a4379150f66": {
-      "id": "cct_5a4379150f66",
+    "cct_cf64e6b03ce8": {
+      "id": "cct_cf64e6b03ce8",
       "name": "C2",
-      "boardId": "cmp_948126104f2f",
+      "boardId": "cmp_c112b921f528",
       "deviceIds": [
-        "cmp_09c87a17370c",
-        "cmp_b7dfb583f1cc",
-        "cmp_ead754a0f95a"
+        "cmp_5d4fb95aa188",
+        "cmp_539dcc4e908a",
+        "cmp_f151eea68211"
       ],
       "phase": "L1",
       "category": "lighting",
@@ -571,16 +574,16 @@
       "demandFactor": 1,
       "notes": "Lighting — bedroom, bathroom"
     },
-    "cct_e73ece637ed2": {
-      "id": "cct_e73ece637ed2",
+    "cct_595929a4d4e1": {
+      "id": "cct_595929a4d4e1",
       "name": "C3",
-      "boardId": "cmp_948126104f2f",
+      "boardId": "cmp_c112b921f528",
       "deviceIds": [
-        "cmp_862035192ddf",
-        "cmp_bb57662f7ad2",
-        "cmp_4ac9c0e8b9c3",
-        "cmp_cf497286b1e5",
-        "cmp_c47a8f85def9"
+        "cmp_a69b66bfb260",
+        "cmp_bb6c9eb822e6",
+        "cmp_22a49f94b5c6",
+        "cmp_2d4adfd8b1d1",
+        "cmp_05244f04aeb0"
       ],
       "phase": "L1",
       "category": "power",
@@ -601,13 +604,13 @@
       "demandFactor": 1,
       "notes": "General sockets"
     },
-    "cct_9efa1d774fb4": {
-      "id": "cct_9efa1d774fb4",
+    "cct_987b5e558642": {
+      "id": "cct_987b5e558642",
       "name": "C4",
-      "boardId": "cmp_948126104f2f",
+      "boardId": "cmp_c112b921f528",
       "deviceIds": [
-        "cmp_e1c2e1d29a7e",
-        "cmp_dbd13415f1e5"
+        "cmp_56461af5ab4b",
+        "cmp_6c04442c1d76"
       ],
       "phase": "L1",
       "category": "power",
@@ -628,12 +631,12 @@
       "demandFactor": 1,
       "notes": "Kitchen sockets"
     },
-    "cct_b5eaad1f0727": {
-      "id": "cct_b5eaad1f0727",
+    "cct_acf5fa51c69b": {
+      "id": "cct_acf5fa51c69b",
       "name": "C5",
-      "boardId": "cmp_948126104f2f",
+      "boardId": "cmp_c112b921f528",
       "deviceIds": [
-        "cmp_3799319671bc"
+        "cmp_4e87d30812bc"
       ],
       "phase": "L1",
       "category": "power",
@@ -654,12 +657,12 @@
       "demandFactor": 1,
       "notes": "Air conditioner — dedicated"
     },
-    "cct_6a2c8bb0081f": {
-      "id": "cct_6a2c8bb0081f",
+    "cct_b5c601b3f8b4": {
+      "id": "cct_b5c601b3f8b4",
       "name": "C6",
-      "boardId": "cmp_948126104f2f",
+      "boardId": "cmp_c112b921f528",
       "deviceIds": [
-        "cmp_217e009cf074"
+        "cmp_62b9aa73718e"
       ],
       "phase": "L1",
       "category": "power",
@@ -682,11 +685,11 @@
     }
   },
   "cables": {
-    "cbl_beeb5ec33740": {
-      "id": "cbl_beeb5ec33740",
-      "circuitId": "cct_f65c3e6501df",
-      "fromId": "cmp_948126104f2f",
-      "toId": "cmp_8019ebf7b0b5",
+    "cbl_ca1a1833884e": {
+      "id": "cbl_ca1a1833884e",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_a0055d09b006",
       "path": [
         {
           "x": 5500,
@@ -699,11 +702,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_fb76ce854d6e": {
-      "id": "cbl_fb76ce854d6e",
-      "circuitId": "cct_f65c3e6501df",
-      "fromId": "cmp_8019ebf7b0b5",
-      "toId": "cmp_8e53cb92b379",
+    "cbl_c15a37eaf541": {
+      "id": "cbl_c15a37eaf541",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_a0055d09b006",
+      "toId": "cmp_9a611c4a73c8",
       "path": [
         {
           "x": 5500,
@@ -720,11 +723,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_6be9a4c4a098": {
-      "id": "cbl_6be9a4c4a098",
-      "circuitId": "cct_f65c3e6501df",
-      "fromId": "cmp_8e53cb92b379",
-      "toId": "cmp_1a00844670e9",
+    "cbl_6267f4504656": {
+      "id": "cbl_6267f4504656",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_9a611c4a73c8",
+      "toId": "cmp_7557991f1b84",
       "path": [
         {
           "x": 2000,
@@ -741,11 +744,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_f9ea81d5c298": {
-      "id": "cbl_f9ea81d5c298",
-      "circuitId": "cct_f65c3e6501df",
-      "fromId": "cmp_1a00844670e9",
-      "toId": "cmp_b7a010dd1af2",
+    "cbl_b7786f33ce8d": {
+      "id": "cbl_b7786f33ce8d",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_7557991f1b84",
+      "toId": "cmp_34b65f733898",
       "path": [
         {
           "x": 1500,
@@ -758,11 +761,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_7a99cdd14d89": {
-      "id": "cbl_7a99cdd14d89",
-      "circuitId": "cct_f65c3e6501df",
-      "fromId": "cmp_b7a010dd1af2",
-      "toId": "cmp_8847b69e72ae",
+    "cbl_3bebf9a4dc1e": {
+      "id": "cbl_3bebf9a4dc1e",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_34b65f733898",
+      "toId": "cmp_b8f6aaaa0767",
       "path": [
         {
           "x": 4500,
@@ -779,11 +782,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_3a7ec8a7be4f": {
-      "id": "cbl_3a7ec8a7be4f",
-      "circuitId": "cct_f65c3e6501df",
-      "fromId": "cmp_8847b69e72ae",
-      "toId": "cmp_e05e4c2de21b",
+    "cbl_b3e1c06c84fe": {
+      "id": "cbl_b3e1c06c84fe",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_b8f6aaaa0767",
+      "toId": "cmp_7cc86aff1261",
       "path": [
         {
           "x": 5800,
@@ -800,11 +803,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_16ad4e872414": {
-      "id": "cbl_16ad4e872414",
-      "circuitId": "cct_5a4379150f66",
-      "fromId": "cmp_948126104f2f",
-      "toId": "cmp_09c87a17370c",
+    "cbl_246692961ae8": {
+      "id": "cbl_246692961ae8",
+      "circuitId": "cct_cf64e6b03ce8",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_5d4fb95aa188",
       "path": [
         {
           "x": 5500,
@@ -821,11 +824,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_58b71d5774a6": {
-      "id": "cbl_58b71d5774a6",
-      "circuitId": "cct_5a4379150f66",
-      "fromId": "cmp_09c87a17370c",
-      "toId": "cmp_b7dfb583f1cc",
+    "cbl_7d3ae3e92259": {
+      "id": "cbl_7d3ae3e92259",
+      "circuitId": "cct_cf64e6b03ce8",
+      "fromId": "cmp_5d4fb95aa188",
+      "toId": "cmp_539dcc4e908a",
       "path": [
         {
           "x": 8500,
@@ -842,11 +845,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_8d03627bfd88": {
-      "id": "cbl_8d03627bfd88",
-      "circuitId": "cct_5a4379150f66",
-      "fromId": "cmp_b7dfb583f1cc",
-      "toId": "cmp_ead754a0f95a",
+    "cbl_89d410b89c40": {
+      "id": "cbl_89d410b89c40",
+      "circuitId": "cct_cf64e6b03ce8",
+      "fromId": "cmp_539dcc4e908a",
+      "toId": "cmp_f151eea68211",
       "path": [
         {
           "x": 8000,
@@ -863,11 +866,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_ce4ffb362064": {
-      "id": "cbl_ce4ffb362064",
-      "circuitId": "cct_e73ece637ed2",
-      "fromId": "cmp_948126104f2f",
-      "toId": "cmp_862035192ddf",
+    "cbl_fdba3c2c2dcf": {
+      "id": "cbl_fdba3c2c2dcf",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_a69b66bfb260",
       "path": [
         {
           "x": 5500,
@@ -884,11 +887,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_2809ea93691a": {
-      "id": "cbl_2809ea93691a",
-      "circuitId": "cct_e73ece637ed2",
-      "fromId": "cmp_862035192ddf",
-      "toId": "cmp_bb57662f7ad2",
+    "cbl_877907854a30": {
+      "id": "cbl_877907854a30",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_a69b66bfb260",
+      "toId": "cmp_bb6c9eb822e6",
       "path": [
         {
           "x": 3000,
@@ -905,11 +908,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_f5f3fa2207ca": {
-      "id": "cbl_f5f3fa2207ca",
-      "circuitId": "cct_e73ece637ed2",
-      "fromId": "cmp_bb57662f7ad2",
-      "toId": "cmp_4ac9c0e8b9c3",
+    "cbl_de7e8ab4a77a": {
+      "id": "cbl_de7e8ab4a77a",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_bb6c9eb822e6",
+      "toId": "cmp_22a49f94b5c6",
       "path": [
         {
           "x": 300,
@@ -922,11 +925,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_a00aac51d2e2": {
-      "id": "cbl_a00aac51d2e2",
-      "circuitId": "cct_e73ece637ed2",
-      "fromId": "cmp_4ac9c0e8b9c3",
-      "toId": "cmp_cf497286b1e5",
+    "cbl_76c7275b7792": {
+      "id": "cbl_76c7275b7792",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_22a49f94b5c6",
+      "toId": "cmp_2d4adfd8b1d1",
       "path": [
         {
           "x": 300,
@@ -943,11 +946,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_f48df037a809": {
-      "id": "cbl_f48df037a809",
-      "circuitId": "cct_e73ece637ed2",
-      "fromId": "cmp_cf497286b1e5",
-      "toId": "cmp_c47a8f85def9",
+    "cbl_481a017d2133": {
+      "id": "cbl_481a017d2133",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_2d4adfd8b1d1",
+      "toId": "cmp_05244f04aeb0",
       "path": [
         {
           "x": 7000,
@@ -964,11 +967,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_8a719f90ce62": {
-      "id": "cbl_8a719f90ce62",
-      "circuitId": "cct_9efa1d774fb4",
-      "fromId": "cmp_948126104f2f",
-      "toId": "cmp_e1c2e1d29a7e",
+    "cbl_36df99831b20": {
+      "id": "cbl_36df99831b20",
+      "circuitId": "cct_987b5e558642",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_56461af5ab4b",
       "path": [
         {
           "x": 5500,
@@ -985,11 +988,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_33e9df5949d1": {
-      "id": "cbl_33e9df5949d1",
-      "circuitId": "cct_9efa1d774fb4",
-      "fromId": "cmp_e1c2e1d29a7e",
-      "toId": "cmp_dbd13415f1e5",
+    "cbl_33a3be32e92d": {
+      "id": "cbl_33a3be32e92d",
+      "circuitId": "cct_987b5e558642",
+      "fromId": "cmp_56461af5ab4b",
+      "toId": "cmp_6c04442c1d76",
       "path": [
         {
           "x": 2000,
@@ -1006,11 +1009,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_82fd903fede3": {
-      "id": "cbl_82fd903fede3",
-      "circuitId": "cct_b5eaad1f0727",
-      "fromId": "cmp_948126104f2f",
-      "toId": "cmp_3799319671bc",
+    "cbl_1545a9e2311b": {
+      "id": "cbl_1545a9e2311b",
+      "circuitId": "cct_acf5fa51c69b",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_4e87d30812bc",
       "path": [
         {
           "x": 5500,
@@ -1027,11 +1030,11 @@
       ],
       "routeElevation": 2900
     },
-    "cbl_bbe179066c6f": {
-      "id": "cbl_bbe179066c6f",
-      "circuitId": "cct_6a2c8bb0081f",
-      "fromId": "cmp_948126104f2f",
-      "toId": "cmp_217e009cf074",
+    "cbl_e4fb768e2a27": {
+      "id": "cbl_e4fb768e2a27",
+      "circuitId": "cct_b5c601b3f8b4",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_62b9aa73718e",
       "path": [
         {
           "x": 5500,
@@ -1050,8 +1053,8 @@
     }
   },
   "annotations": {
-    "ann_a654b92abd3f": {
-      "id": "ann_a654b92abd3f",
+    "ann_284e06325d36": {
+      "id": "ann_284e06325d36",
       "kind": "text",
       "points": [
         {
@@ -1110,7 +1113,7 @@
   ],
   "sheets": [
     {
-      "id": "sheet_22c1222e8f4b",
+      "id": "sheet_7c3defd3c447",
       "title": "Electrical installation plan",
       "number": "E-001",
       "kind": "installation-plan",

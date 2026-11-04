@@ -3,13 +3,13 @@
   "schemaVersion": 1,
   "type": "electronic",
   "meta": {
-    "id": "prj_78a81043cb69",
+    "id": "prj_13ea0c792f30",
     "name": "Relay control of an LED",
     "author": "",
     "organisation": "",
     "description": "",
-    "createdAt": "2026-11-04T08:58:03.605Z",
-    "modifiedAt": "2026-11-04T08:58:03.605Z",
+    "createdAt": "2026-11-04T09:10:21.831Z",
+    "modifiedAt": "2026-11-04T09:10:21.831Z",
     "revision": "A",
     "revisions": [
       {
@@ -44,11 +44,14 @@
       "control": "#d64545",
       "power": "#e5534b"
     },
-    "alwaysConfirm": false
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
   },
   "components": {
-    "cmp_dcf09a8965a9": {
-      "id": "cmp_dcf09a8965a9",
+    "cmp_f41332039764": {
+      "id": "cmp_f41332039764",
       "type": "vdc",
       "ref": "V1",
       "position": {
@@ -63,8 +66,8 @@
       },
       "layer": "components"
     },
-    "cmp_2be9681275ba": {
-      "id": "cmp_2be9681275ba",
+    "cmp_edc21118650e": {
+      "id": "cmp_edc21118650e",
       "type": "pushbutton",
       "ref": "S1",
       "position": {
@@ -79,8 +82,8 @@
       },
       "layer": "components"
     },
-    "cmp_81c1f12be900": {
-      "id": "cmp_81c1f12be900",
+    "cmp_c51885fb05da": {
+      "id": "cmp_c51885fb05da",
       "type": "relay",
       "ref": "K1",
       "position": {
@@ -98,8 +101,8 @@
       },
       "layer": "components"
     },
-    "cmp_c998a7f4dcbc": {
-      "id": "cmp_c998a7f4dcbc",
+    "cmp_ea96cf6d3622": {
+      "id": "cmp_ea96cf6d3622",
       "type": "resistor",
       "ref": "R1",
       "position": {
@@ -116,8 +119,8 @@
       },
       "layer": "components"
     },
-    "cmp_478935edcc00": {
-      "id": "cmp_478935edcc00",
+    "cmp_6bb369ee7015": {
+      "id": "cmp_6bb369ee7015",
       "type": "led",
       "ref": "D1",
       "position": {
@@ -134,8 +137,8 @@
       },
       "layer": "components"
     },
-    "cmp_26aebcc7e0c6": {
-      "id": "cmp_26aebcc7e0c6",
+    "cmp_b77c0688abe3": {
+      "id": "cmp_b77c0688abe3",
       "type": "ground",
       "ref": "GND1",
       "position": {
@@ -150,16 +153,16 @@
     }
   },
   "wires": {
-    "w_924e3faec0f0": {
-      "id": "w_924e3faec0f0",
+    "w_28c0e8afae38": {
+      "id": "w_28c0e8afae38",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_dcf09a8965a9",
+        "componentId": "cmp_f41332039764",
         "pinId": "+"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_2be9681275ba",
+        "componentId": "cmp_edc21118650e",
         "pinId": "1"
       },
       "vertices": [
@@ -171,16 +174,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_e4c1b16e2f9b": {
-      "id": "w_e4c1b16e2f9b",
+    "w_9445c19a7702": {
+      "id": "w_9445c19a7702",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_2be9681275ba",
+        "componentId": "cmp_edc21118650e",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_81c1f12be900",
+        "componentId": "cmp_c51885fb05da",
         "pinId": "A1"
       },
       "vertices": [
@@ -192,16 +195,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_067a075d90b6": {
-      "id": "w_067a075d90b6",
+    "w_1017317022c5": {
+      "id": "w_1017317022c5",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_81c1f12be900",
+        "componentId": "cmp_c51885fb05da",
         "pinId": "A2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_26aebcc7e0c6",
+        "componentId": "cmp_b77c0688abe3",
         "pinId": "1"
       },
       "vertices": [
@@ -217,32 +220,32 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_c32676382774": {
-      "id": "w_c32676382774",
+    "w_64aae931b549": {
+      "id": "w_64aae931b549",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_dcf09a8965a9",
+        "componentId": "cmp_f41332039764",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_26aebcc7e0c6",
+        "componentId": "cmp_b77c0688abe3",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_3b6b71306156": {
-      "id": "w_3b6b71306156",
+    "w_28bea07e95a9": {
+      "id": "w_28bea07e95a9",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_81c1f12be900",
+        "componentId": "cmp_c51885fb05da",
         "pinId": "COM"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_dcf09a8965a9",
+        "componentId": "cmp_f41332039764",
         "pinId": "+"
       },
       "vertices": [
@@ -266,16 +269,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_d9f69525ea73": {
-      "id": "w_d9f69525ea73",
+    "w_89d73d1a82cc": {
+      "id": "w_89d73d1a82cc",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_81c1f12be900",
+        "componentId": "cmp_c51885fb05da",
         "pinId": "NO"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_c998a7f4dcbc",
+        "componentId": "cmp_ea96cf6d3622",
         "pinId": "1"
       },
       "vertices": [
@@ -287,16 +290,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_73fe101fe6ff": {
-      "id": "w_73fe101fe6ff",
+    "w_e8964aa10d45": {
+      "id": "w_e8964aa10d45",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_c998a7f4dcbc",
+        "componentId": "cmp_ea96cf6d3622",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_478935edcc00",
+        "componentId": "cmp_6bb369ee7015",
         "pinId": "A"
       },
       "vertices": [
@@ -308,16 +311,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_228ec50f83ba": {
-      "id": "w_228ec50f83ba",
+    "w_4b880f6f5c97": {
+      "id": "w_4b880f6f5c97",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_478935edcc00",
+        "componentId": "cmp_6bb369ee7015",
         "pinId": "K"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_26aebcc7e0c6",
+        "componentId": "cmp_b77c0688abe3",
         "pinId": "1"
       },
       "vertices": [
@@ -371,7 +374,7 @@
   ],
   "sheets": [
     {
-      "id": "sheet_73ac06b6d76e",
+      "id": "sheet_3f544082af48",
       "title": "Circuit schematic",
       "number": "E-001",
       "kind": "schematic",

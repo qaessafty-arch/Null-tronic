@@ -3,13 +3,13 @@
   "schemaVersion": 1,
   "type": "control",
   "meta": {
-    "id": "prj_51f4dfbc0424",
+    "id": "prj_fe178c4a9697",
     "name": "DOL motor starter — control circuit",
     "author": "",
     "organisation": "",
     "description": "",
-    "createdAt": "2026-11-04T08:58:03.606Z",
-    "modifiedAt": "2026-11-04T08:58:03.606Z",
+    "createdAt": "2026-11-04T09:10:21.832Z",
+    "modifiedAt": "2026-11-04T09:10:21.832Z",
     "revision": "A",
     "revisions": [
       {
@@ -44,11 +44,14 @@
       "control": "#d64545",
       "power": "#e5534b"
     },
-    "alwaysConfirm": false
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
   },
   "components": {
-    "cmp_02ccf960fd58": {
-      "id": "cmp_02ccf960fd58",
+    "cmp_68d1d0c2af35": {
+      "id": "cmp_68d1d0c2af35",
       "type": "vdc",
       "ref": "G1",
       "position": {
@@ -63,8 +66,8 @@
       },
       "layer": "components"
     },
-    "cmp_627dc32417c2": {
-      "id": "cmp_627dc32417c2",
+    "cmp_a22443a354e3": {
+      "id": "cmp_a22443a354e3",
       "type": "overload_nc",
       "ref": "F1",
       "position": {
@@ -79,8 +82,8 @@
       },
       "layer": "components"
     },
-    "cmp_d6eb900f3592": {
-      "id": "cmp_d6eb900f3592",
+    "cmp_38018b241163": {
+      "id": "cmp_38018b241163",
       "type": "pb_nc",
       "ref": "S0",
       "position": {
@@ -95,8 +98,8 @@
       },
       "layer": "components"
     },
-    "cmp_5dc9d5e61b16": {
-      "id": "cmp_5dc9d5e61b16",
+    "cmp_09365931e9c5": {
+      "id": "cmp_09365931e9c5",
       "type": "pb_no",
       "ref": "S1",
       "position": {
@@ -111,8 +114,8 @@
       },
       "layer": "components"
     },
-    "cmp_81c1294ded57": {
-      "id": "cmp_81c1294ded57",
+    "cmp_29a472fb0df8": {
+      "id": "cmp_29a472fb0df8",
       "type": "contact_no",
       "ref": "K1.1",
       "position": {
@@ -127,8 +130,8 @@
       },
       "layer": "components"
     },
-    "cmp_e03f69018e8b": {
-      "id": "cmp_e03f69018e8b",
+    "cmp_e8ccec08e7cf": {
+      "id": "cmp_e8ccec08e7cf",
       "type": "coil",
       "ref": "K1",
       "position": {
@@ -147,8 +150,8 @@
       },
       "layer": "components"
     },
-    "cmp_c817937a372e": {
-      "id": "cmp_c817937a372e",
+    "cmp_071bba318bee": {
+      "id": "cmp_071bba318bee",
       "type": "contact_no",
       "ref": "K1.2",
       "position": {
@@ -163,8 +166,8 @@
       },
       "layer": "components"
     },
-    "cmp_c39166cb77a2": {
-      "id": "cmp_c39166cb77a2",
+    "cmp_2a60bf928fff": {
+      "id": "cmp_2a60bf928fff",
       "type": "lamp",
       "ref": "H1",
       "position": {
@@ -180,8 +183,8 @@
       },
       "layer": "components"
     },
-    "cmp_45aa73362532": {
-      "id": "cmp_45aa73362532",
+    "cmp_f775a3094970": {
+      "id": "cmp_f775a3094970",
       "type": "ground",
       "ref": "GND1",
       "position": {
@@ -196,16 +199,16 @@
     }
   },
   "wires": {
-    "w_4e4611304f6a": {
-      "id": "w_4e4611304f6a",
+    "w_81f24079ee59": {
+      "id": "w_81f24079ee59",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_02ccf960fd58",
+        "componentId": "cmp_68d1d0c2af35",
         "pinId": "+"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_627dc32417c2",
+        "componentId": "cmp_a22443a354e3",
         "pinId": "95"
       },
       "vertices": [
@@ -221,48 +224,48 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_fec405612d27": {
-      "id": "w_fec405612d27",
+    "w_c5b2e94d33b6": {
+      "id": "w_c5b2e94d33b6",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_627dc32417c2",
+        "componentId": "cmp_a22443a354e3",
         "pinId": "96"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_d6eb900f3592",
+        "componentId": "cmp_38018b241163",
         "pinId": "11"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_5a5be12c7d8f": {
-      "id": "w_5a5be12c7d8f",
+    "w_f456eb1b63a5": {
+      "id": "w_f456eb1b63a5",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_d6eb900f3592",
+        "componentId": "cmp_38018b241163",
         "pinId": "12"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_5dc9d5e61b16",
+        "componentId": "cmp_09365931e9c5",
         "pinId": "13"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_664030bd631a": {
-      "id": "w_664030bd631a",
+    "w_9cbf6857637d": {
+      "id": "w_9cbf6857637d",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_5dc9d5e61b16",
+        "componentId": "cmp_09365931e9c5",
         "pinId": "13"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_81c1294ded57",
+        "componentId": "cmp_29a472fb0df8",
         "pinId": "13"
       },
       "vertices": [
@@ -278,16 +281,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_5bbebcb73fa8": {
-      "id": "w_5bbebcb73fa8",
+    "w_9c79f02b18cb": {
+      "id": "w_9c79f02b18cb",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_5dc9d5e61b16",
+        "componentId": "cmp_09365931e9c5",
         "pinId": "14"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_e03f69018e8b",
+        "componentId": "cmp_e8ccec08e7cf",
         "pinId": "A1"
       },
       "vertices": [
@@ -299,16 +302,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_d6a3704c34bd": {
-      "id": "w_d6a3704c34bd",
+    "w_2b3f7fbeff49": {
+      "id": "w_2b3f7fbeff49",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_81c1294ded57",
+        "componentId": "cmp_29a472fb0df8",
         "pinId": "14"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_5dc9d5e61b16",
+        "componentId": "cmp_09365931e9c5",
         "pinId": "14"
       },
       "vertices": [
@@ -324,16 +327,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_7a6abecc48fc": {
-      "id": "w_7a6abecc48fc",
+    "w_291c3250c7c6": {
+      "id": "w_291c3250c7c6",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_e03f69018e8b",
+        "componentId": "cmp_e8ccec08e7cf",
         "pinId": "A2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_45aa73362532",
+        "componentId": "cmp_f775a3094970",
         "pinId": "1"
       },
       "vertices": [
@@ -349,32 +352,32 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_f1063a2feac5": {
-      "id": "w_f1063a2feac5",
+    "w_08f8c636981e": {
+      "id": "w_08f8c636981e",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_02ccf960fd58",
+        "componentId": "cmp_68d1d0c2af35",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_45aa73362532",
+        "componentId": "cmp_f775a3094970",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_c96cdb790c49": {
-      "id": "w_c96cdb790c49",
+    "w_413880c87775": {
+      "id": "w_413880c87775",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_c817937a372e",
+        "componentId": "cmp_071bba318bee",
         "pinId": "13"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_627dc32417c2",
+        "componentId": "cmp_a22443a354e3",
         "pinId": "95"
       },
       "vertices": [
@@ -390,32 +393,32 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_27e200b8886e": {
-      "id": "w_27e200b8886e",
+    "w_2baa25f9e29d": {
+      "id": "w_2baa25f9e29d",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_c817937a372e",
+        "componentId": "cmp_071bba318bee",
         "pinId": "14"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_c39166cb77a2",
+        "componentId": "cmp_2a60bf928fff",
         "pinId": "X1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_62df80dbe277": {
-      "id": "w_62df80dbe277",
+    "w_616609c2e98b": {
+      "id": "w_616609c2e98b",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_c39166cb77a2",
+        "componentId": "cmp_2a60bf928fff",
         "pinId": "X2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_45aa73362532",
+        "componentId": "cmp_f775a3094970",
         "pinId": "1"
       },
       "vertices": [
@@ -469,7 +472,7 @@
   ],
   "sheets": [
     {
-      "id": "sheet_d52d363a2773",
+      "id": "sheet_758d89e4e1c6",
       "title": "Control wiring diagram",
       "number": "E-001",
       "kind": "schematic",

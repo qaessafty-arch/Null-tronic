@@ -3,13 +3,13 @@
   "schemaVersion": 1,
   "type": "electronic",
   "meta": {
-    "id": "prj_d7d35de0e101",
+    "id": "prj_4bd504b8e2ae",
     "name": "Inverting op-amp amplifier",
     "author": "",
     "organisation": "",
     "description": "",
-    "createdAt": "2026-11-04T08:58:03.604Z",
-    "modifiedAt": "2026-11-04T08:58:03.605Z",
+    "createdAt": "2026-11-04T09:10:21.830Z",
+    "modifiedAt": "2026-11-04T09:10:21.830Z",
     "revision": "A",
     "revisions": [
       {
@@ -44,11 +44,14 @@
       "control": "#d64545",
       "power": "#e5534b"
     },
-    "alwaysConfirm": false
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
   },
   "components": {
-    "cmp_d199af62aa55": {
-      "id": "cmp_d199af62aa55",
+    "cmp_c6230b2acdb4": {
+      "id": "cmp_c6230b2acdb4",
       "type": "vac",
       "ref": "V1",
       "position": {
@@ -66,8 +69,8 @@
       },
       "layer": "components"
     },
-    "cmp_53892e0e52ee": {
-      "id": "cmp_53892e0e52ee",
+    "cmp_abae96bd30c3": {
+      "id": "cmp_abae96bd30c3",
       "type": "resistor",
       "ref": "R1",
       "position": {
@@ -84,8 +87,8 @@
       },
       "layer": "components"
     },
-    "cmp_7e7612dd5db5": {
-      "id": "cmp_7e7612dd5db5",
+    "cmp_3f314bcce41d": {
+      "id": "cmp_3f314bcce41d",
       "type": "resistor",
       "ref": "R2",
       "position": {
@@ -102,8 +105,8 @@
       },
       "layer": "components"
     },
-    "cmp_b73f2ee596eb": {
-      "id": "cmp_b73f2ee596eb",
+    "cmp_8558398ed073": {
+      "id": "cmp_8558398ed073",
       "type": "opamp",
       "ref": "U1",
       "position": {
@@ -120,8 +123,8 @@
       },
       "layer": "components"
     },
-    "cmp_8f8beefb398b": {
-      "id": "cmp_8f8beefb398b",
+    "cmp_404ff7386754": {
+      "id": "cmp_404ff7386754",
       "type": "ground",
       "ref": "GND1",
       "position": {
@@ -134,8 +137,8 @@
       "properties": {},
       "layer": "components"
     },
-    "cmp_832f5d6ac8e6": {
-      "id": "cmp_832f5d6ac8e6",
+    "cmp_0c9d99a4006f": {
+      "id": "cmp_0c9d99a4006f",
       "type": "ground",
       "ref": "GND2",
       "position": {
@@ -148,8 +151,8 @@
       "properties": {},
       "layer": "components"
     },
-    "cmp_2e0312b668b5": {
-      "id": "cmp_2e0312b668b5",
+    "cmp_987e2933c69e": {
+      "id": "cmp_987e2933c69e",
       "type": "probe",
       "ref": "P1",
       "position": {
@@ -164,8 +167,8 @@
       },
       "layer": "components"
     },
-    "cmp_b22daf012029": {
-      "id": "cmp_b22daf012029",
+    "cmp_a2a764cff4ef": {
+      "id": "cmp_a2a764cff4ef",
       "type": "probe",
       "ref": "P2",
       "position": {
@@ -182,16 +185,16 @@
     }
   },
   "wires": {
-    "w_548378a6fd91": {
-      "id": "w_548378a6fd91",
+    "w_5fa12931a0df": {
+      "id": "w_5fa12931a0df",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_d199af62aa55",
+        "componentId": "cmp_c6230b2acdb4",
         "pinId": "+"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_53892e0e52ee",
+        "componentId": "cmp_abae96bd30c3",
         "pinId": "1"
       },
       "vertices": [
@@ -203,32 +206,32 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_d215d1e1d777": {
-      "id": "w_d215d1e1d777",
+    "w_787801b07a13": {
+      "id": "w_787801b07a13",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_53892e0e52ee",
+        "componentId": "cmp_abae96bd30c3",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_b73f2ee596eb",
+        "componentId": "cmp_8558398ed073",
         "pinId": "-"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_ab2618e56d6b": {
-      "id": "w_ab2618e56d6b",
+    "w_aa6d57b9289d": {
+      "id": "w_aa6d57b9289d",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_b73f2ee596eb",
+        "componentId": "cmp_8558398ed073",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_7e7612dd5db5",
+        "componentId": "cmp_3f314bcce41d",
         "pinId": "1"
       },
       "vertices": [
@@ -244,16 +247,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_99cabebae00d": {
-      "id": "w_99cabebae00d",
+    "w_71109ba2edcd": {
+      "id": "w_71109ba2edcd",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_7e7612dd5db5",
+        "componentId": "cmp_3f314bcce41d",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_b73f2ee596eb",
+        "componentId": "cmp_8558398ed073",
         "pinId": "OUT"
       },
       "vertices": [
@@ -269,16 +272,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_4633af3e77c1": {
-      "id": "w_4633af3e77c1",
+    "w_46936d8391f8": {
+      "id": "w_46936d8391f8",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_b73f2ee596eb",
+        "componentId": "cmp_8558398ed073",
         "pinId": "+"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_832f5d6ac8e6",
+        "componentId": "cmp_0c9d99a4006f",
         "pinId": "1"
       },
       "vertices": [
@@ -290,48 +293,48 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_bc4e86e9a43b": {
-      "id": "w_bc4e86e9a43b",
+    "w_58497e242ab9": {
+      "id": "w_58497e242ab9",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_d199af62aa55",
+        "componentId": "cmp_c6230b2acdb4",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_8f8beefb398b",
+        "componentId": "cmp_404ff7386754",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_275188565c23": {
-      "id": "w_275188565c23",
+    "w_e62c202b55c5": {
+      "id": "w_e62c202b55c5",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_b73f2ee596eb",
+        "componentId": "cmp_8558398ed073",
         "pinId": "OUT"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_b22daf012029",
+        "componentId": "cmp_a2a764cff4ef",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_ac364d867a6f": {
-      "id": "w_ac364d867a6f",
+    "w_9d8f01dc59bf": {
+      "id": "w_9d8f01dc59bf",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_2e0312b668b5",
+        "componentId": "cmp_987e2933c69e",
         "pinId": "1"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_53892e0e52ee",
+        "componentId": "cmp_abae96bd30c3",
         "pinId": "1"
       },
       "vertices": [],
@@ -376,7 +379,7 @@
   ],
   "sheets": [
     {
-      "id": "sheet_eef2c4acfef7",
+      "id": "sheet_06dfdc246705",
       "title": "Circuit schematic",
       "number": "E-001",
       "kind": "schematic",

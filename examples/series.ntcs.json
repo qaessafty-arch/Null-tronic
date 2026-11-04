@@ -3,13 +3,13 @@
   "schemaVersion": 1,
   "type": "electronic",
   "meta": {
-    "id": "prj_7e4bc9b7758d",
+    "id": "prj_b8682230f0aa",
     "name": "Series circuit",
     "author": "",
     "organisation": "",
     "description": "",
-    "createdAt": "2026-11-04T08:58:03.600Z",
-    "modifiedAt": "2026-11-04T08:58:03.601Z",
+    "createdAt": "2026-11-04T09:10:21.821Z",
+    "modifiedAt": "2026-11-04T09:10:21.822Z",
     "revision": "A",
     "revisions": [
       {
@@ -44,11 +44,14 @@
       "control": "#d64545",
       "power": "#e5534b"
     },
-    "alwaysConfirm": false
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
   },
   "components": {
-    "cmp_6ad7a30c9aae": {
-      "id": "cmp_6ad7a30c9aae",
+    "cmp_149d3f77c948": {
+      "id": "cmp_149d3f77c948",
       "type": "vdc",
       "ref": "V1",
       "position": {
@@ -63,8 +66,8 @@
       },
       "layer": "components"
     },
-    "cmp_1ae8e8e091f3": {
-      "id": "cmp_1ae8e8e091f3",
+    "cmp_c711c82db2f0": {
+      "id": "cmp_c711c82db2f0",
       "type": "resistor",
       "ref": "R1",
       "position": {
@@ -81,8 +84,8 @@
       },
       "layer": "components"
     },
-    "cmp_e53006793907": {
-      "id": "cmp_e53006793907",
+    "cmp_d2108630af83": {
+      "id": "cmp_d2108630af83",
       "type": "resistor",
       "ref": "R2",
       "position": {
@@ -99,8 +102,8 @@
       },
       "layer": "components"
     },
-    "cmp_b326c032f3ff": {
-      "id": "cmp_b326c032f3ff",
+    "cmp_c45cf37d5070": {
+      "id": "cmp_c45cf37d5070",
       "type": "resistor",
       "ref": "R3",
       "position": {
@@ -117,8 +120,8 @@
       },
       "layer": "components"
     },
-    "cmp_138023d51ed5": {
-      "id": "cmp_138023d51ed5",
+    "cmp_48af090168ea": {
+      "id": "cmp_48af090168ea",
       "type": "probe",
       "ref": "P1",
       "position": {
@@ -133,8 +136,8 @@
       },
       "layer": "components"
     },
-    "cmp_2f60c128f7b4": {
-      "id": "cmp_2f60c128f7b4",
+    "cmp_779a5c0795aa": {
+      "id": "cmp_779a5c0795aa",
       "type": "ground",
       "ref": "GND1",
       "position": {
@@ -149,16 +152,16 @@
     }
   },
   "wires": {
-    "w_68f7bfe3dcae": {
-      "id": "w_68f7bfe3dcae",
+    "w_2c8b16e088bd": {
+      "id": "w_2c8b16e088bd",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_6ad7a30c9aae",
+        "componentId": "cmp_149d3f77c948",
         "pinId": "+"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_1ae8e8e091f3",
+        "componentId": "cmp_c711c82db2f0",
         "pinId": "1"
       },
       "vertices": [
@@ -170,32 +173,32 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_ada4394e6c1a": {
-      "id": "w_ada4394e6c1a",
+    "w_c1bedd9234f9": {
+      "id": "w_c1bedd9234f9",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_1ae8e8e091f3",
+        "componentId": "cmp_c711c82db2f0",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_e53006793907",
+        "componentId": "cmp_d2108630af83",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_433e907863ac": {
-      "id": "w_433e907863ac",
+    "w_4be2c4a539fd": {
+      "id": "w_4be2c4a539fd",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_e53006793907",
+        "componentId": "cmp_d2108630af83",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_b326c032f3ff",
+        "componentId": "cmp_c45cf37d5070",
         "pinId": "1"
       },
       "vertices": [
@@ -207,48 +210,48 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_69064dc8d8ff": {
-      "id": "w_69064dc8d8ff",
+    "w_8f4700016272": {
+      "id": "w_8f4700016272",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_b326c032f3ff",
+        "componentId": "cmp_c45cf37d5070",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_6ad7a30c9aae",
+        "componentId": "cmp_149d3f77c948",
         "pinId": "-"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_653040b3ca4d": {
-      "id": "w_653040b3ca4d",
+    "w_2d2b008943d1": {
+      "id": "w_2d2b008943d1",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_6ad7a30c9aae",
+        "componentId": "cmp_149d3f77c948",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_2f60c128f7b4",
+        "componentId": "cmp_779a5c0795aa",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_681bad5ba609": {
-      "id": "w_681bad5ba609",
+    "w_aeeabaa9d47e": {
+      "id": "w_aeeabaa9d47e",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_138023d51ed5",
+        "componentId": "cmp_48af090168ea",
         "pinId": "1"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_1ae8e8e091f3",
+        "componentId": "cmp_c711c82db2f0",
         "pinId": "2"
       },
       "vertices": [],
@@ -293,7 +296,7 @@
   ],
   "sheets": [
     {
-      "id": "sheet_cdbffa4da684",
+      "id": "sheet_79416e7890f0",
       "title": "Circuit schematic",
       "number": "E-001",
       "kind": "schematic",

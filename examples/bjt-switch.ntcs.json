@@ -3,13 +3,13 @@
   "schemaVersion": 1,
   "type": "electronic",
   "meta": {
-    "id": "prj_248311663496",
+    "id": "prj_04a6d027123d",
     "name": "Transistor switch (NPN low-side)",
     "author": "",
     "organisation": "",
     "description": "",
-    "createdAt": "2026-11-04T08:58:03.604Z",
-    "modifiedAt": "2026-11-04T08:58:03.604Z",
+    "createdAt": "2026-11-04T09:10:21.828Z",
+    "modifiedAt": "2026-11-04T09:10:21.829Z",
     "revision": "A",
     "revisions": [
       {
@@ -44,11 +44,14 @@
       "control": "#d64545",
       "power": "#e5534b"
     },
-    "alwaysConfirm": false
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
   },
   "components": {
-    "cmp_9ed908df9d71": {
-      "id": "cmp_9ed908df9d71",
+    "cmp_802c528bd301": {
+      "id": "cmp_802c528bd301",
       "type": "vdc",
       "ref": "V1",
       "position": {
@@ -63,8 +66,8 @@
       },
       "layer": "components"
     },
-    "cmp_675289a5827b": {
-      "id": "cmp_675289a5827b",
+    "cmp_e4a4ede25112": {
+      "id": "cmp_e4a4ede25112",
       "type": "vdc",
       "ref": "V2",
       "position": {
@@ -79,8 +82,8 @@
       },
       "layer": "components"
     },
-    "cmp_b76830ae7cb2": {
-      "id": "cmp_b76830ae7cb2",
+    "cmp_768cf042e758": {
+      "id": "cmp_768cf042e758",
       "type": "resistor",
       "ref": "R1",
       "position": {
@@ -97,8 +100,8 @@
       },
       "layer": "components"
     },
-    "cmp_191c6efcbb2f": {
-      "id": "cmp_191c6efcbb2f",
+    "cmp_2be6c9cc7ffa": {
+      "id": "cmp_2be6c9cc7ffa",
       "type": "npn",
       "ref": "Q1",
       "position": {
@@ -115,8 +118,8 @@
       },
       "layer": "components"
     },
-    "cmp_d0816d9a5dd7": {
-      "id": "cmp_d0816d9a5dd7",
+    "cmp_95f2abc8ae2b": {
+      "id": "cmp_95f2abc8ae2b",
       "type": "resistor",
       "ref": "R2",
       "position": {
@@ -133,8 +136,8 @@
       },
       "layer": "components"
     },
-    "cmp_2234a9edc628": {
-      "id": "cmp_2234a9edc628",
+    "cmp_2dda61513aa5": {
+      "id": "cmp_2dda61513aa5",
       "type": "led",
       "ref": "D1",
       "position": {
@@ -151,8 +154,8 @@
       },
       "layer": "components"
     },
-    "cmp_2eef1f24e055": {
-      "id": "cmp_2eef1f24e055",
+    "cmp_1175bc518763": {
+      "id": "cmp_1175bc518763",
       "type": "ground",
       "ref": "GND1",
       "position": {
@@ -165,8 +168,8 @@
       "properties": {},
       "layer": "components"
     },
-    "cmp_52a2912219cd": {
-      "id": "cmp_52a2912219cd",
+    "cmp_5315a1316895": {
+      "id": "cmp_5315a1316895",
       "type": "switch",
       "ref": "S1",
       "position": {
@@ -184,16 +187,16 @@
     }
   },
   "wires": {
-    "w_6691ae0bca98": {
-      "id": "w_6691ae0bca98",
+    "w_c89c2d9ba86d": {
+      "id": "w_c89c2d9ba86d",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_675289a5827b",
+        "componentId": "cmp_e4a4ede25112",
         "pinId": "+"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_52a2912219cd",
+        "componentId": "cmp_5315a1316895",
         "pinId": "1"
       },
       "vertices": [
@@ -205,80 +208,80 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_f9ea003a5459": {
-      "id": "w_f9ea003a5459",
+    "w_3f48997338fe": {
+      "id": "w_3f48997338fe",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_52a2912219cd",
+        "componentId": "cmp_5315a1316895",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_b76830ae7cb2",
+        "componentId": "cmp_768cf042e758",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_927543bd8531": {
-      "id": "w_927543bd8531",
+    "w_1370627947ad": {
+      "id": "w_1370627947ad",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_b76830ae7cb2",
+        "componentId": "cmp_768cf042e758",
         "pinId": "2"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_191c6efcbb2f",
+        "componentId": "cmp_2be6c9cc7ffa",
         "pinId": "B"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_7dbb5bca4f9c": {
-      "id": "w_7dbb5bca4f9c",
+    "w_92420040b258": {
+      "id": "w_92420040b258",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_191c6efcbb2f",
+        "componentId": "cmp_2be6c9cc7ffa",
         "pinId": "C"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_2234a9edc628",
+        "componentId": "cmp_2dda61513aa5",
         "pinId": "K"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_318841d16735": {
-      "id": "w_318841d16735",
+    "w_9460e3920122": {
+      "id": "w_9460e3920122",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_2234a9edc628",
+        "componentId": "cmp_2dda61513aa5",
         "pinId": "A"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_d0816d9a5dd7",
+        "componentId": "cmp_95f2abc8ae2b",
         "pinId": "2"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_31d7bdda7d84": {
-      "id": "w_31d7bdda7d84",
+    "w_19a129fd2940": {
+      "id": "w_19a129fd2940",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_d0816d9a5dd7",
+        "componentId": "cmp_95f2abc8ae2b",
         "pinId": "1"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_9ed908df9d71",
+        "componentId": "cmp_802c528bd301",
         "pinId": "+"
       },
       "vertices": [
@@ -294,32 +297,32 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_02cd532b350c": {
-      "id": "w_02cd532b350c",
+    "w_4c9d0f4a499d": {
+      "id": "w_4c9d0f4a499d",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_191c6efcbb2f",
+        "componentId": "cmp_2be6c9cc7ffa",
         "pinId": "E"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_2eef1f24e055",
+        "componentId": "cmp_1175bc518763",
         "pinId": "1"
       },
       "vertices": [],
       "role": "auto",
       "layer": "wires"
     },
-    "w_85259d40448b": {
-      "id": "w_85259d40448b",
+    "w_aed15e0e3a69": {
+      "id": "w_aed15e0e3a69",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_675289a5827b",
+        "componentId": "cmp_e4a4ede25112",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_2eef1f24e055",
+        "componentId": "cmp_1175bc518763",
         "pinId": "1"
       },
       "vertices": [
@@ -335,16 +338,16 @@
       "role": "auto",
       "layer": "wires"
     },
-    "w_8bf4cfc83194": {
-      "id": "w_8bf4cfc83194",
+    "w_63275ff913a6": {
+      "id": "w_63275ff913a6",
       "a": {
         "kind": "pin",
-        "componentId": "cmp_9ed908df9d71",
+        "componentId": "cmp_802c528bd301",
         "pinId": "-"
       },
       "b": {
         "kind": "pin",
-        "componentId": "cmp_2eef1f24e055",
+        "componentId": "cmp_1175bc518763",
         "pinId": "1"
       },
       "vertices": [
@@ -398,7 +401,7 @@
   ],
   "sheets": [
     {
-      "id": "sheet_2753cf5c5d09",
+      "id": "sheet_c3e716d6b9b6",
       "title": "Circuit schematic",
       "number": "E-001",
       "kind": "schematic",

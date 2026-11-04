@@ -1,3 +1,4 @@
+import { desktopOpen, desktopSave, isDesktop } from './desktop';
 import { parseProject, serializeProject, ProjectFormatError } from '../project-model/serialization';
 import { loadProject } from '../history/history';
 import { log, store } from '../state/store';
@@ -16,6 +17,13 @@ interface FileHandleLike {
 let currentHandle: FileHandleLike | null = null;
 
 export function download(name: string, data: Blob | string, type = 'application/octet-stream'): void {
+  if (isDesktop()) {
+    desktopSave(name, data).then(
+      (path) => path && log('info', `Saved ${path}`, true),
+      (e) => log('error', `Save failed: ${(e as Error).message}`),
+    );
+    return;
+  }
   const blob = typeof data === 'string' ? new Blob([data], { type }) : data;
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -34,6 +42,18 @@ function safeName(p: Project) {
 export async function saveProject(saveAs = false): Promise<void> {
   const s = store.get();
   const text = serializeProject(s.project);
+  if (isDesktop()) {
+    try {
+      const path = await desktopSave(s.fileName.endsWith('.ntcs.json') && s.fileName !== 'untitled.ntcs.json' ? s.fileName : `${safeName(s.project)}.ntcs.json`, text);
+      if (path) {
+        store.set({ savedRevision: s.project, fileName: path.split(/[\\/]/).pop()! });
+        log('info', `Saved ${path}`, true);
+      }
+    } catch (e) {
+      log('error', `Save failed: ${(e as Error).message}`);
+    }
+    return;
+  }
   const w = window as unknown as { showSaveFilePicker?: (o: unknown) => Promise<FileHandleLike> };
   try {
     if (w.showSaveFilePicker && (saveAs || !currentHandle)) {
@@ -72,6 +92,7 @@ export function openProjectText(text: string, name: string): boolean {
 }
 
 export function pickFile(accept: string): Promise<File | null> {
+  if (isDesktop()) return desktopOpen(accept);
   return new Promise((resolve) => {
     const input = document.createElement('input');
     input.type = 'file';

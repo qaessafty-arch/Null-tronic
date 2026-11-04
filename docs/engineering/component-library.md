@@ -23,12 +23,12 @@ Properties marked * carry typical/assumed defaults that must be confirmed from d
 | N-channel MOSFET | `nmos` | Semiconductors | electronic | G D S | full | vth (V)*, k (A/V²)*, lambda (1/V) |
 | P-channel MOSFET | `pmos` | Semiconductors | electronic | G D S | full | vth (V)*, k (A/V²)*, lambda (1/V) |
 | Operational amplifier | `opamp` | Integrated circuits | electronic | - + OUT | full | gain, vsatPos (V), vsatNeg (V) |
-| AND gate | `gate_and` | Logic | electronic, control | A B Y | none | family |
-| OR gate | `gate_or` | Logic | electronic, control | A B Y | none | family |
-| NAND gate | `gate_nand` | Logic | electronic, control | A B Y | none | family |
-| NOR gate | `gate_nor` | Logic | electronic, control | A B Y | none | family |
-| XOR gate | `gate_xor` | Logic | electronic, control | A B Y | none | family |
-| NOT gate | `gate_not` | Logic | electronic, control | A Y | none | family |
+| AND gate | `gate_and` | Logic | electronic, control | A B Y | full | family, vcc (V), outputResistance (Ω)* |
+| OR gate | `gate_or` | Logic | electronic, control | A B Y | full | family, vcc (V), outputResistance (Ω)* |
+| NAND gate | `gate_nand` | Logic | electronic, control | A B Y | full | family, vcc (V), outputResistance (Ω)* |
+| NOR gate | `gate_nor` | Logic | electronic, control | A B Y | full | family, vcc (V), outputResistance (Ω)* |
+| XOR gate | `gate_xor` | Logic | electronic, control | A B Y | full | family, vcc (V), outputResistance (Ω)* |
+| NOT gate | `gate_not` | Logic | electronic, control | A Y | full | family, vcc (V), outputResistance (Ω)* |
 | Switch (SPST) | `switch` | Switching | electronic, control | 1 2 | interactive | closed, rOn (Ω) |
 | Push button (NO) | `pushbutton` | Switching | electronic | 1 2 | interactive | pressed |
 | Relay (SPDT) | `relay` | Switching | electronic, control | A1 A2 COM NO NC | full | coilVoltage (V), coilResistance (Ω), pickupPercent (% of rated)*, dropoutPercent (% of rated)* |

@@ -14,9 +14,9 @@ webcam hand tracking.
 | Authoritative project model (one model → 2D, 3D, drawings, exports, simulation) | ✅ tested |
 | Component library: 59 parts (passives, sources, semiconductors, op-amp, logic, relays, installation devices, control devices, PLC I/O) | ✅ |
 | Schematic editor: place / move / rotate / mirror / duplicate / copy / paste / delete, wires with junctions, net labels, snapping | ✅ |
-| Simulator (built-in MNA): DC operating point, transient (trapezoidal), AC sweep; diodes, LEDs, Zeners, BJTs, MOSFETs, op-amps, ideal transformer, relays/contactors with pick-up/drop-out | ✅ cross-validated against **ngspice** |
-| Installation design: rooms, devices, circuits from boards, route-based cable lengths, Ib, voltage drop (IEC 60364-5-52 Annex G method), breaker & conductor-size suggestions, board/phase summaries, BOM, cost (user prices only) | ✅ tested against hand calculations |
-| Control systems: start/stop seal-in, E-stop, overload, PLC inputs/forced outputs, interactive simulation | ✅ |
+| Simulator (built-in MNA): DC operating point, transient (trapezoidal), AC sweep; diodes, LEDs, Zeners, BJTs, MOSFETs, op-amps, ideal transformer, relays/contactors with pick-up/drop-out, **logic gates** (74HC / 74LS / CD4000 thresholds) | ✅ cross-validated against **ngspice** |
+| Installation design: rooms, devices, circuits from boards, cables routed **through cable trays** (or orthogonal L-routes), route-based lengths, Ib, voltage drop (IEC 60364-5-52 Annex G method), breaker & conductor-size suggestions, **earth-fault loop impedance Zs and disconnection checks (TN / TT, IEC 60364-4-41)**, breaking capacity, board/phase summaries, BOM, cost (user prices only) | ✅ tested against hand calculations |
+| Control systems: start/stop seal-in, E-stop, overload, PLC I/O with a **PLC program in IEC 61131-3 Structured Text** (Boolean subset) executed in the simulation, interactive buttons | ✅ |
 | 3D viewport (Three.js): parametric models with lead tips on the 2D pin coordinates, wires/cables, rooms, LED glow from simulation, move gizmo that edits the model, ortho/persp, presets, section, explode, hide/isolate, measure | ✅ |
 | Drawings: A0–A4/custom sheets, ISO frame with zones, title block, scales, schedules, BOM, single-line diagram; vector PDF, SVG, PNG/JPEG, browser print | ✅ |
 | Exchange: native `.ntcs.json` (versioned, validated, migrated), DXF R12 export + import, SPICE export + import (subset), GLB/glTF/OBJ/STL | ✅ |
@@ -25,8 +25,8 @@ webcam hand tracking.
 | Local engineering assistant (offline, rule-based, proposals go through preview/validation) | ✅ |
 | Examples & tutorials (13), lab/engineering report | ✅ |
 
-Not implemented: IFC, PLC programming/protocols, digital logic simulation, fault-loop / short-circuit
-calculations, built-in ampacity tables (you enter them with their source). See
+Not implemented: IFC, PLC timers/counters and vendor protocols, short-circuit between live conductors,
+selectivity and cable thermal withstand, built-in ampacity tables (you enter them with their source). See
 [docs/known-limitations.md](docs/known-limitations.md).
 
 ## Quick start
