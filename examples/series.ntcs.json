@@ -1,0 +1,311 @@
+{
+  "format": "nulltech-circuit-studio-project",
+  "schemaVersion": 1,
+  "type": "electronic",
+  "meta": {
+    "id": "prj_b8682230f0aa",
+    "name": "Series circuit",
+    "author": "",
+    "organisation": "",
+    "description": "",
+    "createdAt": "2026-11-04T09:10:21.821Z",
+    "modifiedAt": "2026-11-04T09:10:21.822Z",
+    "revision": "A",
+    "revisions": [
+      {
+        "id": "A",
+        "date": "2026-11-04",
+        "description": "Initial issue",
+        "author": ""
+      }
+    ],
+    "notes": ""
+  },
+  "settings": {
+    "displayUnit": "mm",
+    "gridMm": 2.5,
+    "snapToGrid": true,
+    "supplyVoltage": 230,
+    "frequencyHz": 50,
+    "supplyPhases": 1,
+    "voltageDropLimitLighting": 3,
+    "voltageDropLimitOther": 5,
+    "ampacityTable": [],
+    "unitPrices": {},
+    "currency": "IQD",
+    "conductorColors": {
+      "L1": "#8b5a2b",
+      "L2": "#1a1a1a",
+      "L3": "#8c8c8c",
+      "N": "#2f6fdb",
+      "PE": "#5fbf3a",
+      "signal": "#2bd97a",
+      "ground": "#8f9aa6",
+      "control": "#d64545",
+      "power": "#e5534b"
+    },
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
+  },
+  "components": {
+    "cmp_149d3f77c948": {
+      "id": "cmp_149d3f77c948",
+      "type": "vdc",
+      "ref": "V1",
+      "position": {
+        "x": 0,
+        "y": 15
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "voltage": 12
+      },
+      "layer": "components"
+    },
+    "cmp_c711c82db2f0": {
+      "id": "cmp_c711c82db2f0",
+      "type": "resistor",
+      "ref": "R1",
+      "position": {
+        "x": 15,
+        "y": 5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 1000,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_d2108630af83": {
+      "id": "cmp_d2108630af83",
+      "type": "resistor",
+      "ref": "R2",
+      "position": {
+        "x": 35,
+        "y": 5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 2000,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_c45cf37d5070": {
+      "id": "cmp_c45cf37d5070",
+      "type": "resistor",
+      "ref": "R3",
+      "position": {
+        "x": 45,
+        "y": 15
+      },
+      "rotation": 90,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 3000,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_48af090168ea": {
+      "id": "cmp_48af090168ea",
+      "type": "probe",
+      "ref": "P1",
+      "position": {
+        "x": 25,
+        "y": 5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "name": "A"
+      },
+      "layer": "components"
+    },
+    "cmp_779a5c0795aa": {
+      "id": "cmp_779a5c0795aa",
+      "type": "ground",
+      "ref": "GND1",
+      "position": {
+        "x": 0,
+        "y": 27.5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {},
+      "layer": "components"
+    }
+  },
+  "wires": {
+    "w_2c8b16e088bd": {
+      "id": "w_2c8b16e088bd",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_149d3f77c948",
+        "pinId": "+"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_c711c82db2f0",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_c1bedd9234f9": {
+      "id": "w_c1bedd9234f9",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_c711c82db2f0",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_d2108630af83",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_4be2c4a539fd": {
+      "id": "w_4be2c4a539fd",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_d2108630af83",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_c45cf37d5070",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 45,
+          "y": 5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_8f4700016272": {
+      "id": "w_8f4700016272",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_c45cf37d5070",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_149d3f77c948",
+        "pinId": "-"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_2d2b008943d1": {
+      "id": "w_2d2b008943d1",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_149d3f77c948",
+        "pinId": "-"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_779a5c0795aa",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_aeeabaa9d47e": {
+      "id": "w_aeeabaa9d47e",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_48af090168ea",
+        "pinId": "1"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_c711c82db2f0",
+        "pinId": "2"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    }
+  },
+  "junctions": {},
+  "rooms": {},
+  "circuits": {},
+  "cables": {},
+  "annotations": {},
+  "layers": [
+    {
+      "name": "components",
+      "color": "#d8dee6",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "wires",
+      "color": "#2bd97a",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "annotations",
+      "color": "#9aa4b1",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.18
+    },
+    {
+      "name": "underlay",
+      "color": "#5c6672",
+      "visible": true,
+      "locked": true,
+      "lineWeight": 0.13
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet_79416e7890f0",
+      "title": "Circuit schematic",
+      "number": "E-001",
+      "kind": "schematic",
+      "paper": "A3",
+      "orientation": "landscape",
+      "scale": 0,
+      "marginMm": 10,
+      "lineWeightScale": 1,
+      "showWatermark": false
+    }
+  ]
+}

@@ -1,0 +1,487 @@
+{
+  "format": "nulltech-circuit-studio-project",
+  "schemaVersion": 1,
+  "type": "control",
+  "meta": {
+    "id": "prj_fe178c4a9697",
+    "name": "DOL motor starter — control circuit",
+    "author": "",
+    "organisation": "",
+    "description": "",
+    "createdAt": "2026-11-04T09:10:21.832Z",
+    "modifiedAt": "2026-11-04T09:10:21.832Z",
+    "revision": "A",
+    "revisions": [
+      {
+        "id": "A",
+        "date": "2026-11-04",
+        "description": "Initial issue",
+        "author": ""
+      }
+    ],
+    "notes": ""
+  },
+  "settings": {
+    "displayUnit": "mm",
+    "gridMm": 2.5,
+    "snapToGrid": true,
+    "supplyVoltage": 230,
+    "frequencyHz": 50,
+    "supplyPhases": 1,
+    "voltageDropLimitLighting": 3,
+    "voltageDropLimitOther": 5,
+    "ampacityTable": [],
+    "unitPrices": {},
+    "currency": "IQD",
+    "conductorColors": {
+      "L1": "#8b5a2b",
+      "L2": "#1a1a1a",
+      "L3": "#8c8c8c",
+      "N": "#2f6fdb",
+      "PE": "#5fbf3a",
+      "signal": "#2bd97a",
+      "ground": "#8f9aa6",
+      "control": "#d64545",
+      "power": "#e5534b"
+    },
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
+  },
+  "components": {
+    "cmp_68d1d0c2af35": {
+      "id": "cmp_68d1d0c2af35",
+      "type": "vdc",
+      "ref": "G1",
+      "position": {
+        "x": 0,
+        "y": 40
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "voltage": 24
+      },
+      "layer": "components"
+    },
+    "cmp_a22443a354e3": {
+      "id": "cmp_a22443a354e3",
+      "type": "overload_nc",
+      "ref": "F1",
+      "position": {
+        "x": 20,
+        "y": 10
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "pressed": false
+      },
+      "layer": "components"
+    },
+    "cmp_38018b241163": {
+      "id": "cmp_38018b241163",
+      "type": "pb_nc",
+      "ref": "S0",
+      "position": {
+        "x": 20,
+        "y": 25
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "pressed": false
+      },
+      "layer": "components"
+    },
+    "cmp_09365931e9c5": {
+      "id": "cmp_09365931e9c5",
+      "type": "pb_no",
+      "ref": "S1",
+      "position": {
+        "x": 20,
+        "y": 40
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "pressed": false
+      },
+      "layer": "components"
+    },
+    "cmp_29a472fb0df8": {
+      "id": "cmp_29a472fb0df8",
+      "type": "contact_no",
+      "ref": "K1.1",
+      "position": {
+        "x": 35,
+        "y": 40
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "tag": "K1"
+      },
+      "layer": "components"
+    },
+    "cmp_e8ccec08e7cf": {
+      "id": "cmp_e8ccec08e7cf",
+      "type": "coil",
+      "ref": "K1",
+      "position": {
+        "x": 20,
+        "y": 60
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "tag": "K1",
+        "coilVoltage": 24,
+        "coilResistance": 200,
+        "pickupPercent": 80,
+        "dropoutPercent": 30
+      },
+      "layer": "components"
+    },
+    "cmp_071bba318bee": {
+      "id": "cmp_071bba318bee",
+      "type": "contact_no",
+      "ref": "K1.2",
+      "position": {
+        "x": 55,
+        "y": 40
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "tag": "K1"
+      },
+      "layer": "components"
+    },
+    "cmp_2a60bf928fff": {
+      "id": "cmp_2a60bf928fff",
+      "type": "lamp",
+      "ref": "H1",
+      "position": {
+        "x": 55,
+        "y": 60
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 480,
+        "color": "green"
+      },
+      "layer": "components"
+    },
+    "cmp_f775a3094970": {
+      "id": "cmp_f775a3094970",
+      "type": "ground",
+      "ref": "GND1",
+      "position": {
+        "x": 0,
+        "y": 75
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {},
+      "layer": "components"
+    }
+  },
+  "wires": {
+    "w_81f24079ee59": {
+      "id": "w_81f24079ee59",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_68d1d0c2af35",
+        "pinId": "+"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_a22443a354e3",
+        "pinId": "95"
+      },
+      "vertices": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 20,
+          "y": 0
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_c5b2e94d33b6": {
+      "id": "w_c5b2e94d33b6",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_a22443a354e3",
+        "pinId": "96"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_38018b241163",
+        "pinId": "11"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_f456eb1b63a5": {
+      "id": "w_f456eb1b63a5",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_38018b241163",
+        "pinId": "12"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_09365931e9c5",
+        "pinId": "13"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_9cbf6857637d": {
+      "id": "w_9cbf6857637d",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_09365931e9c5",
+        "pinId": "13"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_29a472fb0df8",
+        "pinId": "13"
+      },
+      "vertices": [
+        {
+          "x": 20,
+          "y": 32.5
+        },
+        {
+          "x": 35,
+          "y": 32.5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_9c79f02b18cb": {
+      "id": "w_9c79f02b18cb",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_09365931e9c5",
+        "pinId": "14"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_e8ccec08e7cf",
+        "pinId": "A1"
+      },
+      "vertices": [
+        {
+          "x": 20,
+          "y": 50
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_2b3f7fbeff49": {
+      "id": "w_2b3f7fbeff49",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_29a472fb0df8",
+        "pinId": "14"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_09365931e9c5",
+        "pinId": "14"
+      },
+      "vertices": [
+        {
+          "x": 35,
+          "y": 50
+        },
+        {
+          "x": 20,
+          "y": 50
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_291c3250c7c6": {
+      "id": "w_291c3250c7c6",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_e8ccec08e7cf",
+        "pinId": "A2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_f775a3094970",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 20,
+          "y": 70
+        },
+        {
+          "x": 0,
+          "y": 70
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_08f8c636981e": {
+      "id": "w_08f8c636981e",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_68d1d0c2af35",
+        "pinId": "-"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_f775a3094970",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_413880c87775": {
+      "id": "w_413880c87775",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_071bba318bee",
+        "pinId": "13"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_a22443a354e3",
+        "pinId": "95"
+      },
+      "vertices": [
+        {
+          "x": 55,
+          "y": 0
+        },
+        {
+          "x": 20,
+          "y": 0
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_2baa25f9e29d": {
+      "id": "w_2baa25f9e29d",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_071bba318bee",
+        "pinId": "14"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_2a60bf928fff",
+        "pinId": "X1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_616609c2e98b": {
+      "id": "w_616609c2e98b",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_2a60bf928fff",
+        "pinId": "X2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_f775a3094970",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 55,
+          "y": 70
+        },
+        {
+          "x": 0,
+          "y": 70
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    }
+  },
+  "junctions": {},
+  "rooms": {},
+  "circuits": {},
+  "cables": {},
+  "annotations": {},
+  "layers": [
+    {
+      "name": "components",
+      "color": "#d8dee6",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "wires",
+      "color": "#2bd97a",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "annotations",
+      "color": "#9aa4b1",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.18
+    },
+    {
+      "name": "underlay",
+      "color": "#5c6672",
+      "visible": true,
+      "locked": true,
+      "lineWeight": 0.13
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet_758d89e4e1c6",
+      "title": "Control wiring diagram",
+      "number": "E-001",
+      "kind": "schematic",
+      "paper": "A3",
+      "orientation": "landscape",
+      "scale": 0,
+      "marginMm": 10,
+      "lineWeightScale": 1,
+      "showWatermark": false
+    }
+  ]
+}

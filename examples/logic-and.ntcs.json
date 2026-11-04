@@ -1,0 +1,525 @@
+{
+  "format": "nulltech-circuit-studio-project",
+  "schemaVersion": 1,
+  "type": "electronic",
+  "meta": {
+    "id": "prj_a087aff2ac7b",
+    "name": "Logic gates — AND driving an LED",
+    "author": "",
+    "organisation": "",
+    "description": "",
+    "createdAt": "2026-11-04T09:10:21.834Z",
+    "modifiedAt": "2026-11-04T09:10:21.835Z",
+    "revision": "A",
+    "revisions": [
+      {
+        "id": "A",
+        "date": "2026-11-04",
+        "description": "Initial issue",
+        "author": ""
+      }
+    ],
+    "notes": ""
+  },
+  "settings": {
+    "displayUnit": "mm",
+    "gridMm": 2.5,
+    "snapToGrid": true,
+    "supplyVoltage": 230,
+    "frequencyHz": 50,
+    "supplyPhases": 1,
+    "voltageDropLimitLighting": 3,
+    "voltageDropLimitOther": 5,
+    "ampacityTable": [],
+    "unitPrices": {},
+    "currency": "IQD",
+    "conductorColors": {
+      "L1": "#8b5a2b",
+      "L2": "#1a1a1a",
+      "L3": "#8c8c8c",
+      "N": "#2f6fdb",
+      "PE": "#5fbf3a",
+      "signal": "#2bd97a",
+      "ground": "#8f9aa6",
+      "control": "#d64545",
+      "power": "#e5534b"
+    },
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
+  },
+  "components": {
+    "cmp_3fd6efce15b7": {
+      "id": "cmp_3fd6efce15b7",
+      "type": "vdc",
+      "ref": "V1",
+      "position": {
+        "x": 0,
+        "y": 25
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "voltage": 5
+      },
+      "layer": "components"
+    },
+    "cmp_ec68f6e1a86b": {
+      "id": "cmp_ec68f6e1a86b",
+      "type": "switch",
+      "ref": "SA",
+      "position": {
+        "x": 15,
+        "y": 5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "closed": false,
+        "rOn": 0.01
+      },
+      "layer": "components"
+    },
+    "cmp_070b3e57b870": {
+      "id": "cmp_070b3e57b870",
+      "type": "switch",
+      "ref": "SB",
+      "position": {
+        "x": 15,
+        "y": 15
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "closed": false,
+        "rOn": 0.01
+      },
+      "layer": "components"
+    },
+    "cmp_d39d22791542": {
+      "id": "cmp_d39d22791542",
+      "type": "resistor",
+      "ref": "RA",
+      "position": {
+        "x": 25,
+        "y": 35
+      },
+      "rotation": 90,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 10000,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_1ccc5c5e62ae": {
+      "id": "cmp_1ccc5c5e62ae",
+      "type": "resistor",
+      "ref": "RB",
+      "position": {
+        "x": 30,
+        "y": 35
+      },
+      "rotation": 90,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 10000,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_48723ce32219": {
+      "id": "cmp_48723ce32219",
+      "type": "gate_and",
+      "ref": "U1",
+      "position": {
+        "x": 45,
+        "y": 10
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "family": "74HC",
+        "vcc": 5,
+        "outputResistance": 50
+      },
+      "layer": "components"
+    },
+    "cmp_db3092da48ad": {
+      "id": "cmp_db3092da48ad",
+      "type": "resistor",
+      "ref": "R1",
+      "position": {
+        "x": 60,
+        "y": 10
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 330,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_c2ffbe384997": {
+      "id": "cmp_c2ffbe384997",
+      "type": "led",
+      "ref": "D1",
+      "position": {
+        "x": 70,
+        "y": 20
+      },
+      "rotation": 90,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "color": "green",
+        "vf": 2.1,
+        "maxCurrent": 0.02
+      },
+      "layer": "components"
+    },
+    "cmp_ccc8904baddd": {
+      "id": "cmp_ccc8904baddd",
+      "type": "ground",
+      "ref": "GND1",
+      "position": {
+        "x": 0,
+        "y": 50
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {},
+      "layer": "components"
+    }
+  },
+  "wires": {
+    "w_26a7599614e8": {
+      "id": "w_26a7599614e8",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_3fd6efce15b7",
+        "pinId": "+"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_ec68f6e1a86b",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_ab1aa23fce0c": {
+      "id": "w_ab1aa23fce0c",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_ec68f6e1a86b",
+        "pinId": "1"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_070b3e57b870",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 15
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_20c7334e793f": {
+      "id": "w_20c7334e793f",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_3fd6efce15b7",
+        "pinId": "-"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_ccc8904baddd",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_c2e14743e96f": {
+      "id": "w_c2e14743e96f",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_ec68f6e1a86b",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_48723ce32219",
+        "pinId": "A"
+      },
+      "vertices": [
+        {
+          "x": 25,
+          "y": 5
+        },
+        {
+          "x": 25,
+          "y": 7.5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_a58dad90bb85": {
+      "id": "w_a58dad90bb85",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_070b3e57b870",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_48723ce32219",
+        "pinId": "B"
+      },
+      "vertices": [
+        {
+          "x": 30,
+          "y": 15
+        },
+        {
+          "x": 30,
+          "y": 12.5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_77bb4004649b": {
+      "id": "w_77bb4004649b",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_d39d22791542",
+        "pinId": "1"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_ec68f6e1a86b",
+        "pinId": "2"
+      },
+      "vertices": [
+        {
+          "x": 25,
+          "y": 5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_43e870afc01d": {
+      "id": "w_43e870afc01d",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_1ccc5c5e62ae",
+        "pinId": "1"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_070b3e57b870",
+        "pinId": "2"
+      },
+      "vertices": [
+        {
+          "x": 30,
+          "y": 15
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_75718b294c49": {
+      "id": "w_75718b294c49",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_d39d22791542",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_ccc8904baddd",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 25,
+          "y": 45
+        },
+        {
+          "x": 0,
+          "y": 45
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_83f1a423e0dc": {
+      "id": "w_83f1a423e0dc",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_1ccc5c5e62ae",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_ccc8904baddd",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 30,
+          "y": 45
+        },
+        {
+          "x": 0,
+          "y": 45
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_e79aed1cb12b": {
+      "id": "w_e79aed1cb12b",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_48723ce32219",
+        "pinId": "Y"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_db3092da48ad",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_d0648cddf91c": {
+      "id": "w_d0648cddf91c",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_db3092da48ad",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_c2ffbe384997",
+        "pinId": "A"
+      },
+      "vertices": [
+        {
+          "x": 70,
+          "y": 10
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_ee871432c975": {
+      "id": "w_ee871432c975",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_c2ffbe384997",
+        "pinId": "K"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_ccc8904baddd",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 70,
+          "y": 45
+        },
+        {
+          "x": 0,
+          "y": 45
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    }
+  },
+  "junctions": {},
+  "rooms": {},
+  "circuits": {},
+  "cables": {},
+  "annotations": {},
+  "layers": [
+    {
+      "name": "components",
+      "color": "#d8dee6",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "wires",
+      "color": "#2bd97a",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "annotations",
+      "color": "#9aa4b1",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.18
+    },
+    {
+      "name": "underlay",
+      "color": "#5c6672",
+      "visible": true,
+      "locked": true,
+      "lineWeight": 0.13
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet_8476af7d1e2d",
+      "title": "Circuit schematic",
+      "number": "E-001",
+      "kind": "schematic",
+      "paper": "A3",
+      "orientation": "landscape",
+      "scale": 0,
+      "marginMm": 10,
+      "lineWeightScale": 1,
+      "showWatermark": false
+    }
+  ]
+}

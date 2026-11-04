@@ -1,0 +1,1128 @@
+{
+  "format": "nulltech-circuit-studio-project",
+  "schemaVersion": 1,
+  "type": "installation",
+  "meta": {
+    "id": "prj_9f29efbac67f",
+    "name": "Residential flat — sample installation",
+    "author": "",
+    "organisation": "",
+    "description": "",
+    "createdAt": "2026-11-04T09:10:21.835Z",
+    "modifiedAt": "2026-11-04T09:10:21.838Z",
+    "revision": "A",
+    "revisions": [
+      {
+        "id": "A",
+        "date": "2026-11-04",
+        "description": "Initial issue",
+        "author": ""
+      }
+    ],
+    "notes": ""
+  },
+  "settings": {
+    "displayUnit": "m",
+    "gridMm": 100,
+    "snapToGrid": true,
+    "supplyVoltage": 230,
+    "frequencyHz": 50,
+    "supplyPhases": 1,
+    "voltageDropLimitLighting": 3,
+    "voltageDropLimitOther": 5,
+    "ampacityTable": [],
+    "unitPrices": {},
+    "currency": "IQD",
+    "conductorColors": {
+      "L1": "#8b5a2b",
+      "L2": "#1a1a1a",
+      "L3": "#8c8c8c",
+      "N": "#2f6fdb",
+      "PE": "#5fbf3a",
+      "signal": "#2bd97a",
+      "ground": "#8f9aa6",
+      "control": "#d64545",
+      "power": "#e5534b"
+    },
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
+  },
+  "components": {
+    "cmp_c112b921f528": {
+      "id": "cmp_c112b921f528",
+      "type": "db",
+      "ref": "DB1",
+      "position": {
+        "x": 5500,
+        "y": 7600
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 1500,
+      "properties": {
+        "ways": 12,
+        "incomerA": 63,
+        "location": "Hall"
+      },
+      "layer": "components"
+    },
+    "cmp_7557991f1b84": {
+      "id": "cmp_7557991f1b84",
+      "type": "light",
+      "ref": "L1",
+      "position": {
+        "x": 1500,
+        "y": 2250
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 2700,
+      "properties": {
+        "power": 18,
+        "powerFactor": 0.9,
+        "lumens": 1800
+      },
+      "layer": "components"
+    },
+    "cmp_34b65f733898": {
+      "id": "cmp_34b65f733898",
+      "type": "light",
+      "ref": "L2",
+      "position": {
+        "x": 4500,
+        "y": 2250
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 2700,
+      "properties": {
+        "power": 18,
+        "powerFactor": 0.9,
+        "lumens": 1800
+      },
+      "layer": "components"
+    },
+    "cmp_539dcc4e908a": {
+      "id": "cmp_539dcc4e908a",
+      "type": "light",
+      "ref": "L3",
+      "position": {
+        "x": 8000,
+        "y": 2250
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 2700,
+      "properties": {
+        "power": 18,
+        "powerFactor": 0.9,
+        "lumens": 1800
+      },
+      "layer": "components"
+    },
+    "cmp_9a611c4a73c8": {
+      "id": "cmp_9a611c4a73c8",
+      "type": "light",
+      "ref": "L4",
+      "position": {
+        "x": 2000,
+        "y": 6250
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 2700,
+      "properties": {
+        "power": 24,
+        "powerFactor": 0.9,
+        "lumens": 1800
+      },
+      "layer": "components"
+    },
+    "cmp_a0055d09b006": {
+      "id": "cmp_a0055d09b006",
+      "type": "light",
+      "ref": "L5",
+      "position": {
+        "x": 5500,
+        "y": 6000
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 2700,
+      "properties": {
+        "power": 12,
+        "powerFactor": 0.9,
+        "lumens": 1800
+      },
+      "layer": "components"
+    },
+    "cmp_5d4fb95aa188": {
+      "id": "cmp_5d4fb95aa188",
+      "type": "light",
+      "ref": "L6",
+      "position": {
+        "x": 8500,
+        "y": 6250
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 2700,
+      "properties": {
+        "power": 12,
+        "powerFactor": 0.9,
+        "lumens": 1800
+      },
+      "layer": "components"
+    },
+    "cmp_b8f6aaaa0767": {
+      "id": "cmp_b8f6aaaa0767",
+      "type": "switch_1way",
+      "ref": "SW1",
+      "position": {
+        "x": 5800,
+        "y": 300
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 1200,
+      "properties": {
+        "gangs": 1
+      },
+      "layer": "components"
+    },
+    "cmp_f151eea68211": {
+      "id": "cmp_f151eea68211",
+      "type": "switch_1way",
+      "ref": "SW2",
+      "position": {
+        "x": 6300,
+        "y": 4200
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 1200,
+      "properties": {
+        "gangs": 1
+      },
+      "layer": "components"
+    },
+    "cmp_7cc86aff1261": {
+      "id": "cmp_7cc86aff1261",
+      "type": "switch_1way",
+      "ref": "SW3",
+      "position": {
+        "x": 3700,
+        "y": 4800
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 1200,
+      "properties": {
+        "gangs": 1
+      },
+      "layer": "components"
+    },
+    "cmp_22a49f94b5c6": {
+      "id": "cmp_22a49f94b5c6",
+      "type": "socket",
+      "ref": "SO1",
+      "position": {
+        "x": 300,
+        "y": 1500
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 300,
+      "properties": {
+        "power": 200,
+        "powerFactor": 0.9,
+        "ratingA": 16
+      },
+      "layer": "components"
+    },
+    "cmp_bb6c9eb822e6": {
+      "id": "cmp_bb6c9eb822e6",
+      "type": "socket",
+      "ref": "SO2",
+      "position": {
+        "x": 300,
+        "y": 3500
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 300,
+      "properties": {
+        "power": 200,
+        "powerFactor": 0.9,
+        "ratingA": 16
+      },
+      "layer": "components"
+    },
+    "cmp_a69b66bfb260": {
+      "id": "cmp_a69b66bfb260",
+      "type": "socket",
+      "ref": "SO3",
+      "position": {
+        "x": 3000,
+        "y": 4300
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 300,
+      "properties": {
+        "power": 200,
+        "powerFactor": 0.9,
+        "ratingA": 16
+      },
+      "layer": "components"
+    },
+    "cmp_05244f04aeb0": {
+      "id": "cmp_05244f04aeb0",
+      "type": "socket",
+      "ref": "SO4",
+      "position": {
+        "x": 9700,
+        "y": 1500
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 300,
+      "properties": {
+        "power": 200,
+        "powerFactor": 0.9,
+        "ratingA": 16
+      },
+      "layer": "components"
+    },
+    "cmp_2d4adfd8b1d1": {
+      "id": "cmp_2d4adfd8b1d1",
+      "type": "socket",
+      "ref": "SO5",
+      "position": {
+        "x": 7000,
+        "y": 300
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 300,
+      "properties": {
+        "power": 200,
+        "powerFactor": 0.9,
+        "ratingA": 16
+      },
+      "layer": "components"
+    },
+    "cmp_6c04442c1d76": {
+      "id": "cmp_6c04442c1d76",
+      "type": "socket",
+      "ref": "SO6",
+      "position": {
+        "x": 300,
+        "y": 5500
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 300,
+      "properties": {
+        "power": 1000,
+        "powerFactor": 0.9,
+        "ratingA": 16
+      },
+      "layer": "components"
+    },
+    "cmp_56461af5ab4b": {
+      "id": "cmp_56461af5ab4b",
+      "type": "socket",
+      "ref": "SO7",
+      "position": {
+        "x": 2000,
+        "y": 7700
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 300,
+      "properties": {
+        "power": 1000,
+        "powerFactor": 0.9,
+        "ratingA": 16
+      },
+      "layer": "components"
+    },
+    "cmp_4e87d30812bc": {
+      "id": "cmp_4e87d30812bc",
+      "type": "ac_unit",
+      "ref": "AC1",
+      "position": {
+        "x": 3000,
+        "y": 300
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 2200,
+      "properties": {
+        "power": 1500,
+        "powerFactor": 0.85
+      },
+      "layer": "components"
+    },
+    "cmp_62b9aa73718e": {
+      "id": "cmp_62b9aa73718e",
+      "type": "water_heater",
+      "ref": "WH1",
+      "position": {
+        "x": 9500,
+        "y": 7500
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 1800,
+      "properties": {
+        "power": 2000,
+        "powerFactor": 1
+      },
+      "layer": "components"
+    }
+  },
+  "wires": {},
+  "junctions": {},
+  "rooms": {
+    "room_9e0d5b404717": {
+      "id": "room_9e0d5b404717",
+      "name": "Living room",
+      "polygon": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 6000,
+          "y": 0
+        },
+        {
+          "x": 6000,
+          "y": 4500
+        },
+        {
+          "x": 0,
+          "y": 4500
+        }
+      ],
+      "floor": 0,
+      "height": 3000,
+      "wallThickness": 150
+    },
+    "room_0cfd1987db50": {
+      "id": "room_0cfd1987db50",
+      "name": "Bedroom",
+      "polygon": [
+        {
+          "x": 6000,
+          "y": 0
+        },
+        {
+          "x": 10000,
+          "y": 0
+        },
+        {
+          "x": 10000,
+          "y": 4500
+        },
+        {
+          "x": 6000,
+          "y": 4500
+        }
+      ],
+      "floor": 0,
+      "height": 3000,
+      "wallThickness": 150
+    },
+    "room_29174c1c3b29": {
+      "id": "room_29174c1c3b29",
+      "name": "Kitchen",
+      "polygon": [
+        {
+          "x": 0,
+          "y": 4500
+        },
+        {
+          "x": 4000,
+          "y": 4500
+        },
+        {
+          "x": 4000,
+          "y": 8000
+        },
+        {
+          "x": 0,
+          "y": 8000
+        }
+      ],
+      "floor": 0,
+      "height": 3000,
+      "wallThickness": 150
+    },
+    "room_a60bf4090bd7": {
+      "id": "room_a60bf4090bd7",
+      "name": "Hall",
+      "polygon": [
+        {
+          "x": 4000,
+          "y": 4500
+        },
+        {
+          "x": 7000,
+          "y": 4500
+        },
+        {
+          "x": 7000,
+          "y": 8000
+        },
+        {
+          "x": 4000,
+          "y": 8000
+        }
+      ],
+      "floor": 0,
+      "height": 3000,
+      "wallThickness": 150
+    },
+    "room_583aa2f105d8": {
+      "id": "room_583aa2f105d8",
+      "name": "Bathroom",
+      "polygon": [
+        {
+          "x": 7000,
+          "y": 4500
+        },
+        {
+          "x": 10000,
+          "y": 4500
+        },
+        {
+          "x": 10000,
+          "y": 8000
+        },
+        {
+          "x": 7000,
+          "y": 8000
+        }
+      ],
+      "floor": 0,
+      "height": 3000,
+      "wallThickness": 150
+    }
+  },
+  "circuits": {
+    "cct_5383458b1ab6": {
+      "id": "cct_5383458b1ab6",
+      "name": "C1",
+      "boardId": "cmp_c112b921f528",
+      "deviceIds": [
+        "cmp_a0055d09b006",
+        "cmp_9a611c4a73c8",
+        "cmp_7557991f1b84",
+        "cmp_34b65f733898",
+        "cmp_b8f6aaaa0767",
+        "cmp_7cc86aff1261"
+      ],
+      "phase": "L1",
+      "category": "lighting",
+      "protection": {
+        "kind": "MCB",
+        "curve": "B",
+        "ratingA": null,
+        "residualmA": null
+      },
+      "cable": {
+        "material": "Cu",
+        "csaMm2": null,
+        "hasNeutral": true,
+        "hasPE": true,
+        "insulation": "PVC",
+        "installationMethod": "B1"
+      },
+      "demandFactor": 1,
+      "notes": "Lighting — kitchen, living, hall"
+    },
+    "cct_cf64e6b03ce8": {
+      "id": "cct_cf64e6b03ce8",
+      "name": "C2",
+      "boardId": "cmp_c112b921f528",
+      "deviceIds": [
+        "cmp_5d4fb95aa188",
+        "cmp_539dcc4e908a",
+        "cmp_f151eea68211"
+      ],
+      "phase": "L1",
+      "category": "lighting",
+      "protection": {
+        "kind": "MCB",
+        "curve": "B",
+        "ratingA": null,
+        "residualmA": null
+      },
+      "cable": {
+        "material": "Cu",
+        "csaMm2": null,
+        "hasNeutral": true,
+        "hasPE": true,
+        "insulation": "PVC",
+        "installationMethod": "B1"
+      },
+      "demandFactor": 1,
+      "notes": "Lighting — bedroom, bathroom"
+    },
+    "cct_595929a4d4e1": {
+      "id": "cct_595929a4d4e1",
+      "name": "C3",
+      "boardId": "cmp_c112b921f528",
+      "deviceIds": [
+        "cmp_a69b66bfb260",
+        "cmp_bb6c9eb822e6",
+        "cmp_22a49f94b5c6",
+        "cmp_2d4adfd8b1d1",
+        "cmp_05244f04aeb0"
+      ],
+      "phase": "L1",
+      "category": "power",
+      "protection": {
+        "kind": "MCB",
+        "curve": "B",
+        "ratingA": null,
+        "residualmA": null
+      },
+      "cable": {
+        "material": "Cu",
+        "csaMm2": null,
+        "hasNeutral": true,
+        "hasPE": true,
+        "insulation": "PVC",
+        "installationMethod": "B1"
+      },
+      "demandFactor": 1,
+      "notes": "General sockets"
+    },
+    "cct_987b5e558642": {
+      "id": "cct_987b5e558642",
+      "name": "C4",
+      "boardId": "cmp_c112b921f528",
+      "deviceIds": [
+        "cmp_56461af5ab4b",
+        "cmp_6c04442c1d76"
+      ],
+      "phase": "L1",
+      "category": "power",
+      "protection": {
+        "kind": "MCB",
+        "curve": "B",
+        "ratingA": null,
+        "residualmA": null
+      },
+      "cable": {
+        "material": "Cu",
+        "csaMm2": null,
+        "hasNeutral": true,
+        "hasPE": true,
+        "insulation": "PVC",
+        "installationMethod": "B1"
+      },
+      "demandFactor": 1,
+      "notes": "Kitchen sockets"
+    },
+    "cct_acf5fa51c69b": {
+      "id": "cct_acf5fa51c69b",
+      "name": "C5",
+      "boardId": "cmp_c112b921f528",
+      "deviceIds": [
+        "cmp_4e87d30812bc"
+      ],
+      "phase": "L1",
+      "category": "power",
+      "protection": {
+        "kind": "MCB",
+        "curve": "B",
+        "ratingA": null,
+        "residualmA": null
+      },
+      "cable": {
+        "material": "Cu",
+        "csaMm2": null,
+        "hasNeutral": true,
+        "hasPE": true,
+        "insulation": "PVC",
+        "installationMethod": "B1"
+      },
+      "demandFactor": 1,
+      "notes": "Air conditioner — dedicated"
+    },
+    "cct_b5c601b3f8b4": {
+      "id": "cct_b5c601b3f8b4",
+      "name": "C6",
+      "boardId": "cmp_c112b921f528",
+      "deviceIds": [
+        "cmp_62b9aa73718e"
+      ],
+      "phase": "L1",
+      "category": "power",
+      "protection": {
+        "kind": "RCBO",
+        "curve": "B",
+        "ratingA": null,
+        "residualmA": 30
+      },
+      "cable": {
+        "material": "Cu",
+        "csaMm2": null,
+        "hasNeutral": true,
+        "hasPE": true,
+        "insulation": "PVC",
+        "installationMethod": "B1"
+      },
+      "demandFactor": 1,
+      "notes": "Water heater — dedicated"
+    }
+  },
+  "cables": {
+    "cbl_ca1a1833884e": {
+      "id": "cbl_ca1a1833884e",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_a0055d09b006",
+      "path": [
+        {
+          "x": 5500,
+          "y": 7600
+        },
+        {
+          "x": 5500,
+          "y": 6000
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_c15a37eaf541": {
+      "id": "cbl_c15a37eaf541",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_a0055d09b006",
+      "toId": "cmp_9a611c4a73c8",
+      "path": [
+        {
+          "x": 5500,
+          "y": 6000
+        },
+        {
+          "x": 2000,
+          "y": 6000
+        },
+        {
+          "x": 2000,
+          "y": 6250
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_6267f4504656": {
+      "id": "cbl_6267f4504656",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_9a611c4a73c8",
+      "toId": "cmp_7557991f1b84",
+      "path": [
+        {
+          "x": 2000,
+          "y": 6250
+        },
+        {
+          "x": 1500,
+          "y": 6250
+        },
+        {
+          "x": 1500,
+          "y": 2250
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_b7786f33ce8d": {
+      "id": "cbl_b7786f33ce8d",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_7557991f1b84",
+      "toId": "cmp_34b65f733898",
+      "path": [
+        {
+          "x": 1500,
+          "y": 2250
+        },
+        {
+          "x": 4500,
+          "y": 2250
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_3bebf9a4dc1e": {
+      "id": "cbl_3bebf9a4dc1e",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_34b65f733898",
+      "toId": "cmp_b8f6aaaa0767",
+      "path": [
+        {
+          "x": 4500,
+          "y": 2250
+        },
+        {
+          "x": 5800,
+          "y": 2250
+        },
+        {
+          "x": 5800,
+          "y": 300
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_b3e1c06c84fe": {
+      "id": "cbl_b3e1c06c84fe",
+      "circuitId": "cct_5383458b1ab6",
+      "fromId": "cmp_b8f6aaaa0767",
+      "toId": "cmp_7cc86aff1261",
+      "path": [
+        {
+          "x": 5800,
+          "y": 300
+        },
+        {
+          "x": 3700,
+          "y": 300
+        },
+        {
+          "x": 3700,
+          "y": 4800
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_246692961ae8": {
+      "id": "cbl_246692961ae8",
+      "circuitId": "cct_cf64e6b03ce8",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_5d4fb95aa188",
+      "path": [
+        {
+          "x": 5500,
+          "y": 7600
+        },
+        {
+          "x": 8500,
+          "y": 7600
+        },
+        {
+          "x": 8500,
+          "y": 6250
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_7d3ae3e92259": {
+      "id": "cbl_7d3ae3e92259",
+      "circuitId": "cct_cf64e6b03ce8",
+      "fromId": "cmp_5d4fb95aa188",
+      "toId": "cmp_539dcc4e908a",
+      "path": [
+        {
+          "x": 8500,
+          "y": 6250
+        },
+        {
+          "x": 8000,
+          "y": 6250
+        },
+        {
+          "x": 8000,
+          "y": 2250
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_89d410b89c40": {
+      "id": "cbl_89d410b89c40",
+      "circuitId": "cct_cf64e6b03ce8",
+      "fromId": "cmp_539dcc4e908a",
+      "toId": "cmp_f151eea68211",
+      "path": [
+        {
+          "x": 8000,
+          "y": 2250
+        },
+        {
+          "x": 6300,
+          "y": 2250
+        },
+        {
+          "x": 6300,
+          "y": 4200
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_fdba3c2c2dcf": {
+      "id": "cbl_fdba3c2c2dcf",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_a69b66bfb260",
+      "path": [
+        {
+          "x": 5500,
+          "y": 7600
+        },
+        {
+          "x": 3000,
+          "y": 7600
+        },
+        {
+          "x": 3000,
+          "y": 4300
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_877907854a30": {
+      "id": "cbl_877907854a30",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_a69b66bfb260",
+      "toId": "cmp_bb6c9eb822e6",
+      "path": [
+        {
+          "x": 3000,
+          "y": 4300
+        },
+        {
+          "x": 300,
+          "y": 4300
+        },
+        {
+          "x": 300,
+          "y": 3500
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_de7e8ab4a77a": {
+      "id": "cbl_de7e8ab4a77a",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_bb6c9eb822e6",
+      "toId": "cmp_22a49f94b5c6",
+      "path": [
+        {
+          "x": 300,
+          "y": 3500
+        },
+        {
+          "x": 300,
+          "y": 1500
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_76c7275b7792": {
+      "id": "cbl_76c7275b7792",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_22a49f94b5c6",
+      "toId": "cmp_2d4adfd8b1d1",
+      "path": [
+        {
+          "x": 300,
+          "y": 1500
+        },
+        {
+          "x": 7000,
+          "y": 1500
+        },
+        {
+          "x": 7000,
+          "y": 300
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_481a017d2133": {
+      "id": "cbl_481a017d2133",
+      "circuitId": "cct_595929a4d4e1",
+      "fromId": "cmp_2d4adfd8b1d1",
+      "toId": "cmp_05244f04aeb0",
+      "path": [
+        {
+          "x": 7000,
+          "y": 300
+        },
+        {
+          "x": 9700,
+          "y": 300
+        },
+        {
+          "x": 9700,
+          "y": 1500
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_36df99831b20": {
+      "id": "cbl_36df99831b20",
+      "circuitId": "cct_987b5e558642",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_56461af5ab4b",
+      "path": [
+        {
+          "x": 5500,
+          "y": 7600
+        },
+        {
+          "x": 2000,
+          "y": 7600
+        },
+        {
+          "x": 2000,
+          "y": 7700
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_33a3be32e92d": {
+      "id": "cbl_33a3be32e92d",
+      "circuitId": "cct_987b5e558642",
+      "fromId": "cmp_56461af5ab4b",
+      "toId": "cmp_6c04442c1d76",
+      "path": [
+        {
+          "x": 2000,
+          "y": 7700
+        },
+        {
+          "x": 300,
+          "y": 7700
+        },
+        {
+          "x": 300,
+          "y": 5500
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_1545a9e2311b": {
+      "id": "cbl_1545a9e2311b",
+      "circuitId": "cct_acf5fa51c69b",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_4e87d30812bc",
+      "path": [
+        {
+          "x": 5500,
+          "y": 7600
+        },
+        {
+          "x": 3000,
+          "y": 7600
+        },
+        {
+          "x": 3000,
+          "y": 300
+        }
+      ],
+      "routeElevation": 2900
+    },
+    "cbl_e4fb768e2a27": {
+      "id": "cbl_e4fb768e2a27",
+      "circuitId": "cct_b5c601b3f8b4",
+      "fromId": "cmp_c112b921f528",
+      "toId": "cmp_62b9aa73718e",
+      "path": [
+        {
+          "x": 5500,
+          "y": 7600
+        },
+        {
+          "x": 9500,
+          "y": 7600
+        },
+        {
+          "x": 9500,
+          "y": 7500
+        }
+      ],
+      "routeElevation": 2900
+    }
+  },
+  "annotations": {
+    "ann_284e06325d36": {
+      "id": "ann_284e06325d36",
+      "kind": "text",
+      "points": [
+        {
+          "x": 0,
+          "y": -600
+        }
+      ],
+      "text": "GROUND FLOOR — ELECTRICAL LAYOUT",
+      "textHeight": 250,
+      "layer": "annotations"
+    }
+  },
+  "layers": [
+    {
+      "name": "components",
+      "color": "#d8dee6",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "wires",
+      "color": "#2bd97a",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "annotations",
+      "color": "#9aa4b1",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.18
+    },
+    {
+      "name": "underlay",
+      "color": "#5c6672",
+      "visible": true,
+      "locked": true,
+      "lineWeight": 0.13
+    },
+    {
+      "name": "architecture",
+      "color": "#9aa4b1",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.5
+    },
+    {
+      "name": "cables",
+      "color": "#f2b84b",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.35
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet_7c3defd3c447",
+      "title": "Electrical installation plan",
+      "number": "E-001",
+      "kind": "installation-plan",
+      "paper": "A3",
+      "orientation": "landscape",
+      "scale": 50,
+      "marginMm": 10,
+      "lineWeightScale": 1,
+      "showWatermark": false
+    }
+  ]
+}

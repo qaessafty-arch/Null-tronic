@@ -1,0 +1,285 @@
+{
+  "format": "nulltech-circuit-studio-project",
+  "schemaVersion": 1,
+  "type": "electronic",
+  "meta": {
+    "id": "prj_cbf4a4d019e9",
+    "name": "RC charging (time constant)",
+    "author": "",
+    "organisation": "",
+    "description": "",
+    "createdAt": "2026-11-04T09:10:21.826Z",
+    "modifiedAt": "2026-11-04T09:10:21.827Z",
+    "revision": "A",
+    "revisions": [
+      {
+        "id": "A",
+        "date": "2026-11-04",
+        "description": "Initial issue",
+        "author": ""
+      }
+    ],
+    "notes": ""
+  },
+  "settings": {
+    "displayUnit": "mm",
+    "gridMm": 2.5,
+    "snapToGrid": true,
+    "supplyVoltage": 230,
+    "frequencyHz": 50,
+    "supplyPhases": 1,
+    "voltageDropLimitLighting": 3,
+    "voltageDropLimitOther": 5,
+    "ampacityTable": [],
+    "unitPrices": {},
+    "currency": "IQD",
+    "conductorColors": {
+      "L1": "#8b5a2b",
+      "L2": "#1a1a1a",
+      "L3": "#8c8c8c",
+      "N": "#2f6fdb",
+      "PE": "#5fbf3a",
+      "signal": "#2bd97a",
+      "ground": "#8f9aa6",
+      "control": "#d64545",
+      "power": "#e5534b"
+    },
+    "alwaysConfirm": false,
+    "plcProgram": "",
+    "externalLoopImpedance": null,
+    "earthingSystem": "TN-C-S"
+  },
+  "components": {
+    "cmp_add1e7dd3e98": {
+      "id": "cmp_add1e7dd3e98",
+      "type": "vdc",
+      "ref": "V1",
+      "position": {
+        "x": 0,
+        "y": 15
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "voltage": 5
+      },
+      "layer": "components"
+    },
+    "cmp_3e02397aa40f": {
+      "id": "cmp_3e02397aa40f",
+      "type": "resistor",
+      "ref": "R1",
+      "position": {
+        "x": 15,
+        "y": 5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 1000,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_5fd8937f322c": {
+      "id": "cmp_5fd8937f322c",
+      "type": "capacitor_polarized",
+      "ref": "C1",
+      "position": {
+        "x": 25,
+        "y": 15
+      },
+      "rotation": 90,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "capacitance": 0.0001,
+        "voltageRating": 25
+      },
+      "layer": "components"
+    },
+    "cmp_ac92d2496d28": {
+      "id": "cmp_ac92d2496d28",
+      "type": "probe",
+      "ref": "P1",
+      "position": {
+        "x": 25,
+        "y": 5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "name": "VC"
+      },
+      "layer": "components"
+    },
+    "cmp_5074d349a6da": {
+      "id": "cmp_5074d349a6da",
+      "type": "ground",
+      "ref": "GND1",
+      "position": {
+        "x": 0,
+        "y": 27.5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {},
+      "layer": "components"
+    }
+  },
+  "wires": {
+    "w_6a81bca25884": {
+      "id": "w_6a81bca25884",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_add1e7dd3e98",
+        "pinId": "+"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_3e02397aa40f",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_8d159a33dad2": {
+      "id": "w_8d159a33dad2",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_3e02397aa40f",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_5fd8937f322c",
+        "pinId": "+"
+      },
+      "vertices": [
+        {
+          "x": 25,
+          "y": 5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_b7eb9d706001": {
+      "id": "w_b7eb9d706001",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_5fd8937f322c",
+        "pinId": "-"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_add1e7dd3e98",
+        "pinId": "-"
+      },
+      "vertices": [
+        {
+          "x": 25,
+          "y": 22.5
+        },
+        {
+          "x": 0,
+          "y": 22.5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_a97d587d692d": {
+      "id": "w_a97d587d692d",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_add1e7dd3e98",
+        "pinId": "-"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_5074d349a6da",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_4c061dd0f404": {
+      "id": "w_4c061dd0f404",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_ac92d2496d28",
+        "pinId": "1"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_5fd8937f322c",
+        "pinId": "+"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    }
+  },
+  "junctions": {},
+  "rooms": {},
+  "circuits": {},
+  "cables": {},
+  "annotations": {},
+  "layers": [
+    {
+      "name": "components",
+      "color": "#d8dee6",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "wires",
+      "color": "#2bd97a",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "annotations",
+      "color": "#9aa4b1",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.18
+    },
+    {
+      "name": "underlay",
+      "color": "#5c6672",
+      "visible": true,
+      "locked": true,
+      "lineWeight": 0.13
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet_fadf39851b8d",
+      "title": "Circuit schematic",
+      "number": "E-001",
+      "kind": "schematic",
+      "paper": "A3",
+      "orientation": "landscape",
+      "scale": 0,
+      "marginMm": 10,
+      "lineWeightScale": 1,
+      "showWatermark": false
+    }
+  ]
+}
