@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://null-tech.local/schemas/project.schema.json",
+  "title": "NULL-TECH CIRCUIT STUDIO project (schemaVersion 1)",
+  "description": "Native project file (.ntcs.json). Lengths in millimetres; 2D +y points down. Nets are derived, not stored. Authoritative definition: frontend/src/project-model/types.ts. Referential integrity (wire endpoints, boards, circuits) is checked by the application on load.",
+  "type": "object",
+  "required": ["format", "schemaVersion", "type", "meta", "settings", "components", "wires", "junctions", "rooms", "circuits", "cables", "annotations", "layers", "sheets"],
+  "properties": {
+    "format": { "const": "nulltech-circuit-studio-project" },
+    "schemaVersion": { "const": 1 },
+    "type": { "enum": ["electronic", "installation", "control"] },
+    "meta": {
+      "type": "object",
+      "required": ["id", "name", "createdAt", "modifiedAt", "revision", "revisions"],
+      "properties": {
+        "id": { "type": "string" }, "name": { "type": "string" }, "author": { "type": "string" }, "organisation": { "type": "string" },
+        "description": { "type": "string" }, "notes": { "type": "string" }, "createdAt": { "type": "string" }, "modifiedAt": { "type": "string" },
+        "revision": { "type": "string" },
+        "revisions": { "type": "array", "items": { "type": "object", "required": ["id", "date", "description"], "properties": { "id": { "type": "string" }, "date": { "type": "string" }, "description": { "type": "string" }, "author": { "type": "string" } } } }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "displayUnit": { "enum": ["mm", "cm", "m"] }, "gridMm": { "type": "number", "exclusiveMinimum": 0 }, "snapToGrid": { "type": "boolean" },
+        "supplyVoltage": { "type": "number" }, "frequencyHz": { "type": "number" }, "supplyPhases": { "enum": [1, 3] },
+        "voltageDropLimitLighting": { "type": "number" }, "voltageDropLimitOther": { "type": "number" },
+        "ampacityTable": { "type": "array", "items": { "type": "object", "required": ["csaMm2", "material", "insulation", "installationMethod", "ampacityA", "source"], "properties": { "csaMm2": { "type": "number" }, "material": { "enum": ["Cu", "Al"] }, "insulation": { "enum": ["PVC", "XLPE"] }, "installationMethod": { "type": "string" }, "ampacityA": { "type": "number" }, "source": { "type": "string", "minLength": 1 } } } },
+        "unitPrices": { "type": "object", "additionalProperties": { "type": "number" } }, "currency": { "type": "string" },
+        "conductorColors": { "type": "object", "additionalProperties": { "type": "string" } }, "alwaysConfirm": { "type": "boolean" }
+      }
+    },
+    "components": { "type": "object", "additionalProperties": { "$ref": "#/$defs/component" } },
+    "wires": { "type": "object", "additionalProperties": { "$ref": "#/$defs/wire" } },
+    "junctions": { "type": "object", "additionalProperties": { "type": "object", "required": ["id", "position"], "properties": { "id": { "type": "string" }, "position": { "$ref": "#/$defs/vec2" } } } },
+    "rooms": { "type": "object", "additionalProperties": { "type": "object", "required": ["id", "name", "polygon", "height", "wallThickness"], "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "polygon": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/vec2" } }, "floor": { "type": "integer" }, "height": { "type": "number" }, "wallThickness": { "type": "number" } } } },
+    "circuits": { "type": "object", "additionalProperties": { "$ref": "#/$defs/circuit" } },
+    "cables": { "type": "object", "additionalProperties": { "type": "object", "required": ["id", "circuitId", "fromId", "toId", "path", "routeElevation"], "properties": { "id": { "type": "string" }, "circuitId": { "type": "string" }, "fromId": { "type": "string" }, "toId": { "type": "string" }, "path": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/vec2" } }, "routeElevation": { "type": "number" } } } },
+    "annotations": { "type": "object", "additionalProperties": { "type": "object", "required": ["id", "kind", "points", "layer"], "properties": { "id": { "type": "string" }, "kind": { "enum": ["line", "polyline", "circle", "arc", "text", "dimension"] }, "points": { "type": "array", "items": { "$ref": "#/$defs/vec2" } }, "radius": { "type": "number" }, "startAngle": { "type": "number" }, "endAngle": { "type": "number" }, "text": { "type": "string" }, "textHeight": { "type": "number" }, "closed": { "type": "boolean" }, "layer": { "type": "string" } } } },
+    "layers": { "type": "array", "items": { "type": "object", "required": ["name", "color", "visible", "locked", "lineWeight"] } },
+    "sheets": { "type": "array", "items": { "type": "object", "required": ["id", "title", "number", "kind", "paper", "orientation", "scale"], "properties": { "kind": { "enum": ["schematic", "installation-plan", "lighting-plan", "power-plan", "cable-plan", "single-line", "schedule", "bom"] }, "paper": { "enum": ["A0", "A1", "A2", "A3", "A4", "custom"] }, "orientation": { "enum": ["landscape", "portrait"] }, "scale": { "type": "number", "minimum": 0 } } } }
+  },
+  "$defs": {
+    "vec2": { "type": "object", "required": ["x", "y"], "properties": { "x": { "type": "number" }, "y": { "type": "number" } } },
+    "endpoint": {
+      "oneOf": [
+        { "type": "object", "required": ["kind", "componentId", "pinId"], "properties": { "kind": { "const": "pin" }, "componentId": { "type": "string" }, "pinId": { "type": "string" } } },
+        { "type": "object", "required": ["kind", "junctionId"], "properties": { "kind": { "const": "junction" }, "junctionId": { "type": "string" } } }
+      ]
+    },
+    "component": {
+      "type": "object",
+      "required": ["id", "type", "ref", "position", "rotation", "mirror", "elevation", "properties", "layer"],
+      "properties": {
+        "id": { "type": "string" }, "type": { "type": "string", "description": "Key into the component library" }, "ref": { "type": "string" },
+        "position": { "$ref": "#/$defs/vec2" }, "rotation": { "enum": [0, 90, 180, 270] }, "mirror": { "type": "boolean" }, "elevation": { "type": "number" },
+        "properties": { "type": "object", "additionalProperties": { "type": ["number", "string", "boolean"] } }, "layer": { "type": "string" }, "hidden": { "type": "boolean" }
+      }
+    },
+    "wire": {
+      "type": "object",
+      "required": ["id", "a", "b", "vertices", "role", "layer"],
+      "properties": { "id": { "type": "string" }, "a": { "$ref": "#/$defs/endpoint" }, "b": { "$ref": "#/$defs/endpoint" }, "vertices": { "type": "array", "items": { "$ref": "#/$defs/vec2" } }, "role": { "enum": ["auto", "signal", "power", "ground", "control", "L", "N", "PE"] }, "layer": { "type": "string" } }
+    },
+    "circuit": {
+      "type": "object",
+      "required": ["id", "name", "boardId", "deviceIds", "phase", "category", "protection", "cable", "demandFactor"],
+      "properties": {
+        "id": { "type": "string" }, "name": { "type": "string" }, "boardId": { "type": "string" }, "deviceIds": { "type": "array", "items": { "type": "string" } },
+        "phase": { "enum": ["L1", "L2", "L3", "L123"] }, "category": { "enum": ["lighting", "power"] },
+        "protection": { "type": "object", "required": ["kind", "curve", "ratingA"], "properties": { "kind": { "enum": ["MCB", "RCBO"] }, "curve": { "enum": ["B", "C", "D"] }, "ratingA": { "type": ["number", "null"] }, "residualmA": { "type": ["number", "null"] } } },
+        "cable": { "type": "object", "required": ["material", "csaMm2", "hasNeutral", "hasPE", "insulation", "installationMethod"], "properties": { "material": { "enum": ["Cu", "Al"] }, "csaMm2": { "type": ["number", "null"] }, "hasNeutral": { "type": "boolean" }, "hasPE": { "type": "boolean" }, "insulation": { "enum": ["PVC", "XLPE"] }, "installationMethod": { "type": "string" } } },
+        "demandFactor": { "type": "number", "minimum": 0, "maximum": 1 }, "notes": { "type": "string" }
+      }
+    }
+  }
+}

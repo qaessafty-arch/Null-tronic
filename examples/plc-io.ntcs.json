@@ -1,0 +1,372 @@
+{
+  "format": "nulltech-circuit-studio-project",
+  "schemaVersion": 1,
+  "type": "control",
+  "meta": {
+    "id": "prj_7c11623a01f9",
+    "name": "PLC input / output wiring",
+    "author": "",
+    "organisation": "",
+    "description": "",
+    "createdAt": "2026-11-04T08:58:03.606Z",
+    "modifiedAt": "2026-11-04T08:58:03.606Z",
+    "revision": "A",
+    "revisions": [
+      {
+        "id": "A",
+        "date": "2026-11-04",
+        "description": "Initial issue",
+        "author": ""
+      }
+    ],
+    "notes": ""
+  },
+  "settings": {
+    "displayUnit": "mm",
+    "gridMm": 2.5,
+    "snapToGrid": true,
+    "supplyVoltage": 230,
+    "frequencyHz": 50,
+    "supplyPhases": 1,
+    "voltageDropLimitLighting": 3,
+    "voltageDropLimitOther": 5,
+    "ampacityTable": [],
+    "unitPrices": {},
+    "currency": "IQD",
+    "conductorColors": {
+      "L1": "#8b5a2b",
+      "L2": "#1a1a1a",
+      "L3": "#8c8c8c",
+      "N": "#2f6fdb",
+      "PE": "#5fbf3a",
+      "signal": "#2bd97a",
+      "ground": "#8f9aa6",
+      "control": "#d64545",
+      "power": "#e5534b"
+    },
+    "alwaysConfirm": false
+  },
+  "components": {
+    "cmp_f0c49701e890": {
+      "id": "cmp_f0c49701e890",
+      "type": "vdc",
+      "ref": "G1",
+      "position": {
+        "x": 0,
+        "y": 20
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "voltage": 24
+      },
+      "layer": "components"
+    },
+    "cmp_a2443f841883": {
+      "id": "cmp_a2443f841883",
+      "type": "pb_no",
+      "ref": "S1",
+      "position": {
+        "x": 20,
+        "y": 10
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "pressed": false
+      },
+      "layer": "components"
+    },
+    "cmp_09269b24cb49": {
+      "id": "cmp_09269b24cb49",
+      "type": "plc_input",
+      "ref": "I0",
+      "position": {
+        "x": 35,
+        "y": 15
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "address": "I0.0",
+        "threshold": 15
+      },
+      "layer": "components"
+    },
+    "cmp_0a084a6deeae": {
+      "id": "cmp_0a084a6deeae",
+      "type": "plc_output",
+      "ref": "Q0",
+      "position": {
+        "x": 45,
+        "y": 35
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "address": "Q0.0",
+        "state": false,
+        "voltage": 24
+      },
+      "layer": "components"
+    },
+    "cmp_9f1401f87be1": {
+      "id": "cmp_9f1401f87be1",
+      "type": "lamp",
+      "ref": "H1",
+      "position": {
+        "x": 60,
+        "y": 40
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 480,
+        "color": "green"
+      },
+      "layer": "components"
+    },
+    "cmp_9bffd1ffa948": {
+      "id": "cmp_9bffd1ffa948",
+      "type": "ground",
+      "ref": "GND1",
+      "position": {
+        "x": 0,
+        "y": 55
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {},
+      "layer": "components"
+    },
+    "cmp_f39cb4d0d149": {
+      "id": "cmp_f39cb4d0d149",
+      "type": "resistor",
+      "ref": "R1",
+      "position": {
+        "x": 30,
+        "y": 30
+      },
+      "rotation": 90,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 4700,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    }
+  },
+  "wires": {
+    "w_b840f4747727": {
+      "id": "w_b840f4747727",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_f0c49701e890",
+        "pinId": "+"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_a2443f841883",
+        "pinId": "13"
+      },
+      "vertices": [
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 20,
+          "y": 5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_4f5bcfa2d096": {
+      "id": "w_4f5bcfa2d096",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_a2443f841883",
+        "pinId": "14"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_09269b24cb49",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 20,
+          "y": 15
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_9453ddd8a223": {
+      "id": "w_9453ddd8a223",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_f0c49701e890",
+        "pinId": "-"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_9bffd1ffa948",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_23ee5943e3fb": {
+      "id": "w_23ee5943e3fb",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_0a084a6deeae",
+        "pinId": "1"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_9f1401f87be1",
+        "pinId": "X1"
+      },
+      "vertices": [
+        {
+          "x": 60,
+          "y": 35
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_6e1e002582df": {
+      "id": "w_6e1e002582df",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_9f1401f87be1",
+        "pinId": "X2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_9bffd1ffa948",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 60,
+          "y": 50
+        },
+        {
+          "x": 0,
+          "y": 50
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_88deaab470f9": {
+      "id": "w_88deaab470f9",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_f39cb4d0d149",
+        "pinId": "1"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_09269b24cb49",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 30,
+          "y": 15
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_d4b531487833": {
+      "id": "w_d4b531487833",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_f39cb4d0d149",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_9bffd1ffa948",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 30,
+          "y": 50
+        },
+        {
+          "x": 0,
+          "y": 50
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    }
+  },
+  "junctions": {},
+  "rooms": {},
+  "circuits": {},
+  "cables": {},
+  "annotations": {},
+  "layers": [
+    {
+      "name": "components",
+      "color": "#d8dee6",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "wires",
+      "color": "#2bd97a",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "annotations",
+      "color": "#9aa4b1",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.18
+    },
+    {
+      "name": "underlay",
+      "color": "#5c6672",
+      "visible": true,
+      "locked": true,
+      "lineWeight": 0.13
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet_09ab60adb2db",
+      "title": "Control wiring diagram",
+      "number": "E-001",
+      "kind": "schematic",
+      "paper": "A3",
+      "orientation": "landscape",
+      "scale": 0,
+      "marginMm": 10,
+      "lineWeightScale": 1,
+      "showWatermark": false
+    }
+  ]
+}

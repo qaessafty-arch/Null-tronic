@@ -1,0 +1,391 @@
+{
+  "format": "nulltech-circuit-studio-project",
+  "schemaVersion": 1,
+  "type": "electronic",
+  "meta": {
+    "id": "prj_d7d35de0e101",
+    "name": "Inverting op-amp amplifier",
+    "author": "",
+    "organisation": "",
+    "description": "",
+    "createdAt": "2026-11-04T08:58:03.604Z",
+    "modifiedAt": "2026-11-04T08:58:03.605Z",
+    "revision": "A",
+    "revisions": [
+      {
+        "id": "A",
+        "date": "2026-11-04",
+        "description": "Initial issue",
+        "author": ""
+      }
+    ],
+    "notes": ""
+  },
+  "settings": {
+    "displayUnit": "mm",
+    "gridMm": 2.5,
+    "snapToGrid": true,
+    "supplyVoltage": 230,
+    "frequencyHz": 50,
+    "supplyPhases": 1,
+    "voltageDropLimitLighting": 3,
+    "voltageDropLimitOther": 5,
+    "ampacityTable": [],
+    "unitPrices": {},
+    "currency": "IQD",
+    "conductorColors": {
+      "L1": "#8b5a2b",
+      "L2": "#1a1a1a",
+      "L3": "#8c8c8c",
+      "N": "#2f6fdb",
+      "PE": "#5fbf3a",
+      "signal": "#2bd97a",
+      "ground": "#8f9aa6",
+      "control": "#d64545",
+      "power": "#e5534b"
+    },
+    "alwaysConfirm": false
+  },
+  "components": {
+    "cmp_d199af62aa55": {
+      "id": "cmp_d199af62aa55",
+      "type": "vac",
+      "ref": "V1",
+      "position": {
+        "x": 0,
+        "y": 15
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "amplitude": 0.5,
+        "frequency": 1000,
+        "offset": 0,
+        "phase": 0
+      },
+      "layer": "components"
+    },
+    "cmp_53892e0e52ee": {
+      "id": "cmp_53892e0e52ee",
+      "type": "resistor",
+      "ref": "R1",
+      "position": {
+        "x": 15,
+        "y": 7.5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 10000,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_7e7612dd5db5": {
+      "id": "cmp_7e7612dd5db5",
+      "type": "resistor",
+      "ref": "R2",
+      "position": {
+        "x": 32.5,
+        "y": -2.5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "resistance": 100000,
+        "powerRating": 0.25,
+        "tolerance": 5
+      },
+      "layer": "components"
+    },
+    "cmp_b73f2ee596eb": {
+      "id": "cmp_b73f2ee596eb",
+      "type": "opamp",
+      "ref": "U1",
+      "position": {
+        "x": 32.5,
+        "y": 10
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "gain": 100000,
+        "vsatPos": 15,
+        "vsatNeg": -15
+      },
+      "layer": "components"
+    },
+    "cmp_8f8beefb398b": {
+      "id": "cmp_8f8beefb398b",
+      "type": "ground",
+      "ref": "GND1",
+      "position": {
+        "x": 0,
+        "y": 25
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {},
+      "layer": "components"
+    },
+    "cmp_832f5d6ac8e6": {
+      "id": "cmp_832f5d6ac8e6",
+      "type": "ground",
+      "ref": "GND2",
+      "position": {
+        "x": 22.5,
+        "y": 17.5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {},
+      "layer": "components"
+    },
+    "cmp_2e0312b668b5": {
+      "id": "cmp_2e0312b668b5",
+      "type": "probe",
+      "ref": "P1",
+      "position": {
+        "x": 5,
+        "y": 7.5
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "name": "VIN"
+      },
+      "layer": "components"
+    },
+    "cmp_b22daf012029": {
+      "id": "cmp_b22daf012029",
+      "type": "probe",
+      "ref": "P2",
+      "position": {
+        "x": 45,
+        "y": 10
+      },
+      "rotation": 0,
+      "mirror": false,
+      "elevation": 0,
+      "properties": {
+        "name": "VOUT"
+      },
+      "layer": "components"
+    }
+  },
+  "wires": {
+    "w_548378a6fd91": {
+      "id": "w_548378a6fd91",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_d199af62aa55",
+        "pinId": "+"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_53892e0e52ee",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 0,
+          "y": 7.5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_d215d1e1d777": {
+      "id": "w_d215d1e1d777",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_53892e0e52ee",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_b73f2ee596eb",
+        "pinId": "-"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_ab2618e56d6b": {
+      "id": "w_ab2618e56d6b",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_b73f2ee596eb",
+        "pinId": "-"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_7e7612dd5db5",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 22.5,
+          "y": 7.5
+        },
+        {
+          "x": 22.5,
+          "y": -2.5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_99cabebae00d": {
+      "id": "w_99cabebae00d",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_7e7612dd5db5",
+        "pinId": "2"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_b73f2ee596eb",
+        "pinId": "OUT"
+      },
+      "vertices": [
+        {
+          "x": 45,
+          "y": -2.5
+        },
+        {
+          "x": 45,
+          "y": 10
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_4633af3e77c1": {
+      "id": "w_4633af3e77c1",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_b73f2ee596eb",
+        "pinId": "+"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_832f5d6ac8e6",
+        "pinId": "1"
+      },
+      "vertices": [
+        {
+          "x": 22.5,
+          "y": 12.5
+        }
+      ],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_bc4e86e9a43b": {
+      "id": "w_bc4e86e9a43b",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_d199af62aa55",
+        "pinId": "-"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_8f8beefb398b",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_275188565c23": {
+      "id": "w_275188565c23",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_b73f2ee596eb",
+        "pinId": "OUT"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_b22daf012029",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    },
+    "w_ac364d867a6f": {
+      "id": "w_ac364d867a6f",
+      "a": {
+        "kind": "pin",
+        "componentId": "cmp_2e0312b668b5",
+        "pinId": "1"
+      },
+      "b": {
+        "kind": "pin",
+        "componentId": "cmp_53892e0e52ee",
+        "pinId": "1"
+      },
+      "vertices": [],
+      "role": "auto",
+      "layer": "wires"
+    }
+  },
+  "junctions": {},
+  "rooms": {},
+  "circuits": {},
+  "cables": {},
+  "annotations": {},
+  "layers": [
+    {
+      "name": "components",
+      "color": "#d8dee6",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "wires",
+      "color": "#2bd97a",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.25
+    },
+    {
+      "name": "annotations",
+      "color": "#9aa4b1",
+      "visible": true,
+      "locked": false,
+      "lineWeight": 0.18
+    },
+    {
+      "name": "underlay",
+      "color": "#5c6672",
+      "visible": true,
+      "locked": true,
+      "lineWeight": 0.13
+    }
+  ],
+  "sheets": [
+    {
+      "id": "sheet_eef2c4acfef7",
+      "title": "Circuit schematic",
+      "number": "E-001",
+      "kind": "schematic",
+      "paper": "A3",
+      "orientation": "landscape",
+      "scale": 0,
+      "marginMm": 10,
+      "lineWeightScale": 1,
+      "showWatermark": false
+    }
+  ]
+}
