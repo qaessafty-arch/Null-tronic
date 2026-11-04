@@ -463,7 +463,7 @@ export interface OpSolution {
 }
 
 export function solveOperatingPoint(model: CircuitModel, states?: Map<string, boolean>, time = 0): OpSolution {
-  const st = new Map(states ?? model.initialStates);
+  const st = new Map([...model.initialStates, ...(states ?? [])]);
   let sol = dcSolve(model, st, time);
   let relayIterations = 0;
   let oscillation = false;
@@ -496,7 +496,7 @@ export function solveTransient(model: CircuitModel, tstop: number, steps: number
   if (!(tstop > 0) || steps < 2) throw new Error('Transient requires tstop > 0 and at least 2 steps');
   const h = tstop / steps;
   const op: OpSolution = uic
-    ? { x: new Float64Array(sz(model)), states: new Map(states ?? model.initialStates), iterations: 0, method: 'uic', relayIterations: 0, oscillation: false }
+    ? { x: new Float64Array(sz(model)), states: new Map([...model.initialStates, ...(states ?? [])]), iterations: 0, method: 'uic', relayIterations: 0, oscillation: false }
     : solveOperatingPoint(model, states, 0);
   const st = op.states;
   const n = model.elements.length;

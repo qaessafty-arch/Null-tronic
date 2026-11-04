@@ -200,14 +200,17 @@ export function mirrorComponents(p: Project, ids: Iterable<Id>): Project {
   return out;
 }
 
-/** Duplicate components (and wires fully between them) with an offset. Returns new ids. */
-export function duplicateEntities(p: Project, ids: Iterable<Id>, offset: Vec2): { project: Project; newIds: Id[] } {
+/**
+ * Duplicate components, junctions and the wires fully between them with an offset.
+ * `source` may be another project snapshot (clipboard paste). Returns the new ids.
+ */
+export function duplicateEntities(p: Project, ids: Iterable<Id>, offset: Vec2, source: Project = p): { project: Project; newIds: Id[] } {
   const set = new Set(ids);
   let out = p;
   const map = new Map<Id, Id>();
   const newIds: Id[] = [];
   for (const id of set) {
-    const c = p.components[id];
+    const c = source.components[id];
     if (!c) continue;
     const def = getDef(c.type);
     const copy: ComponentInstance = {
@@ -223,7 +226,7 @@ export function duplicateEntities(p: Project, ids: Iterable<Id>, offset: Vec2): 
   }
   const jmap = new Map<Id, Id>();
   for (const id of set) {
-    const j = p.junctions[id];
+    const j = source.junctions[id];
     if (!j) continue;
     const nj: Junction = { id: newId('jn'), position: { x: j.position.x + offset.x, y: j.position.y + offset.y } };
     jmap.set(id, nj.id);
@@ -234,7 +237,7 @@ export function duplicateEntities(p: Project, ids: Iterable<Id>, offset: Vec2): 
     if (e.kind === 'pin') return map.has(e.componentId) ? { ...e, componentId: map.get(e.componentId)! } : null;
     return jmap.has(e.junctionId) ? { kind: 'junction', junctionId: jmap.get(e.junctionId)! } : null;
   };
-  for (const w of Object.values(p.wires)) {
+  for (const w of Object.values(source.wires)) {
     const a = remap(w.a);
     const b = remap(w.b);
     if (!a || !b) continue;
