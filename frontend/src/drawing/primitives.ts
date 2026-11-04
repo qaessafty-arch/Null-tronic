@@ -88,7 +88,9 @@ export function line(x1: number, y1: number, x2: number, y2: number, w?: number)
   return { k: 'line', a: { x: x1, y: y1 }, b: { x: x2, y: y2 }, w };
 }
 
-export function text(x: number, y: number, s: string, size = 1.8, anchor: 'start' | 'middle' | 'end' = 'middle', baseline: 'top' | 'middle' | 'bottom' = 'middle'): Primitive {
+export type TextPrimitive = Extract<Primitive, { k: 'text' }>;
+
+export function text(x: number, y: number, s: string, size = 1.8, anchor: 'start' | 'middle' | 'end' = 'middle', baseline: 'top' | 'middle' | 'bottom' = 'middle'): TextPrimitive {
   return { k: 'text', p: { x, y }, text: s, size, anchor, baseline };
 }
 

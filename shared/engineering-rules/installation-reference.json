@@ -2,20 +2,69 @@
   "$comment": "Reference data used by the installation calculation engine. Every value carries its source. Values are DEFAULTS that a project may override; they are not a claim of compliance. Verify against the edition of the standard that applies to your jurisdiction (including Iraqi / Kurdistan Region requirements) before relying on any result.",
   "version": 1,
   "conductorResistivity20C": {
-    "Cu": { "value": 0.017241, "unit": "ohm*mm2/m", "source": "IEC 60028:1925 International standard of resistance for copper (annealed copper, 1/58 ohm*mm2/m at 20 C)" },
-    "Al": { "value": 0.028264, "unit": "ohm*mm2/m", "source": "IEC 60889 hard-drawn aluminium wire (61.0 % IACS), commonly tabulated value" }
+    "Cu": {
+      "value": 0.017241,
+      "unit": "ohm*mm2/m",
+      "source": "IEC 60028:1925 International standard of resistance for copper (annealed copper, 1/58 ohm*mm2/m at 20 C)"
+    },
+    "Al": {
+      "value": 0.028264,
+      "unit": "ohm*mm2/m",
+      "source": "IEC 60889 hard-drawn aluminium wire (61.0 % IACS), commonly tabulated value"
+    }
   },
   "temperatureCoefficient20C": {
-    "Cu": { "value": 0.00393, "unit": "1/K", "source": "IEC 60228 Annex B (copper, alpha20 = 0.00393/K)" },
-    "Al": { "value": 0.00403, "unit": "1/K", "source": "IEC 60228 Annex B (aluminium, alpha20 = 0.00403/K)" }
+    "Cu": {
+      "value": 0.00393,
+      "unit": "1/K",
+      "source": "IEC 60228 Annex B (copper, alpha20 = 0.00393/K)"
+    },
+    "Al": {
+      "value": 0.00403,
+      "unit": "1/K",
+      "source": "IEC 60228 Annex B (aluminium, alpha20 = 0.00403/K)"
+    }
   },
   "nominalCrossSections": {
-    "values": [1, 1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300],
+    "values": [
+      1,
+      1.5,
+      2.5,
+      4,
+      6,
+      10,
+      16,
+      25,
+      35,
+      50,
+      70,
+      95,
+      120,
+      150,
+      185,
+      240,
+      300
+    ],
     "unit": "mm2",
     "source": "IEC 60228 nominal cross-sectional areas of conductors"
   },
   "mcbRatedCurrents": {
-    "values": [6, 8, 10, 13, 16, 20, 25, 32, 40, 50, 63, 80, 100, 125],
+    "values": [
+      6,
+      8,
+      10,
+      13,
+      16,
+      20,
+      25,
+      32,
+      40,
+      50,
+      63,
+      80,
+      100,
+      125
+    ],
     "unit": "A",
     "source": "IEC 60898-1 clause 5.3.2 preferred values of rated current"
   },
@@ -28,5 +77,26 @@
   "ampacityTable": {
     "rows": [],
     "source": "NOT PROVIDED. Current-carrying capacity depends on installation method, grouping and ambient temperature (IEC 60364-5-52 Annex B). No table is shipped so that no value is invented. Add rows in Project > Engineering settings from the edition of the standard you are designing to; until then the Iz <= In check is reported as 'Not evaluated'."
+  },
+  "voltageDropMethod": {
+    "serviceResistivityFactor": 1.25,
+    "reactancePerMetre_mOhm": 0.08,
+    "b": {
+      "singlePhase": 2,
+      "threePhase": 1
+    },
+    "formula": "u = b * (rho1 * L / S * cos(phi) + lambda * L * sin(phi)) * Ib ;  dU% = 100 * u / U0",
+    "source": "IEC 60364-5-52 Annex G (informative), clause G.52.2: rho1 = 1.25 x resistivity at 20 C, lambda = 0.08 mOhm/m when no other data is available."
+  },
+  "minimumCrossSection": {
+    "Cu": {
+      "powerAndLighting": 1.5,
+      "unit": "mm2"
+    },
+    "source": "IEC 60364-5-52 Table 52.2 (fixed installations, cables with copper conductors, power and lighting circuits). Aluminium minimum not encoded: check the applicable edition."
+  },
+  "rcdAdditionalProtection": {
+    "residualCurrent_mA": 30,
+    "source": "IEC 60364-4-41 clause 411.3.3 (additional protection for socket-outlets used by ordinary persons; the rated-current limit and permitted exceptions depend on the edition and national rules)."
   }
 }

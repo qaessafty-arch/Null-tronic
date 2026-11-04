@@ -27,7 +27,6 @@ export function defaultSettings(type: ProjectType): ProjectSettings {
     supplyVoltage: 230,
     frequencyHz: 50,
     supplyPhases: 1,
-    conductorTempC: 70,
     voltageDropLimitLighting: reference.voltageDropLimits.lighting,
     voltageDropLimitOther: reference.voltageDropLimits.other,
     ampacityTable: [],

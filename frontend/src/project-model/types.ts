@@ -65,7 +65,8 @@ export interface Room {
   wallThickness: number;
 }
 
-export type Phase = 'L1' | 'L2' | 'L3';
+/** Single-phase circuits are connected to one line conductor; 'L123' = balanced three-phase circuit. */
+export type Phase = 'L1' | 'L2' | 'L3' | 'L123';
 
 export interface ProtectionDevice {
   kind: 'MCB' | 'RCBO';
@@ -179,7 +180,6 @@ export interface ProjectSettings {
   supplyVoltage: number;
   frequencyHz: number;
   supplyPhases: 1 | 3;
-  conductorTempC: number;
   voltageDropLimitLighting: number;
   voltageDropLimitOther: number;
   ampacityTable: AmpacityRow[];
