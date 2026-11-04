@@ -23,6 +23,7 @@ webcam hand tracking.
 | Shared input system: mouse, keyboard, hand tracking → same tools, preview → validate → confirm/reject, undo/redo | ✅ e2e-tested |
 | Hand tracking service (Python): OpenCV latest-frame capture, MediaPipe landmarks, gesture state machine, One Euro smoothing, WebSocket | ✅ logic tested; camera path needs real hardware (see limitations) |
 | Local engineering assistant (offline, rule-based, proposals go through preview/validation) | ✅ |
+| Desktop app (Tauri v2, native save/open dialogs) | ✅ builds & launches on Linux; installers not yet produced |
 | Examples & tutorials (13), lab/engineering report | ✅ |
 
 Not implemented: IFC, PLC timers/counters and vendor protocols, short-circuit between live conductors,
@@ -36,6 +37,8 @@ selectivity and cable thermal withstand, built-in ampacity tables (you enter the
 cd frontend
 npm install
 npm run dev            # http://localhost:5173
+
+# desktop app (needs Rust + Tauri prerequisites): npm run desktop:dev
 
 # 2. optional: hand tracking + ngspice verification service
 cd ../backend

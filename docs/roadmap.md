@@ -6,7 +6,7 @@
 3. **Digital simulation** (done: zero-delay gates): event-driven timing, flip-flops; adaptive
    transient timestep; ngspice as an optional in-app engine.
 4. **PLC** (done: Boolean ST scan): timers/counters (TON/TOF/CTU), ladder-diagram view of the program.
-5. **Desktop release** with Tauri (native dialogs, Python sidecar), auto-update.
+5. **Desktop release** (shell done): Python service as a Tauri sidecar, signed installers for Windows/macOS/Linux, auto-update.
 6. **IFC** import/export of electrical elements (IfcElectricAppliance, IfcCableSegment, ...).
 7. **Hand-tracking**: gesture for undo/redo and radial tool menu; per-user calibration profiles.
 8. **Localisation**: Arabic and Kurdish (Sorani) with RTL layout, provided by qualified translators.

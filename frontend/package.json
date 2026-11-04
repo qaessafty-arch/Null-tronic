@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "gen:docs": "NTCS_SCRIPTS=1 vitest run"
+    "gen:docs": "NTCS_SCRIPTS=1 vitest run",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build"
   },
   "dependencies": {
     "@tauri-apps/plugin-dialog": "^2.8.4",

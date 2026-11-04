@@ -30,6 +30,8 @@ Hand tracking
 - No gesture for undo/redo or tool switching yet (use keyboard/toolbar).
 
 Platform
-- Runs as a local web app; desktop packaging (Tauri) is planned. File save uses the File System
-  Access API where available, otherwise downloads.
+- Desktop app (Tauri) builds and launches on Linux; installer bundles, code signing and Windows/macOS
+  builds have not been produced here, and the native save/open dialogs were compiled but not
+  exercised interactively. The Python service is not yet bundled as a sidecar. In browsers, file save
+  uses the File System Access API where available, otherwise downloads.
 - Localisation infrastructure only (English); RTL locales need translators.

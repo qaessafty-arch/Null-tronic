@@ -43,5 +43,7 @@ the cross-validation tests (skipped, not passed, when absent).
 1. `npm test` at the repository root (all suites green).
 2. `cd frontend && npm run build`.
 3. Package `frontend/dist` with the `backend/` wheel (`pip wheel backend`).
-4. Desktop shell (planned): Tauri serving `dist/` with the backend as a sidecar — see
-   [architecture](../architecture/overview.md#desktop-packaging-evaluation).
+4. Desktop app (Tauri v2): install Rust and the Tauri prerequisites for your OS (Linux:
+   `libwebkit2gtk-4.1-dev librsvg2-dev libayatana-appindicator3-dev libxdo-dev build-essential`), then
+   `cd frontend && npm run desktop:build` (installers in `src-tauri/target/release/bundle/`) or
+   `npm run desktop:dev` for development. The hand-tracking service is started separately.

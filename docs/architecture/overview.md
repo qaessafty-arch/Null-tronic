@@ -4,7 +4,7 @@
 
 | # | Decision | Why |
 |---|---|---|
-| 1 | **Web application (React + TypeScript + Vite) + optional local Python service.** No Electron/Tauri shell yet. | Runs offline from a local build, prints through the browser's print system, saves through the File System Access API (download fallback), and WebGL covers 3D. Webcam processing lives in Python because MediaPipe/OpenCV are mature there. A desktop shell is a packaging step that does not change the architecture (see below). |
+| 1 | **Web application (React + TypeScript + Vite) + optional local Python service, packaged as a Tauri v2 desktop app** (`frontend/src-tauri`). | Runs offline from a local build, prints through the browser's print system, saves through the File System Access API (download fallback), and WebGL covers 3D. Webcam processing lives in Python because MediaPipe/OpenCV are mature there. A desktop shell is a packaging step that does not change the architecture (see below). |
 | 2 | **One immutable project model** (`frontend/src/project-model`). | Every view is a pure function of it: 2D canvas and every drawing exporter consume the same primitive list (`drawing/scene.ts`); the 3D scene is synchronised from it (`viewport-3d/scene3d.ts`); nets are *derived* (`connectivity.ts`), never stored. 2D and 3D cannot diverge. |
 | 3 | **All edits are pure operations wrapped in history commands** (`project-model/operations.ts`, `history/history.ts`). | Undo/redo is snapshot-based with structural sharing; the same code path serves mouse, keyboard, hand, assistant and importers. |
 | 4 | **Shared input system** (`input-system/input.ts`). | DOM events and hand-tracking messages become the same `PointerInput` / command stream. Tools (`engineering-tools/tools.ts`) do not know the input device. |
@@ -15,10 +15,12 @@
 
 ### Desktop packaging evaluation
 
-Tauri is the preferred shell for a later release: small footprint, native file dialogs, can spawn
-the Python service as a sidecar, and serves the same Vite build. Electron would also work but adds
-~150 MB and a second JS runtime with no functional gain here. Until then the app runs as a local
-web app (`npm run build && npm run preview`, or any static server).
+Tauri v2 was chosen over Electron: small footprint, the system webview, native dialogs through
+`tauri-plugin-dialog` / `tauri-plugin-fs`, and the same Vite build as the web version
+(`src/app/desktop.ts` switches save/open to native dialogs when running inside Tauri). Electron would
+add ~150 MB and a second JS runtime with no functional gain. Verified here: the shell builds and
+launches on Linux and renders the workspace. Not yet done: starting the Python service as a sidecar,
+signing, and building the installer bundles on each OS.
 
 ## Data flow
 
