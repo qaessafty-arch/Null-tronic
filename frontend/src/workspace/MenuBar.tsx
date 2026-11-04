@@ -114,6 +114,7 @@ export function MenuBar() {
       { label: 'Text', action: cmd('tool:text'), key: 'T' },
       { label: 'Measure', action: cmd('tool:measure'), key: 'Shift+M' },
       { sep: true, label: '' },
+      { label: 'PLC program (Structured Text)…', action: () => store.set({ dialog: 'plc' }), disabled: isInst },
       { label: 'Engineering assistant…', action: () => store.set({ dialog: 'assistant' }) },
       { label: 'Hand tracking…', action: () => store.set({ dialog: 'hand' }) },
       { label: 'Keyboard shortcuts…', action: () => store.set({ dialog: 'shortcuts' }) },

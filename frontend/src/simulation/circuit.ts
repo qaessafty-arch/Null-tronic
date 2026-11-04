@@ -1,6 +1,7 @@
 import { getDef, DIODE_PRESETS } from '../component-library/library';
 import { buildNetlist, pinKey, type Netlist } from '../project-model/connectivity';
 import type { ComponentInstance, Id, Project, PropertyValue } from '../project-model/types';
+import { compilePlc, normaliseAddress, type PlcProgram } from './plc';
 
 /**
  * Converts the authoritative project model into a flat element list for the MNA solver.
@@ -21,7 +22,7 @@ export type Element =
   | { kind: 'R'; name: string; cid: Id; a: number; b: number; r: number; role?: 'coil' | 'load' | 'rs' }
   | { kind: 'C'; name: string; cid: Id; a: number; b: number; c: number }
   | { kind: 'L'; name: string; cid: Id; a: number; b: number; l: number; br: number }
-  | { kind: 'V'; name: string; cid: Id; a: number; b: number; dc: number; wave?: Wave; br: number; acMag: number; acPhase: number; meter?: boolean }
+  | { kind: 'V'; name: string; cid: Id; a: number; b: number; dc: number; wave?: Wave; br: number; acMag: number; acPhase: number; meter?: boolean; /** discrete-state driven source: value = state ? dc : vOff */ stateKey?: string; vOff?: number }
   | { kind: 'I'; name: string; cid: Id; a: number; b: number; dc: number }
   | { kind: 'D'; name: string; cid: Id; a: number; k: number; is: number; n: number; bv?: number; ibv?: number; rs: number; extAnode: number }
   | { kind: 'Q'; name: string; cid: Id; c: number; b: number; e: number; pol: 1 | -1; is: number; bf: number; br: number }
@@ -40,6 +41,27 @@ export interface CoilInfo {
   dropout: number;
 }
 
+/** Digital gate evaluated from input node voltages (zero-delay, combinational). */
+export interface GateInfo {
+  cid: Id;
+  ref: string;
+  fn: 'and' | 'or' | 'nand' | 'nor' | 'xor' | 'not';
+  inputs: number[];
+  stateKey: string;
+  vih: number;
+  vil: number;
+}
+
+/**
+ * Logic-family input thresholds. CMOS families scale with the supply (VIH = 0.7·Vcc, VIL = 0.3·Vcc,
+ * the JEDEC CMOS levels used in 74HC / CD4000B datasheets); 74LS uses fixed TTL levels
+ * (VIH 2.0 V, VIL 0.8 V) and typical output levels VOH 3.4 V / VOL 0.35 V (assumptions).
+ */
+export function logicLevels(family: string, vcc: number): { vih: number; vil: number; voh: number; vol: number } {
+  if (family === '74LS') return { vih: 2.0, vil: 0.8, voh: Math.min(3.4, vcc), vol: 0.35 };
+  return { vih: 0.7 * vcc, vil: 0.3 * vcc, voh: vcc, vol: 0 };
+}
+
 export interface CircuitModel {
   netlist: Netlist;
   /** net name -> node index (ground excluded, -1). */
@@ -54,7 +76,12 @@ export interface CircuitModel {
   initialStates: Map<string, boolean>;
   unsupported: { cid: Id; ref: string; reason: string }[];
   hasGround: boolean;
-  plcInputs: { cid: Id; node: number; threshold: number }[];
+  plcInputs: { cid: Id; node: number; threshold: number; address: string }[];
+  plcOutputs: { cid: Id; address: string; stateKey: string }[];
+  gates: GateInfo[];
+  /** Compiled PLC program (null when none is entered). */
+  plc: PlcProgram | null;
+  plcError: string | null;
 }
 
 const num = (v: PropertyValue | undefined, d: number): number => {
@@ -91,6 +118,8 @@ export function buildCircuit(project: Project): CircuitModel {
   const unsupported: CircuitModel['unsupported'] = [];
   const initialStates = new Map<string, boolean>();
   const plcInputs: CircuitModel['plcInputs'] = [];
+  const plcOutputs: CircuitModel['plcOutputs'] = [];
+  const gates: GateInfo[] = [];
 
   const node = (c: ComponentInstance, pinId: string): number => {
     const net = netlist.pinNet.get(pinKey(c.id, pinId));
@@ -240,11 +269,38 @@ export function buildCircuit(project: Project): CircuitModel {
         break;
       }
       case 'plc_input':
-        plcInputs.push({ cid: c.id, node: node(c, '1'), threshold: num(pr.threshold, 15) });
+        plcInputs.push({ cid: c.id, node: node(c, '1'), threshold: num(pr.threshold, 15), address: normaliseAddress(String(pr.address ?? c.ref)) });
         break;
-      case 'plc_output':
-        if (pr.state) elements.push({ kind: 'V', name, cid: c.id, a: node(c, '1'), b: -1, dc: num(pr.voltage, 24), br: branch(), acMag: 0, acPhase: 0 });
+      case 'plc_output': {
+        // sourcing output: internal supply node switched onto the terminal
+        const address = normaliseAddress(String(pr.address ?? c.ref));
+        const key = `plc:${address}`;
+        initialStates.set(key, !!pr.state);
+        const int = numNodes++;
+        nodeNames.push(`${name}#out`);
+        elements.push({ kind: 'V', name: `${name}.supply`, cid: c.id, a: int, b: -1, dc: num(pr.voltage, 24), br: branch(), acMag: 0, acPhase: 0 });
+        elements.push({ kind: 'SW', name: `${name}.out`, cid: c.id, a: int, b: node(c, '1'), ron: 0.1, roff: 1e9, stateKey: key, invert: false });
+        plcOutputs.push({ cid: c.id, address, stateKey: key });
         break;
+      }
+      case 'gate_and':
+      case 'gate_or':
+      case 'gate_nand':
+      case 'gate_nor':
+      case 'gate_xor':
+      case 'gate_not': {
+        const vcc = num(pr.vcc, 5);
+        const lv = logicLevels(String(pr.family), vcc);
+        const key = `gate:${c.id}`;
+        initialStates.set(key, false);
+        const int = numNodes++;
+        nodeNames.push(`${name}#drv`);
+        elements.push({ kind: 'V', name: `${name}.drv`, cid: c.id, a: int, b: -1, dc: lv.voh, vOff: lv.vol, stateKey: key, br: branch(), acMag: 0, acPhase: 0 });
+        elements.push({ kind: 'R', name: `${name}.rout`, cid: c.id, a: int, b: node(c, 'Y'), r: Math.max(num(pr.outputResistance, 50), 1e-3), role: 'rs' });
+        const ins = c.type === 'gate_not' ? [node(c, 'A')] : [node(c, 'A'), node(c, 'B')];
+        gates.push({ cid: c.id, ref: c.ref, fn: c.type.slice(5) as GateInfo['fn'], inputs: ins, stateKey: key, vih: lv.vih, vil: lv.vil });
+        break;
+      }
       case 'ground':
       case 'label':
       case 'terminal':
@@ -263,5 +319,17 @@ export function buildCircuit(project: Project): CircuitModel {
       unsupported.push({ cid: e.cid, ref: e.name, reason: `contact operated by "${e.stateKey.slice(4)}" but no coil with that tag exists (contact held in its normal position)` });
     }
   }
-  return { netlist, nodeOf, nodeNames, numNodes, numBranches, elements, coils, initialStates, unsupported, hasGround, plcInputs };
+  // PLC program (project-level, Structured Text subset)
+  let plc: PlcProgram | null = null;
+  let plcError: string | null = null;
+  const src = project.settings.plcProgram ?? '';
+  if (src.trim() && (plcInputs.length || plcOutputs.length)) {
+    try {
+      plc = compilePlc(src);
+      for (const o of plcOutputs) if (plc.written.has(o.address)) initialStates.set(o.stateKey, false);
+    } catch (e) {
+      plcError = (e as Error).message;
+    }
+  }
+  return { netlist, nodeOf, nodeNames, numNodes, numBranches, elements, coils, initialStates, unsupported, hasGround, plcInputs, plcOutputs, gates, plc, plcError };
 }

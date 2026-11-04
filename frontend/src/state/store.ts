@@ -103,7 +103,7 @@ export interface AppState {
   hand: HandState;
   log: LogEntry[];
   toasts: { id: number; level: 'info' | 'warn' | 'error'; text: string }[];
-  dialog: null | 'new' | 'print' | 'settings' | 'hand' | 'examples' | 'about' | 'assistant' | 'recovery' | 'import' | 'project' | 'shortcuts';
+  dialog: null | 'new' | 'print' | 'settings' | 'hand' | 'examples' | 'about' | 'assistant' | 'recovery' | 'import' | 'project' | 'shortcuts' | 'plc';
   cursorWorld: Vec2 | null;
   findings: Finding[];
 }

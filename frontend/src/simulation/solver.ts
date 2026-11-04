@@ -1,5 +1,6 @@
 import { solveComplex, solveReal, SingularMatrixError } from './linalg';
 import { VT_300K, type CircuitModel, type Element } from './circuit';
+import { scan } from './plc';
 
 /**
  * Modified Nodal Analysis solver.
@@ -223,7 +224,7 @@ function assemble(ctx: SolveContext, x: Float64Array): { sys: Sys; limited: bool
           s.G[e.b][br] -= 1;
           s.G[br][e.b] -= 1;
         }
-        s.b[br] = waveValue(e, ctx.time) * ctx.sourceScale;
+        s.b[br] = (e.stateKey !== undefined ? ((ctx.states.get(e.stateKey) ?? false) ? e.dc : (e.vOff ?? 0)) : waveValue(e, ctx.time)) * ctx.sourceScale;
         break;
       }
       case 'I':
@@ -433,6 +434,59 @@ function dcSolve(model: CircuitModel, states: Map<string, boolean>, time: number
   return { x, iterations: total, method: 'source-stepping' };
 }
 
+export function hasDiscrete(model: CircuitModel): boolean {
+  return model.coils.length > 0 || model.gates.length > 0 || model.plc !== null;
+}
+
+/** Logic level of a node with input hysteresis memory; records undefined (between VIL and VIH) inputs. */
+function logicIn(states: Map<string, boolean>, key: string, v: number, vih: number, vil: number): boolean {
+  if (v >= vih) return true;
+  if (v <= vil) return false;
+  states.set(`undef:${key}`, true);
+  return states.get(key) ?? false;
+}
+
+/**
+ * Discrete-state update after a continuous solve: relay/contactor coils, digital gates
+ * (zero-delay combinational evaluation) and one PLC scan. Returns true if anything changed,
+ * in which case the caller re-solves; the loop detects oscillation.
+ */
+function updateDiscrete(model: CircuitModel, states: Map<string, boolean>, x: Float64Array): boolean {
+  let changed = updateCoils(model, states, x);
+  for (const g of model.gates) {
+    const ins = g.inputs.map((n, i) => {
+      const key = `gin:${g.cid}:${i}`;
+      const b = logicIn(states, key, V(x, n), g.vih, g.vil);
+      states.set(key, b);
+      return b;
+    });
+    const a = ins[0];
+    const b = ins[1] ?? false;
+    const out = { and: a && b, or: a || b, nand: !(a && b), nor: !(a || b), xor: a !== b, not: !a }[g.fn];
+    if ((states.get(g.stateKey) ?? false) !== out) {
+      states.set(g.stateKey, out);
+      changed = true;
+    }
+  }
+  if (model.plc) {
+    const env = new Map<string, boolean>();
+    for (const [k, v] of states) if (k.startsWith('plcm:')) env.set(k.slice(5), v);
+    for (const o of model.plcOutputs) env.set(o.address, states.get(o.stateKey) ?? false);
+    for (const i of model.plcInputs) env.set(i.address, V(x, i.node) >= i.threshold);
+    scan(model.plc, env);
+    const outKeys = new Map(model.plcOutputs.map((o) => [o.address, o.stateKey]));
+    for (const name of model.plc.written) {
+      const key = outKeys.get(name) ?? `plcm:${name}`;
+      const v = env.get(name) ?? false;
+      if ((states.get(key) ?? false) !== v) {
+        states.set(key, v);
+        changed = true;
+      }
+    }
+  }
+  return changed;
+}
+
 /** Update coil states from a solution; returns true if any state changed. */
 function updateCoils(model: CircuitModel, states: Map<string, boolean>, x: Float64Array): boolean {
   let changed = false;
@@ -468,7 +522,7 @@ export function solveOperatingPoint(model: CircuitModel, states?: Map<string, bo
   let relayIterations = 0;
   let oscillation = false;
   const seen = new Set<string>();
-  while (model.coils.length && updateCoils(model, st, sol.x)) {
+  while (hasDiscrete(model) && updateDiscrete(model, st, sol.x)) {
     relayIterations++;
     const sig = [...st.entries()].map(([k, v]) => `${k}=${v}`).join(',');
     if (seen.has(sig) || relayIterations > 30) {
@@ -523,7 +577,7 @@ export function solveTransient(model: CircuitModel, tstop: number, steps: number
     const ctx: SolveContext = { model, states: st, sourceScale: 1, gminExtra: 0, time: t, h, reactive, junction, be };
     let r = newtonSolve(ctx, x);
     let guard = 0;
-    while (model.coils.length && updateCoils(model, st, r.x) && guard++ < 10) r = newtonSolve(ctx, r.x);
+    while (hasDiscrete(model) && updateDiscrete(model, st, r.x) && guard++ < 10) r = newtonSolve(ctx, r.x);
     x = r.x;
     // update histories
     model.elements.forEach((e, idx) => {

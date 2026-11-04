@@ -16,6 +16,8 @@ import { COMMAND_LABELS } from '../input-system/commands';
 import { localAssistant, type AssistantReply } from '../assistant/assistant';
 import { scenePrimitives } from '../drawing/scene';
 import { runSimulation } from '../simulation/run';
+import { compilePlc } from '../simulation/plc';
+import { getDef } from '../component-library/library';
 
 function NewProjectDialog() {
   const [type, setType] = useState<ProjectType>('electronic');
@@ -433,12 +435,53 @@ function AboutDialog() {
       <h4>Known limitations</h4>
       <ul>
         <li>No status ever means “safe” or “compliant”. Fault-loop impedance, disconnection times, short-circuit levels and ampacity tables are not built in.</li>
-        <li>Digital logic, generic ICs and microcontrollers are not simulated (reported as “not evaluated”). Op-amps are ideal macro-models.</li>
-        <li>No vendor PLC programming or protocol is implemented; PLC outputs are forced manually.</li>
+        <li>Logic gates are zero-delay; generic ICs and microcontrollers are not simulated (reported as “not evaluated”). Op-amps are ideal macro-models.</li>
+        <li>PLC programs: Boolean Structured Text subset only (no timers/counters); no vendor PLC or protocol is emulated.</li>
         <li>Cable routes are explicit polylines; automatic routing through trays/conduits is not yet implemented.</li>
         <li>IFC import/export is not implemented.</li>
       </ul>
       <p className="note">Engineering assistance only: verify every design with a qualified engineer against the applicable standards and local regulations.</p>
+    </Dialog>
+  );
+}
+
+function PlcDialog() {
+  const project = useStore((s) => s.project);
+  const [src, setSrc] = useState(project.settings.plcProgram ?? '');
+  const io = Object.values(project.components).filter((c) => c.type === 'plc_input' || c.type === 'plc_output');
+  let status: { ok: boolean; text: string };
+  try {
+    const prog = compilePlc(src);
+    status = { ok: true, text: src.trim() ? `OK — writes ${[...prog.written].join(', ') || 'nothing'}; reads ${[...prog.read].join(', ') || 'nothing'}` : 'No program: outputs follow their forced state.' };
+  } catch (e) {
+    status = { ok: false, text: (e as Error).message };
+  }
+  const save = () => {
+    execute('Edit PLC program', (p) => updateSettings(p, { plcProgram: src }));
+    store.set({ dialog: null });
+    if (project.type !== 'installation') setTimeout(() => runSimulation(), 0);
+  };
+  return (
+    <Dialog title="PLC program — IEC 61131-3 Structured Text (subset)" wide footer={<><button className="btn" onClick={() => store.set({ dialog: null })}>Cancel</button><button className="btn btn-primary" disabled={!status.ok} onClick={save}>Save & simulate</button></>}>
+      <div className="row2">
+        <div style={{ flex: 2, minWidth: 0 }}>
+          <textarea className="mono plc-editor" spellCheck={false} value={src} onChange={(e) => setSrc(e.target.value)} onKeyDown={(e) => e.stopPropagation()} placeholder={'(* example *)\nQ0.0 := (I0.0 OR Q0.0) AND NOT I0.1;'} />
+          <div className={`finding ${status.ok ? 'st-valid' : 'st-error'}`}>{status.text}</div>
+        </div>
+        <div style={{ flex: 1, minWidth: 200 }}>
+          <h4>I/O in this project</h4>
+          {io.length === 0 && <p className="note">Place PLC input / output components (library ▸ PLC) and give them addresses.</p>}
+          <table className="mini"><tbody>{io.map((c) => <tr key={c.id}><td className="mono">{String(c.properties.address)}</td><td>{c.ref}</td><td>{getDef(c.type).name}</td></tr>)}</tbody></table>
+          <h4>Language</h4>
+          <ul className="note">
+            <li><code>X := expr;</code> assignment (outputs Q…, memory M… or any name)</li>
+            <li><code>IF … THEN … ELSIF … ELSE … END_IF;</code></li>
+            <li><code>NOT</code> &gt; <code>AND</code>/<code>&amp;</code> &gt; <code>XOR</code> &gt; <code>OR</code>, <code>TRUE</code>, <code>FALSE</code></li>
+            <li>Comments <code>(* … *)</code> and <code>// …</code></li>
+          </ul>
+          <p className="note">One scan runs per simulation iteration until outputs settle. Timers, counters and arithmetic are not supported yet and are rejected, not ignored. Vendor-neutral: no PLC brand or protocol is emulated.</p>
+        </div>
+      </div>
     </Dialog>
   );
 }
@@ -456,6 +499,7 @@ export function Dialogs() {
     case 'shortcuts': return <ShortcutsDialog />;
     case 'assistant': return <AssistantDialog />;
     case 'about': return <AboutDialog />;
+    case 'plc': return <PlcDialog />;
     default: return null;
   }
 }

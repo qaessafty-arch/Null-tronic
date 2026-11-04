@@ -237,9 +237,9 @@ describe('circuit model', () => {
   it('excludes unsupported parts and reports them as not evaluated', () => {
     const b = new ProjectBuilder('electronic');
     const v = b.add('vdc', { x: 0, y: 10 });
-    const u = b.add('gate_and', { x: 30, y: 10 });
+    const u = b.add('ic8', { x: 30, y: 10 });
     const g = b.add('ground', { x: 0, y: 25 });
-    b.wire(v, '+', u, 'A').wire(v, '-', g, '1');
+    b.wire(v, '+', u, '1').wire(v, '-', g, '1');
     const m = buildCircuit(b.build());
     expect(m.unsupported.map((x) => x.ref)).toContain(u.ref);
     const r = runOperatingPoint(b.build());

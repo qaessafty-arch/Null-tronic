@@ -188,6 +188,12 @@ export interface ProjectSettings {
   conductorColors: Record<'L1' | 'L2' | 'L3' | 'N' | 'PE' | 'signal' | 'ground' | 'control' | 'power', string>;
   /** Require explicit confirmation of every previewed operation, even from mouse input. */
   alwaysConfirm: boolean;
+  /** PLC program (IEC 61131-3 Structured Text subset) executed against PLC I/O during simulation. */
+  plcProgram?: string;
+  /** Installation: external earth-fault loop impedance Ze at the origin (Ω), measured or declared by the supplier. */
+  externalLoopImpedance?: number | null;
+  /** Installation: earthing system of the supply. */
+  earthingSystem?: 'TN-S' | 'TN-C-S' | 'TT' | 'IT';
 }
 
 export interface ProjectMeta {

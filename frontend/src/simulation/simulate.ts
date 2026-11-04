@@ -73,6 +73,13 @@ function preflight(project: Project, model: CircuitModel): Finding[] {
     f.push({ id: 'sim-gnd', status: 'error', code: 'NO_GROUND', message: 'No ground (0 V reference) symbol is connected. Add a Ground component.', refs: [], basis: 'Nodal analysis needs a reference node.' });
   if (!model.elements.some((e) => e.kind === 'V' || e.kind === 'I'))
     f.push({ id: 'sim-src', status: 'warning', code: 'NO_SOURCE', message: 'No independent source: every voltage will be 0 V.', refs: [] });
+  if (model.plcError) f.push({ id: 'plc-syntax', status: 'error', code: 'PLC_SYNTAX', message: `PLC program: ${model.plcError}`, refs: [], basis: 'Structured Text subset: assignments, IF/ELSIF/ELSE, NOT/AND/XOR/OR.' });
+  if (model.plc) {
+    const known = new Set([...model.plcInputs.map((i) => i.address), ...model.plcOutputs.map((o) => o.address)]);
+    for (const name of model.plc.read) if (/^[IQ]\d/.test(name) && !known.has(name)) f.push({ id: `plc-io-${name}`, status: 'warning', code: 'PLC_UNWIRED_IO', message: `PLC program uses ${name}, but no PLC I/O component has that address (reads FALSE).`, refs: [] });
+    for (const name of model.plc.written) if (/^Q\d/.test(name) && !known.has(name)) f.push({ id: `plc-o-${name}`, status: 'warning', code: 'PLC_UNWIRED_IO', message: `PLC program writes ${name}, but no PLC output has that address.`, refs: [] });
+  }
+  if (model.gates.length) f.push({ id: 'logic-model', status: 'review', code: 'LOGIC_MODEL', message: 'Logic gates use a zero-delay combinational model with ideal output levels behind an output resistance; propagation delay and supply current are not modelled.', refs: [] });
   for (const u of model.unsupported) f.push({ id: `sim-ns-${u.cid}`, status: 'not-evaluated', code: 'NOT_SIMULATED', message: `${u.ref}: ${u.reason}.`, refs: [u.cid] });
   for (const c of model.netlist.conflicts) f.push({ id: `sim-lbl-${c.net}`, status: 'warning', code: 'LABEL_CONFLICT', message: `Net ${c.net} has several labels (${c.labels.join(', ')}); they are shorted together.`, refs: [] });
   // floating subcircuits (no DC path to ground)
@@ -269,6 +276,12 @@ function componentResults(project: Project, model: CircuitModel, x: Float64Array
     }
   }
   for (const c of model.coils) get(c.cid).state = states.get(c.stateKey) ?? false;
+  for (const g of model.gates) {
+    const r = get(g.cid);
+    r.state = states.get(g.stateKey) ?? false;
+    r.extra = { ...(r.extra ?? {}), inputs: g.inputs.map((n, i) => `${'AB'[i]}=${(states.get(`gin:${g.cid}:${i}`) ?? false) ? 1 : 0} (${V(x, n).toFixed(2)} V)`).join(', '), output: r.state ? 'HIGH' : 'LOW' };
+  }
+  for (const o of model.plcOutputs) get(o.cid).state = states.get(o.stateKey) ?? false;
   for (const p of model.plcInputs) {
     const v = V(x, p.node);
     get(p.cid).voltage = v;
@@ -338,6 +351,11 @@ export function runOperatingPoint(project: Project, states?: Map<string, boolean
     for (const net of model.netlist.nets) if (net.isGround) nodeVoltages[net.name] = 0;
     const comps = componentResults(project, model, sol.x, sol.states);
     findings.push(...ratingFindings(project, comps));
+    for (const g of model.gates)
+      g.inputs.forEach((_, i) => {
+        if (sol.states.get(`undef:gin:${g.cid}:${i}`))
+          findings.push({ id: `undef-${g.cid}-${i}`, status: 'warning', code: 'LOGIC_UNDEFINED', message: `${g.ref} input ${'AB'[i]} sits between VIL and VIH (undefined logic level) during the solution.`, refs: [g.cid], basis: `VIL ${g.vil.toFixed(2)} V, VIH ${g.vih.toFixed(2)} V for the selected family.` });
+      });
     if (sol.oscillation) findings.push({ id: 'sim-osc', status: 'warning', code: 'RELAY_OSCILLATION', message: 'Relay states do not settle (the circuit oscillates, e.g. a relay that interrupts its own coil). Showing the last state.', refs: [] });
     if (sol.method !== 'newton') findings.push({ id: 'sim-method', status: 'review', code: 'CONTINUATION', message: `Operating point found with ${sol.method}; verify the result.`, refs: [] });
     if (Object.values(project.components).some((c) => c.type === 'opamp'))

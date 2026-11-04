@@ -192,18 +192,42 @@ function motorStarter(): Project {
 }
 
 function plcIo(): Project {
-  const b = new ProjectBuilder('control', 'PLC input / output wiring');
-  const v1 = b.add('vdc', { x: 0, y: 20 }, { voltage: 24 }, { ref: 'G1' });
+  const b = new ProjectBuilder('control', 'PLC start/stop with seal-in (Structured Text)');
+  const v1 = b.add('vdc', { x: 0, y: 25 }, { voltage: 24 }, { ref: 'G1' });
   const s1 = b.add('pb_no', { x: 20, y: 10 }, {}, { ref: 'S1' });
-  const i0 = b.add('plc_input', { x: 35, y: 15 }, { address: 'I0.0' }, { ref: 'I0' });
-  const q0 = b.add('plc_output', { x: 45, y: 35 }, { address: 'Q0.0', state: false }, { ref: 'Q0' });
-  const h1 = b.add('lamp', { x: 60, y: 40 }, { resistance: 480 }, { ref: 'H1' });
-  const g = b.add('ground', { x: 0, y: 55 });
-  b.wire(v1, '+', s1, '13', [{ x: 0, y: 5 }, { x: 20, y: 5 }]).wire(s1, '14', i0, '1', [{ x: 20, y: 15 }]).wire(v1, '-', g, '1');
-  b.wire(q0, '1', h1, 'X1', [{ x: 60, y: 35 }]).wire(h1, 'X2', g, '1', [{ x: 60, y: 50 }, { x: 0, y: 50 }]);
-  // input reference resistor so the input reads 0 V when the button is released
-  const r = b.add('resistor', { x: 30, y: 30 }, { resistance: 4700 }, { rotation: 90 });
-  b.wire(r, '1', i0, '1', [{ x: 30, y: 15 }]).wire(r, '2', g, '1', [{ x: 30, y: 50 }, { x: 0, y: 50 }]);
+  const s2 = b.add('pb_no', { x: 40, y: 10 }, {}, { ref: 'S2' });
+  const i0 = b.add('plc_input', { x: 25, y: 25 }, { address: 'I0.0' }, { ref: 'I0' });
+  const i1 = b.add('plc_input', { x: 45, y: 25 }, { address: 'I0.1' }, { ref: 'I1' });
+  const q0 = b.add('plc_output', { x: 60, y: 40 }, { address: 'Q0.0', state: false }, { ref: 'Q0' });
+  const h1 = b.add('lamp', { x: 75, y: 45 }, { resistance: 480 }, { ref: 'H1' });
+  const r1 = b.add('resistor', { x: 20, y: 40 }, { resistance: 4700 }, { rotation: 90, ref: 'R1' });
+  const r2 = b.add('resistor', { x: 40, y: 40 }, { resistance: 4700 }, { rotation: 90, ref: 'R2' });
+  const g = b.add('ground', { x: 0, y: 60 });
+  b.wire(v1, '+', s1, '13', [{ x: 0, y: 5 }, { x: 20, y: 5 }]).wire(s1, '13', s2, '13', [{ x: 20, y: 5 }, { x: 40, y: 5 }]).wire(v1, '-', g, '1');
+  b.wire(s1, '14', i0, '1', [{ x: 20, y: 25 }]).wire(s2, '14', i1, '1', [{ x: 40, y: 25 }]);
+  b.wire(r1, '1', s1, '14').wire(r2, '1', s2, '14');
+  b.wire(r1, '2', g, '1', [{ x: 20, y: 55 }, { x: 0, y: 55 }]).wire(r2, '2', g, '1', [{ x: 40, y: 55 }, { x: 0, y: 55 }]);
+  b.wire(q0, '1', h1, 'X1', [{ x: 75, y: 40 }]).wire(h1, 'X2', g, '1', [{ x: 75, y: 55 }, { x: 0, y: 55 }]);
+  b.project = { ...b.project, settings: { ...b.project.settings, plcProgram: '(* Start/stop with seal-in: S1 starts, S2 stops *)\nQ0.0 := (I0.0 OR Q0.0) AND NOT I0.1;\n' } };
+  return b.build();
+}
+
+function logicGates(): Project {
+  const b = new ProjectBuilder('electronic', 'Logic gates — AND driving an LED');
+  const v1 = b.add('vdc', { x: 0, y: 25 }, { voltage: 5 });
+  const sa = b.add('switch', { x: 15, y: 5 }, { closed: false }, { ref: 'SA' });
+  const sb = b.add('switch', { x: 15, y: 15 }, { closed: false }, { ref: 'SB' });
+  const ra = b.add('resistor', { x: 25, y: 35 }, { resistance: 10000 }, { rotation: 90, ref: 'RA' });
+  const rb = b.add('resistor', { x: 30, y: 35 }, { resistance: 10000 }, { rotation: 90, ref: 'RB' });
+  const u1 = b.add('gate_and', { x: 45, y: 10 }, { family: '74HC', vcc: 5 }, { ref: 'U1' });
+  const r1 = b.add('resistor', { x: 60, y: 10 }, { resistance: 330 });
+  const d1 = b.add('led', { x: 70, y: 20 }, { color: 'green', vf: 2.1 }, { rotation: 90 });
+  const g = b.add('ground', { x: 0, y: 50 });
+  b.wire(v1, '+', sa, '1', [{ x: 0, y: 5 }]).wire(sa, '1', sb, '1', [{ x: 5, y: 5 }, { x: 5, y: 15 }]).wire(v1, '-', g, '1');
+  b.wire(sa, '2', u1, 'A', [{ x: 25, y: 5 }, { x: 25, y: 7.5 }]).wire(sb, '2', u1, 'B', [{ x: 30, y: 15 }, { x: 30, y: 12.5 }]);
+  b.wire(ra, '1', sa, '2', [{ x: 25, y: 5 }]).wire(rb, '1', sb, '2', [{ x: 30, y: 15 }]);
+  b.wire(ra, '2', g, '1', [{ x: 25, y: 45 }, { x: 0, y: 45 }]).wire(rb, '2', g, '1', [{ x: 30, y: 45 }, { x: 0, y: 45 }]);
+  b.wire(u1, 'Y', r1, '1').wire(r1, '2', d1, 'A', [{ x: 70, y: 10 }]).wire(d1, 'K', g, '1', [{ x: 70, y: 45 }, { x: 0, y: 45 }]);
   return b.build();
 }
 
@@ -391,14 +415,25 @@ export const EXAMPLES: ExampleDef[] = [
   },
   {
     id: 'plc-io',
-    title: 'PLC I/O wiring',
+    title: 'PLC start/stop (Structured Text)',
     topic: 'PLC',
     type: 'control',
-    summary: 'A push button wired to a sourcing input and an output driving a lamp.',
+    summary: 'Start and stop push buttons on PLC inputs; the PLC program latches output Q0.0 which lights H1.',
     analysis: { kind: 'op' },
-    theory: ['Input I0.0 reads ON when its terminal is ≥ 15 V.', 'Force Q0.0 to light H1 (no PLC program execution yet).'],
-    steps: ['Simulate and press S1: I0.0 turns ON.', 'Force Q0.0 on: H1 receives 24 V.'],
+    theory: ['Inputs read ON when their terminal is ≥ 15 V (IEC 61131-2 type 1 at 24 V DC, verify with the module).', 'Q0.0 := (I0.0 OR Q0.0) AND NOT I0.1 — the output holds itself on (seal-in) until stop.'],
+    steps: ['Open Tools ▸ PLC program to read the program.', 'Simulate, press S1: Q0.0 turns on and H1 lights.', 'Release S1: Q0.0 stays on.', 'Press S2: Q0.0 turns off.'],
     build: plcIo,
+  },
+  {
+    id: 'logic-and',
+    title: 'Logic gates (AND)',
+    topic: 'Digital logic',
+    type: 'electronic',
+    summary: 'Two switches with pull-down resistors drive a 74HC AND gate that lights an LED.',
+    analysis: { kind: 'op' },
+    theory: ['74HC at 5 V: input HIGH ≥ 3.5 V, LOW ≤ 1.5 V (0.7/0.3 × Vcc).', 'Y = A · B; LED current ≈ (5 − 2.1)/(330 + 50) ≈ 7.6 mA when Y is HIGH.'],
+    steps: ['Simulate: LED off.', 'Close SA only: still off.', 'Close SB as well: Y goes HIGH and the LED lights.'],
+    build: logicGates,
   },
   {
     id: 'flat',

@@ -48,6 +48,9 @@ export function modelToSpice(project: Project, model: CircuitModel, opts: SpiceO
           const w = e.wave;
           const delay = 0;
           lines.push(`${uid('V', e.name)} ${N(e.a)} ${N(e.b)} DC ${fmt(e.dc)} AC ${fmt(e.acMag)} ${fmt(e.acPhase)} SIN(${fmt(w.offset)} ${fmt(w.amp)} ${fmt(w.freq)} ${delay} 0 ${fmt(w.phaseDeg)})`);
+        } else if (e.stateKey !== undefined) {
+          const on = states.get(e.stateKey) ?? false;
+          lines.push(`${uid('V', e.name)} ${N(e.a)} ${N(e.b)} DC ${fmt(on ? e.dc : e.vOff ?? 0)} ; logic state ${on ? 'HIGH' : 'LOW'}`);
         } else lines.push(`${uid('V', e.name)} ${N(e.a)} ${N(e.b)} DC ${fmt(e.dc)}`);
         break;
       case 'I':

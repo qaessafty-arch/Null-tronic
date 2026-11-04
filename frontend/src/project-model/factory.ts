@@ -45,6 +45,9 @@ export function defaultSettings(type: ProjectType): ProjectSettings {
       power: '#e5534b',
     },
     alwaysConfirm: false,
+    plcProgram: '',
+    externalLoopImpedance: null,
+    earthingSystem: 'TN-C-S',
   };
 }
 

@@ -283,3 +283,5 @@ button.sb-item:hover { color: var(--text); }
   .print-layout, .hand-layout, .examples { grid-template-columns: 1fr; }
   .brand-product { display: none; }
 }
+
+.plc-editor { width: 100%; min-height: 280px; font-size: 13px; line-height: 1.5; tab-size: 2; }
