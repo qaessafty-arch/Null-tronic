@@ -1,6 +1,7 @@
 import { getDef } from '../component-library/library';
 import { newId } from './ids';
 import { orthoRoute } from './geometry';
+import { routeViaContainment, traySegments } from './containment';
 import type { Cable, Circuit, Id, Phase, Project, Room, Vec2 } from './types';
 
 /** Helpers for creating installation circuits and rooms (used by tools, examples and the assistant). */
@@ -50,14 +51,34 @@ export function planCircuit(project: Project, boardId: Id, deviceIds: Id[], opts
     notes: '',
     ...opts,
   };
-  const elev = defaultRouteElevation(project);
   const cables: Cable[] = [];
   let prev = board;
   for (const d of devs) {
-    cables.push({ id: newId('cbl'), circuitId: circuit.id, fromId: prev.id, toId: d.id, path: autoRoute(prev.position, d.position), routeElevation: elev });
+    cables.push({ id: newId('cbl'), circuitId: circuit.id, fromId: prev.id, toId: d.id, ...routeBetween(project, prev.position, d.position) });
     prev = d;
   }
   return { circuit, cables };
+}
+
+/** Route one cable run: through cable trays when the project has any, otherwise an orthogonal L. */
+export function routeBetween(project: Project, a: Vec2, b: Vec2): { path: Vec2[]; routeElevation: number } {
+  const trays = traySegments(project);
+  const r = routeViaContainment(trays, a, b);
+  if (r && r.onTrayMm > 0) return { path: r.path, routeElevation: r.elevation ?? defaultRouteElevation(project) };
+  return { path: autoRoute(a, b), routeElevation: defaultRouteElevation(project) };
+}
+
+/** Recompute every cable route of a circuit (e.g. after containment was added or devices moved). */
+export function rerouteCircuit(project: Project, circuitId: Id): Project {
+  const cables = { ...project.cables };
+  for (const cb of Object.values(project.cables)) {
+    if (cb.circuitId !== circuitId) continue;
+    const from = project.components[cb.fromId];
+    const to = project.components[cb.toId];
+    if (!from || !to) continue;
+    cables[cb.id] = { ...cb, ...routeBetween(project, from.position, to.position) };
+  }
+  return { ...project, cables, meta: { ...project.meta, modifiedAt: new Date().toISOString() } };
 }
 
 export function makeRoom(name: string, x: number, y: number, w: number, h: number, height = 3000): Room {

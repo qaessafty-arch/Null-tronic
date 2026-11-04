@@ -7,6 +7,7 @@ import { useStore, store } from '../state/store';
 import { formatSI, parseSI } from '../calculations/units';
 import { calculateCircuit } from '../calculations/installation';
 import { polygonArea } from '../project-model/geometry';
+import { rerouteCircuit } from '../project-model/installation';
 import type { Circuit, ComponentInstance, ConductorRole, Project, PropertyValue } from '../project-model/types';
 import { StatusIcon } from '../components/Icon';
 import refData from '@shared/engineering-rules/installation-reference.json';
@@ -268,6 +269,9 @@ function CircuitProps({ circuit, project }: { circuit: Circuit; project: Project
       <Row label="Demand factor" badge="assumed">
         <CommitInput mono value={String(circuit.demandFactor)} onCommit={(v) => isFinite(+v) && up('demand factor', { demandFactor: Math.min(1, Math.max(0, +v)) })} />
       </Row>
+      <button className="btn btn-sm" onClick={() => execute(`${circuit.name}: re-route cables`, (p) => rerouteCircuit(p, circuit.id))} title="Route every cable of this circuit through the cable trays (or an orthogonal L where none apply)">
+        Re-route via containment
+      </button>
       <div className="calc-box">
         <div>
           Connected load <b>{calc.connectedW.toFixed(0)} W</b> · cos φ {calc.powerFactor.toFixed(2)}
