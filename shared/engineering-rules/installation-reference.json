@@ -98,5 +98,18 @@
   "rcdAdditionalProtection": {
     "residualCurrent_mA": 30,
     "source": "IEC 60364-4-41 clause 411.3.3 (additional protection for socket-outlets used by ordinary persons; the rated-current limit and permitted exceptions depend on the edition and national rules)."
+  },
+  "mcbInstantaneousTripMultiple": {
+    "B": 5,
+    "C": 10,
+    "D": 20,
+    "description": "Upper limit of the instantaneous tripping range as a multiple of In (current that ensures magnetic tripping).",
+    "source": "IEC 60898-1 Table 7 (instantaneous tripping ranges: B 3-5 In, C 5-10 In, D 10-20 In)"
+  },
+  "faultProtection": {
+    "tnCondition": "Zs x Ia <= U0",
+    "ttCondition": "RA x IDn <= 50 V",
+    "touchVoltageLimitV": 50,
+    "source": "IEC 60364-4-41 clauses 411.4.4 (TN) and 411.5.3 (TT). Ia taken as the instantaneous-trip current, which disconnects within the Table 41.1 times. Zs uses conductor resistance at normal service temperature (1.25 x rho20) and adds Ze arithmetically (conservative)."
   }
 }

@@ -50,6 +50,8 @@ export interface CircuitCalc {
   breakerSource: ValueSource;
   izA: number | null;
   izSource: ValueSource;
+  /** Earth-fault loop: Zs at the farthest device (Ω), R1+R2 of the circuit, prospective fault current there (A). */
+  faultLoop: { r1r2: number; zs: number | null; ia: number | null; maxZs: number | null; ipfA: number | null; system: string } | null;
   status: Finding['status'];
   findings: Finding[];
   assumptions: Assumption[];
@@ -248,7 +250,47 @@ export function calculateCircuit(project: Project, c: Circuit): CircuitCalc {
   const hasSockets = devices.some((d) => d.type === 'socket');
   if (hasSockets && !(c.protection.kind === 'RCBO' && (c.protection.residualmA ?? 999) <= ref.rcdAdditionalProtection.residualCurrent_mA))
     F('RCD', 'review', `${c.name} supplies socket-outlets without ≤ 30 mA residual-current protection recorded.`, ref.rcdAdditionalProtection.source);
-  F('SC_NE', 'not-evaluated', 'Fault-loop impedance and disconnection time are not evaluated (supply impedance not modelled).', 'IEC 60364-4-41 Table 41.1 requires verification of disconnection times.');
+  // earth-fault loop impedance & automatic disconnection (IEC 60364-4-41)
+  const fp = ref.faultProtection.source;
+  const peCsa = c.cable.peCsaMm2 ?? csa;
+  const totalLen = segs.reduce((a, x) => a + x.lengthM, 0);
+  const r1r2 = c.cable.hasPE && peCsa ? totalLen * (serviceResistancePerM(c.cable.material, csa) + serviceResistancePerM(c.cable.material, peCsa)) : NaN;
+  const system = s.earthingSystem ?? 'TN-C-S';
+  const ze = s.externalLoopImpedance ?? null;
+  let faultLoop: CircuitCalc['faultLoop'] = null;
+  formulae.push('Zs = Ze + (R1 + R2), R1+R2 = L·ρ1·(1/S + 1/S_PE); TN: Zs·Ia ≤ U0 with Ia = instantaneous-trip current');
+  if (!c.cable.hasPE) {
+    // NO_PE already reported
+  } else if (system === 'TT') {
+    const electrode = Object.values(project.components).find((d) => d.type === 'earth_electrode');
+    const ra = electrode ? num(electrode.properties.resistance, 0) : 0;
+    const idn = c.protection.kind === 'RCBO' ? (c.protection.residualmA ?? 0) / 1000 : 0;
+    faultLoop = { r1r2, zs: null, ia: null, maxZs: null, ipfA: null, system };
+    if (!idn) F('TT_NO_RCD', 'error', `${c.name}: TT system without a residual-current device — fault protection by RCD is required in practice.`, fp);
+    else if (!(ra > 0)) F('TT_RA_NE', 'not-evaluated', `${c.name}: earth electrode resistance RA not entered — RA·IΔn ≤ 50 V not evaluated.`, fp);
+    else if (ra * idn > ref.faultProtection.touchVoltageLimitV) F('TT_RA', 'error', `${c.name}: RA·IΔn = ${(ra * idn).toFixed(1)} V exceeds 50 V.`, fp);
+  } else if (system === 'IT') {
+    F('IT_NE', 'not-evaluated', `${c.name}: IT-system fault protection (insulation monitoring, second-fault conditions) is not evaluated.`, fp);
+  } else if (ze === null) {
+    faultLoop = { r1r2, zs: null, ia: null, maxZs: null, ipfA: null, system };
+    F('ZE_NE', 'not-evaluated', `${c.name}: external loop impedance Ze not entered — Zs and disconnection time not evaluated (R1+R2 = ${r1r2.toFixed(3)} Ω).`, fp);
+  } else {
+    const zs = ze + r1r2;
+    const mult = ref.mcbInstantaneousTripMultiple[c.protection.curve];
+    const ia = breaker !== null ? breaker * mult : null;
+    const maxZs = ia ? U0 / ia : null;
+    const ipf = U0 / zs;
+    faultLoop = { r1r2, zs, ia, maxZs, ipfA: ipf, system };
+    assumptions.push({ text: `Ia = ${mult} × In for curve ${c.protection.curve}.`, source: ref.mcbInstantaneousTripMultiple.source });
+    if (ia === null) F('ZS_NE', 'not-evaluated', `${c.name}: no protective-device rating — disconnection not evaluated.`, fp);
+    else if (zs > maxZs!) F('ZS_HIGH', 'error', `${c.name}: Zs = ${zs.toFixed(3)} Ω exceeds ${maxZs!.toFixed(3)} Ω (U0/Ia for ${c.protection.curve}${breaker} A): disconnection time not ensured.`, fp);
+    else if (zs > 0.8 * maxZs!) F('ZS_MARGIN', 'warning', `${c.name}: Zs = ${zs.toFixed(3)} Ω is within 20 % of the ${maxZs!.toFixed(3)} Ω limit (measure on site).`, fp);
+    const icn = c.protection.breakingCapacitykA;
+    const ipfBoard = ze > 0 ? U0 / ze : Infinity;
+    if (icn === null || icn === undefined) F('ICN_NE', 'not-evaluated', `${c.name}: breaking capacity not entered — prospective fault current at the board ${Number.isFinite(ipfBoard) ? `${(ipfBoard / 1000).toFixed(2)} kA` : '(Ze = 0)'} not compared.`, 'IEC 60898-1 rated short-circuit capacity Icn; IEC 60364-4-43 434.5.1.');
+    else if (ipfBoard > icn * 1000) F('ICN_LOW', 'error', `${c.name}: prospective fault current ${(ipfBoard / 1000).toFixed(2)} kA exceeds the ${icn} kA breaking capacity.`, 'IEC 60364-4-43 434.5.1.');
+  }
+  F('SC_NE', 'not-evaluated', 'Short-circuit current between live conductors, selectivity and cable thermal withstand (k²S²) are not evaluated.', 'IEC 60364-4-43 434/435.');
 
   if (!board) F('NO_BOARD', 'error', `${c.name} has no distribution board.`);
   return {
@@ -274,6 +316,7 @@ export function calculateCircuit(project: Project, c: Circuit): CircuitCalc {
     breakerSource,
     izA: iz,
     izSource,
+    faultLoop,
     status: worst(findings),
     findings,
     assumptions,

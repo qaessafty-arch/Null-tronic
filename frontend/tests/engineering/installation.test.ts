@@ -118,4 +118,49 @@ describe('installation calculations (independent hand calculation)', () => {
     const priced = buildBom(updateSettings(p, { unitPrices: { [lightKey]: 10 } }));
     expect(priced.lines.find((l) => l.key === lightKey)!.total).toBe(10 * priced.lines.find((l) => l.key === lightKey)!.quantity);
   });
+
+  it('earth-fault loop: Zs = Ze + R1+R2 and TN disconnection condition (hand calculation)', () => {
+    // 2.5 mm² / 1.5 mm² PE, 20 m: R1+R2 = 20·1.25·0.017241·(1/2.5 + 1/1.5) = 0.45976 Ω
+    const { p, circuit } = oneLoad(2000, 20000, 2.5);
+    let q = updateCircuit(p, circuit.id, { cable: { ...circuit.cable, peCsaMm2: 1.5 }, protection: { ...circuit.protection, ratingA: 16, curve: 'B' } });
+    q = updateSettings(q, { externalLoopImpedance: 0.35, earthingSystem: 'TN-C-S' });
+    const r = calculateCircuit(q, q.circuits[circuit.id]);
+    const r1r2 = 20 * 1.25 * 0.017241 * (1 / 2.5 + 1 / 1.5);
+    expect(r.faultLoop!.r1r2).toBeCloseTo(r1r2, 9);
+    expect(r.faultLoop!.zs).toBeCloseTo(0.35 + r1r2, 9);
+    expect(r.faultLoop!.ia).toBe(80); // 5 × 16 A
+    expect(r.faultLoop!.maxZs).toBeCloseTo(230 / 80, 9); // 2.875 Ω
+    expect(r.findings.some((f) => f.code === 'ZS_HIGH')).toBe(false);
+  });
+
+  it('long circuit on curve C fails the Zs limit', () => {
+    const { p, circuit } = oneLoad(1000, 120000, 1.5);
+    let q = updateCircuit(p, circuit.id, { protection: { ...circuit.protection, ratingA: 20, curve: 'C' } });
+    q = updateSettings(q, { externalLoopImpedance: 0.8 });
+    const r = calculateCircuit(q, q.circuits[circuit.id]);
+    // Zs ≈ 0.8 + 120·1.25·0.017241·(2/1.5) = 4.25 Ω > 230/200 = 1.15 Ω
+    expect(r.findings.find((f) => f.code === 'ZS_HIGH')?.status).toBe('error');
+  });
+
+  it('without Ze the disconnection check is not evaluated, never passed', () => {
+    const { p, circuit } = oneLoad(1000, 10000, 2.5);
+    const r = calculateCircuit(p, circuit);
+    expect(r.findings.find((f) => f.code === 'ZE_NE')?.status).toBe('not-evaluated');
+    expect(r.faultLoop!.zs).toBeNull();
+  });
+
+  it('TT system needs an RCD and RA·IΔn ≤ 50 V', () => {
+    const { p, circuit } = oneLoad(1000, 10000, 2.5);
+    const tt = updateSettings(p, { earthingSystem: 'TT' });
+    expect(calculateCircuit(tt, tt.circuits[circuit.id]).findings.some((f) => f.code === 'TT_NO_RCD')).toBe(true);
+    const withRcd = updateCircuit(tt, circuit.id, { protection: { kind: 'RCBO', curve: 'B', ratingA: 16, residualmA: 30 } });
+    expect(calculateCircuit(withRcd, withRcd.circuits[circuit.id]).findings.some((f) => f.code === 'TT_RA_NE')).toBe(true);
+  });
+
+  it('breaking capacity below prospective fault current is an error', () => {
+    const { p, circuit } = oneLoad(1000, 10000, 2.5);
+    let q = updateCircuit(p, circuit.id, { protection: { ...circuit.protection, breakingCapacitykA: 6 } });
+    q = updateSettings(q, { externalLoopImpedance: 0.02 }); // 230/0.02 = 11.5 kA
+    expect(calculateCircuit(q, q.circuits[circuit.id]).findings.find((f) => f.code === 'ICN_LOW')?.status).toBe('error');
+  });
 });

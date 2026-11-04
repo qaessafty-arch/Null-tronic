@@ -75,6 +75,8 @@ export interface ProtectionDevice {
   ratingA: number | null;
   /** Residual operating current for RCBO, mA. */
   residualmA: number | null;
+  /** Rated short-circuit (breaking) capacity Icn, kA — from the device datasheet. */
+  breakingCapacitykA?: number | null;
 }
 
 export interface CableSpec {
@@ -86,6 +88,8 @@ export interface CableSpec {
   insulation: 'PVC' | 'XLPE';
   /** Free text reference to an IEC 60364-5-52 installation method (e.g. "B1"). */
   installationMethod: string;
+  /** Protective-conductor cross-section, mm². null/undefined = same as the phase conductor. */
+  peCsaMm2?: number | null;
 }
 
 export interface Circuit {

@@ -214,6 +214,15 @@ function ScheduleTab() {
             <option value={3}>3-phase</option>
           </select>
         </label>
+        <label title="External earth-fault loop impedance at the origin, measured or declared by the supplier">
+          Ze <input className="mono short" type="number" step="0.01" placeholder="not set" value={project.settings.externalLoopImpedance ?? ''} onChange={(e) => execute('Ze', (p) => updateSettings(p, { externalLoopImpedance: e.target.value === '' ? null : Math.max(0, +e.target.value) }))} /> Ω
+        </label>
+        <label>
+          Earthing
+          <select value={project.settings.earthingSystem ?? 'TN-C-S'} onChange={(e) => execute('Earthing system', (p) => updateSettings(p, { earthingSystem: e.target.value as 'TT' }))}>
+            {['TN-S', 'TN-C-S', 'TT', 'IT'].map((x) => <option key={x}>{x}</option>)}
+          </select>
+        </label>
         <span className="muted">ΔU limits: lighting {project.settings.voltageDropLimitLighting} %, other {project.settings.voltageDropLimitOther} % (IEC 60364-5-52 Annex G, configurable)</span>
       </div>
       <table className="grid-table">
@@ -229,6 +238,7 @@ function ScheduleTab() {
             <th>Length m</th>
             <th>ΔU %</th>
             <th>Iz</th>
+            <th>Zs / max Ω</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -254,6 +264,7 @@ function ScheduleTab() {
                   {c.dropPct.toFixed(2)} / {c.dropLimitPct}
                 </td>
                 <td>{c.izA ?? 'n/e'}</td>
+                <td className={`num ${c.faultLoop?.zs != null && c.faultLoop.maxZs != null && c.faultLoop.zs > c.faultLoop.maxZs ? 'st-error' : ''}`}>{c.faultLoop?.zs != null ? `${c.faultLoop.zs.toFixed(2)} / ${c.faultLoop.maxZs?.toFixed(2) ?? '—'}` : 'n/e'}</td>
                 <td>
                   <StatusIcon status={c.status} /> {c.status}
                 </td>

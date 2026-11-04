@@ -253,6 +253,15 @@ function CircuitProps({ circuit, project }: { circuit: Circuit; project: Project
           <CommitInput value={circuit.cable.installationMethod} onCommit={(v) => up('method', { cable: { ...circuit.cable, installationMethod: v } })} />
         </span>
       </Row>
+      <Row label="PE size" badge={circuit.cable.peCsaMm2 ? 'user' : undefined}>
+        <select value={circuit.cable.peCsaMm2 ?? ''} onChange={(e) => up('PE size', { cable: { ...circuit.cable, peCsaMm2: e.target.value ? +e.target.value : null } })}>
+          <option value="">= phase conductor</option>
+          {refData.nominalCrossSections.values.map((v) => <option key={v} value={v}>{v} mm²</option>)}
+        </select>
+      </Row>
+      <Row label="Breaking capacity Icn" hint="From the protective device datasheet">
+        <CommitInput mono value={circuit.protection.breakingCapacitykA == null ? '' : String(circuit.protection.breakingCapacitykA)} onCommit={(v) => up('breaking capacity', { protection: { ...circuit.protection, breakingCapacitykA: v.trim() === '' ? null : Math.max(0, +v) } })} />
+      </Row>
       <Row label="Protective conductor">
         <input type="checkbox" checked={circuit.cable.hasPE} onChange={() => up('PE', { cable: { ...circuit.cable, hasPE: !circuit.cable.hasPE } })} />
       </Row>
@@ -270,6 +279,13 @@ function CircuitProps({ circuit, project }: { circuit: Circuit; project: Project
           ΔU <b>{calc.dropPct.toFixed(2)} %</b> ({calc.dropV.toFixed(2)} V) / limit {calc.dropLimitPct} %
         </div>
         <div>Iz: {calc.izA !== null ? `${calc.izA} A` : 'not evaluated (no ampacity row)'}</div>
+        {calc.faultLoop && (
+          <div>
+            R1+R2 {Number.isFinite(calc.faultLoop.r1r2) ? `${calc.faultLoop.r1r2.toFixed(3)} Ω` : '—'} · Zs {calc.faultLoop.zs != null ? <b>{calc.faultLoop.zs.toFixed(3)} Ω</b> : 'n/e (enter Ze)'}
+            {calc.faultLoop.maxZs != null && <> / max {calc.faultLoop.maxZs.toFixed(3)} Ω</>}
+            {calc.faultLoop.ipfA != null && <> · Ipf {(calc.faultLoop.ipfA / 1000).toFixed(2)} kA</>}
+          </div>
+        )}
       </div>
       <details>
         <summary>Calculation details</summary>
