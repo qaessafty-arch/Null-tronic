@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>NULL-TECH Circuit Studio — Technical &amp; Business Proposal</title>
+<style>
+@page { size: A4; margin: 17mm 15mm 18mm 15mm; }
+:root { --ink:#16191d; --muted:#5b6570; --line:#d9dee4; --accent:#0e9f57; --soft:#eef7f2; --dark:#0d1014; }
+* { box-sizing: border-box; }
+body { font: 9.8pt/1.48 "IBM Plex Sans","Segoe UI",Arial,sans-serif; color: var(--ink); margin: 0; }
+h2 { font-size: 16pt; margin: 0 0 3.5mm; border-bottom: 2px solid var(--accent); padding-bottom: 1.8mm; }
+h2 .n { color: var(--accent); margin-right: 2mm; }
+h3 { font-size: 11pt; margin: 4.5mm 0 1.8mm; }
+p { margin: 0 0 2.6mm; } ul, ol { margin: 0 0 2.6mm; padding-left: 5mm; } li { margin-bottom: 1mm; }
+.page { page-break-after: always; } .page:last-child { page-break-after: auto; }
+.avoid { break-inside: avoid; }
+.cover { background: var(--dark); color: #d8dee6; padding: 22mm 18mm 16mm; display: flex; flex-direction: column; margin: -17mm -15mm; width: calc(100% + 30mm); height: 297mm; }
+.cover .mark { display: flex; align-items: center; gap: 4mm; } .cover .mark svg { width: 14mm; height: 14mm; }
+.cover .brand { font-weight: 700; letter-spacing: .2em; font-size: 15pt; color: #fff; } .cover .prod { letter-spacing: .3em; font-size: 9pt; color: #7d8794; }
+.cover h1 { color: #fff; font-size: 31pt; margin: 30mm 0 3mm; font-weight: 600; line-height: 1.1; }
+.cover .sub { font-size: 13pt; color: #b8c1cc; max-width: 160mm; } .cover .accent { color: #2bd97a; }
+.cover .kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 3mm; margin: 10mm 0 8mm; }
+.cover .kpi { border: 1px solid #262d36; border-radius: 1.5mm; padding: 3mm; } .cover .kpi b { display:block; font-size: 17pt; color:#2bd97a; } .cover .kpi span { font-size: 8pt; color:#9aa4b1; }
+.cover img { width: 100%; border: 1px solid #262d36; border-radius: 2mm; margin-top: auto; }
+.cover .meta { margin-top: 6mm; font-size: 8.5pt; color: #7d8794; display: flex; justify-content: space-between; }
+.toc { columns: 2; column-gap: 8mm; font-size: 10pt; } .toc div { display:flex; justify-content: space-between; border-bottom: 1px dotted var(--line); padding: 1.2mm 0; break-inside: avoid; }
+.lead { font-size: 11pt; color: #2a3038; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; margin: 3mm 0; }
+.cards.four { grid-template-columns: repeat(4,1fr); }
+.card { border: 1px solid var(--line); border-top: 3px solid var(--accent); padding: 3mm; border-radius: 1mm; }
+.card b { display: block; margin-bottom: 1mm; font-size: 10pt; } .card span { color: var(--muted); font-size: 8.8pt; }
+figure { margin: 3mm 0; break-inside: avoid; } figure img { width: 100%; border: 1px solid var(--line); border-radius: 1.5mm; display:block; }
+figcaption { font-size: 8pt; color: var(--muted); margin-top: 1.2mm; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5mm; }
+table { width: 100%; border-collapse: collapse; font-size: 8.8pt; margin: 1.5mm 0 3.5mm; break-inside: auto; }
+tr { break-inside: avoid; }
+th { text-align: left; background: #f1f3f5; font-weight: 600; } th, td { border: 1px solid var(--line); padding: 1.5mm 2.2mm; vertical-align: top; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tfoot td { font-weight: 600; background: #fafbfc; }
+.callout { background: var(--soft); border-left: 3px solid var(--accent); padding: 2.6mm 3.5mm; margin: 2.5mm 0; break-inside: avoid; }
+.warn { background: #fff8e8; border-left-color: #b7791f; }
+.eq { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 8.8pt; background: #f6f8fa; border: 1px solid var(--line); border-radius: 1mm; padding: 1.6mm 2.5mm; margin: 1.2mm 0 2mm; white-space: pre-wrap; break-inside: avoid; }
+code { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 8.5pt; background:#f3f5f7; padding: 0 1mm; border-radius: .8mm; }
+.status { display: inline-block; padding: 0 1.8mm; border-radius: 1mm; font-size: 8pt; font-weight: 600; }
+.s-valid { background:#e3f6ec; color:#0b7a43 } .s-warn { background:#fff3d6; color:#8a5b00 } .s-err { background:#fde4e4; color:#b42318 } .s-ne { background:#eceff3; color:#4b5563 } .s-rev { background:#ede9fe; color:#5b3fc4 }
+.small { font-size: 8.3pt; color: var(--muted); }
+.tag { display:inline-block; font-size: 7.5pt; font-weight: 600; border-radius: 1mm; padding: 0 1.5mm; }
+.t-m { background:#e3f6ec; color:#0b7a43 } .t-e { background:#fff3d6; color:#8a5b00 } .t-a { background:#eceff3; color:#4b5563 }
+svg.diagram { width: 100%; height: auto; display: block; margin: 2mm 0; }
+.gantt td { padding: 1mm 1.5mm; } .bar { background: var(--accent); height: 3.2mm; border-radius: .8mm; } .bar.lite { background: #9fd8b9; }
+.compact table { font-size: 8.1pt; margin: 1mm 0 2.4mm; } .compact th, .compact td { padding: 1mm 2mm; } .compact h3 { margin: 3mm 0 1.2mm; } .compact .callout { padding: 2mm 3mm; margin: 1.5mm 0; }
+</style></head><body>
+
+<!-- ============================== COVER -->
+<section class="page cover">
+  <div class="mark">
+    <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="4" fill="#12161b"/><path d="M4 16h6l3-8 6 16 3-8h6" fill="none" stroke="#2bd97a" stroke-width="3" stroke-linecap="square"/></svg>
+    <div><div class="brand">NULL-TECH</div><div class="prod">CIRCUIT STUDIO</div></div>
+  </div>
+  <h1>Technical &amp; business proposal</h1>
+  <div class="sub">An electrical-engineering workspace to <span class="accent">design, simulate, calculate, visualise in 3D and document</span> electronic circuits, building installations and control systems — operated by mouse and keyboard or by hand gestures through a webcam.</div>
+  <div class="kpis">
+    <div class="kpi"><b>59</b><span>component types in 16 categories</span></div>
+    <div class="kpi"><b>3</b><span>engineering modes: electronic · installation · control</span></div>
+    <div class="kpi"><b>153</b><span>automated tests passing + 5 end-to-end workflows</span></div>
+    <div class="kpi"><b>0</b><span>servers required — runs offline on the user's computer</span></div>
+  </div>
+  <img src="s1-split.png" alt="Workspace">
+  <div class="meta"><span>Version 0.1 · working software with automated verification · prepared from the actual codebase</span><span>November 2026</span></div>
+</section>
+
+<!-- ============================== CONTENTS + SUMMARY -->
+<section class="page">
+  <h2>Contents</h2>
+  <div class="toc">
+    <div><span>1. Executive summary</span><span>2</span></div>
+    <div><span>2. Problem and opportunity</span><span>3</span></div>
+    <div><span>3. The product</span><span>3</span></div>
+    <div><span>4. Physics and engineering foundations</span><span>5</span></div>
+    <div><span>5. Validation against independent references</span><span>7</span></div>
+    <div><span>6. System architecture</span><span>8</span></div>
+    <div><span>7. Models (simulation, 3D, data, vision, business)</span><span>9</span></div>
+    <div><span>8. 3D pipeline</span><span>10</span></div>
+    <div><span>9. Data: inventory, flows, privacy, formats</span><span>11</span></div>
+    <div><span>10. Hand-tracking and human factors</span><span>12</span></div>
+    <div><span>11. Requirements: hardware, software, people</span><span>13</span></div>
+    <div><span>12. Team roles and responsibilities</span><span>14</span></div>
+    <div><span>13. Roadmap and timeline</span><span>15</span></div>
+    <div><span>14. Cost estimate</span><span>16</span></div>
+    <div><span>15. Pilot plan and success criteria</span><span>17</span></div>
+    <div><span>16. Risks and mitigations</span><span>18</span></div>
+    <div><span>17. Quality, safety and governance</span><span>18</span></div>
+    <div><span>18. Decision requested</span><span>19</span></div>
+    <div><span>Appendices: standards, tests, glossary</span><span>19</span></div>
+  </div>
+
+  <h2 style="margin-top:7mm"><span class="n">1</span>Executive summary</h2>
+  <p class="lead">NULL-TECH Circuit Studio already exists as working software. A user can start from an empty workspace, build an electronic circuit, a building electrical installation or a relay/PLC control circuit, simulate or calculate it, inspect it in 3D and print engineering drawings — all generated from one engineering model.</p>
+  <div class="cards">
+    <div class="card"><b>One model, every view</b><span>2D, 3D, simulation, calculations, drawings and exports derive from the same data and cannot disagree.</span></div>
+    <div class="card"><b>Verified physics</b><span>Simulator results agree with ngspice (the reference open-source SPICE engine) within 0.1 mV on every DC example.</span></div>
+    <div class="card"><b>Touch-free control</b><span>Webcam gestures use exactly the same tools as the mouse, with preview and confirmation before any change.</span></div>
+  </div>
+  <h3>What we propose</h3>
+  <ol>
+    <li><b>Pilot (3 months):</b> deploy in university laboratories, run an independent review of every calculation rule by a licensed electrical engineer, and test hand tracking with real webcams and users.</li>
+    <li><b>Productisation (≈ 9–12 months):</b> complete the safety calculations, localise (Arabic, Kurdish Sorani; regional rules), and ship signed desktop installers.</li>
+    <li><b>Commercial launch:</b> free student edition plus institutional and professional licences (options in §7.5).</li>
+  </ol>
+  <p>Indicative effort for the full programme is <b>≈ 48 person-months</b> (§14). Running costs are low because the product needs no servers: it runs on the user's own computer.</p>
+  <div class="callout"><b>Positioning.</b> The software assists engineers; it does not replace them. No result is ever labelled “safe” or “compliant”. Checks that are not implemented are shown as <i>not evaluated</i>, and every calculation shows its formula, inputs, assumptions and source.</div>
+  <p class="small">Evidence tags used in this document: <span class="tag t-m">MEASURED</span> obtained by running the software or its tests; <span class="tag t-e">ESTIMATE</span> engineering or planning judgement; <span class="tag t-a">ASSUMPTION</span> a value to be replaced with local data.</p>
+</section>
+
+<!-- ============================== PROBLEM + PRODUCT -->
+<section class="page">
+  <h2><span class="n">2</span>Problem and opportunity</h2>
+  <table>
+    <tr><th style="width:26%">Problem today</th><th>Consequence</th><th style="width:32%">How NULL-TECH addresses it</th></tr>
+    <tr><td>Fragmented tools: schematic editor, simulator, spreadsheets, CAD, 3D viewer</td><td>The same design is re-entered several times and copies drift out of date</td><td>One model feeds every view, calculation and export</td></tr>
+    <tr><td>Opaque calculators</td><td>A number without formula, assumptions or source is risky for safety-relevant work</td><td>Every result shows formula, inputs, assumptions and cited standard</td></tr>
+    <tr><td>Teaching needs hands-on construction</td><td>Students watch rather than build; lab equipment is limited</td><td>15 buildable examples, live simulation, automatic lab report</td></tr>
+    <tr><td>Hands-busy settings (labs, workshops, presentations)</td><td>Mouse use interrupts work and demonstrations</td><td>Webcam gesture control on the same tools</td></tr>
+    <tr><td>Local rules and language</td><td>International tools rarely reflect regional requirements or Arabic/Kurdish users</td><td>Rules are project data, not code; localisation layer prepared (RTL-ready)</td></tr>
+  </table>
+
+  <h2 style="margin-top:6mm"><span class="n">3</span>The product</h2>
+  <table>
+    <tr><th style="width:20%">Mode</th><th>Capabilities in the current version</th></tr>
+    <tr><td><b>Electronic circuits</b></td><td>Resistors, capacitors, inductors, DC/AC/current sources, diodes, LEDs, Zeners, BJTs, MOSFETs, op-amps, logic gates, relays, transformer, connectors, probes. Wiring with snapping and junctions, net labels. DC operating point, transient waveforms, AC frequency response. Rating checks (power, current, voltage, polarity).</td></tr>
+    <tr><td><b>Installations</b></td><td>Rooms (drawn or imported from DXF), distribution boards, luminaires, switches, sockets, appliances, cable trays. Circuits created from a board; cables routed through trays; lengths from the actual route. Load, design current, voltage drop, suggested breaker and conductor size, earth-fault loop impedance (TN/TT), breaking capacity, phase balance, schedule, BOM, single-line diagram.</td></tr>
+    <tr><td><b>Control systems</b></td><td>Push buttons, E-stop, limit switch, overload contact, contactor coils with tagged contacts, pilot lamps, breakers, PLC inputs/outputs and a PLC program in IEC 61131-3 Structured Text, all executed by the simulator.</td></tr>
+  </table>
+  <div class="two">
+    <figure><img src="s7-circuit.png"><figcaption>Fig. 1 — Installation plan: circuit C3 highlighted; schedule with Ib, protection, cable, length, ΔU, Zs and status.</figcaption></figure>
+    <figure><img src="s3-3d.png"><figcaption>Fig. 2 — Same model in 3D: walls, devices at mounting height, cables at route height.</figcaption></figure>
+  </div>
+</section>
+
+<section class="page">
+  <h3 style="margin-top:0">Cross-cutting capabilities</h3>
+  <table>
+    <tr><th style="width:22%">Area</th><th>Capability</th></tr>
+    <tr><td>3D</td><td>Parametric component models with terminals exactly on schematic pins; orbit, orthographic/perspective, Top/Front/Side/ISO, section plane, exploded view, hide/isolate, measuring; LED and lamp glow from simulated current; moving a part in 3D edits the model.</td></tr>
+    <tr><td>Drawings</td><td>A0–A4 and custom sheets, scale 1:N or fit, ISO frame with zone references, title block, revisions, schematics, installation/lighting/power plans, single-line diagram, schedules, BOM; vector PDF, SVG, PNG, JPEG, browser printing.</td></tr>
+    <tr><td>Exchange</td><td>Native <code>.ntcs.json</code> (versioned, validated, migrated, JSON Schema); DXF R12 export/import; SPICE export/import; GLB, glTF, OBJ, STL.</td></tr>
+    <tr><td>Input</td><td>Mouse, keyboard (customisable shortcuts), hand tracking; preview → validate → confirm/reject; undo/redo for every operation.</td></tr>
+    <tr><td>Education</td><td>15 examples (Ohm's law to motor starters and PLC logic) with theory, hand calculation and steps; engineering/lab report export.</td></tr>
+    <tr><td>Assistant</td><td>Offline rule-based assistant: “create a red LED circuit with 12 V”, “place 4 lights in living room”, “why is this not working”. Proposals are previewed and validated like any other operation.</td></tr>
+    <tr><td>Platforms</td><td>Any modern browser (served locally), or a Tauri desktop application with native save/open dialogs.</td></tr>
+  </table>
+  <div class="two">
+    <figure><img src="s5-rect.png"><figcaption>Fig. 3 — Half-wave rectifier transient: input sine and smoothed output.</figcaption></figure>
+    <figure><img src="s9-logic3d.png"><figcaption>Fig. 4 — Logic-gate circuit in 3D; gate, resistors and LED placed at schematic positions.</figcaption></figure>
+  </div>
+  <div class="two">
+    <figure><img src="s4-print.png"><figcaption>Fig. 5 — Drawing sheet with ISO frame and title block (vector PDF export).</figcaption></figure>
+    <figure><img src="s6-plc.png"><figcaption>Fig. 6 — PLC program (Structured Text) driving the simulated control circuit.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============================== PHYSICS -->
+<section class="page">
+  <h2><span class="n">4</span>Physics and engineering foundations</h2>
+  <p>This section lists the physical laws and numerical methods the software actually implements (source: <code>frontend/src/simulation</code>, <code>frontend/src/calculations</code>).</p>
+  <h3>4.1 Circuit laws and network formulation</h3>
+  <p>Ohm's law, Kirchhoff's current and voltage laws are enforced through <b>Modified Nodal Analysis</b> (MNA). For n nodes and m voltage-defined branches:</p>
+  <div class="eq">[ G   B ] [ v ]   [ i ]      G : conductances (n×n)       v : node voltages
+[ C   D ] [ j ] = [ e ]      B,C : branch incidence       j : branch currents (sources, inductors, op-amp outputs)
+                             i : injected currents        e : source voltages</div>
+  <p>Solved by LU decomposition with partial pivoting. A 1 pS shunt on every node keeps floating nodes solvable; nets with no DC path to ground are reported as warnings.</p>
+  <h3>4.2 Non-linear devices — Newton–Raphson</h3>
+  <div class="eq">x(k+1) = x(k) − J(x(k))⁻¹ · F(x(k))     converged when |Δv| ≤ 10⁻⁴·|v| + 1 µV
+fallbacks: gmin stepping (10⁻² → 10⁻¹² S), then source stepping (5 % → 100 %)</div>
+  <table>
+    <tr><th style="width:20%">Device</th><th>Model equation</th></tr>
+    <tr><td>Diode / LED</td><td><code>I = Is·(e^(V/(N·Vt)) − 1)</code>, series Rs; LED Is fitted so I = 20 mA at the stated Vf (N = 2); SPICE junction-voltage limiting (pnjlim)</td></tr>
+    <tr><td>Zener</td><td>forward Shockley term + breakdown <code>−IBV·e^(−(V+BV)/(N·Vt))</code></td></tr>
+    <tr><td>Thermal voltage</td><td><code>Vt = k·T/q = 1.380649e−23 × 300.15 / 1.602176634e−19 = 25.865 mV</code> (SPICE default 27 °C)</td></tr>
+    <tr><td>BJT</td><td>Ebers–Moll transport: <code>Ic = Is(e^(Vbe/Vt) − e^(Vbc/Vt)) − (Is/βR)(e^(Vbc/Vt) − 1)</code>, <code>Ib = (Is/βF)(e^(Vbe/Vt) − 1) + (Is/βR)(e^(Vbc/Vt) − 1)</code></td></tr>
+    <tr><td>MOSFET</td><td>Shichman–Hodges level 1: saturation <code>Id = K/2·(Vgs − Vth)²·(1 + λVds)</code>; linear <code>Id = K·((Vgs − Vth)Vds − Vds²/2)·(1 + λVds)</code></td></tr>
+    <tr><td>Op-amp</td><td>rail-limited high-gain source <code>Vout = Vmid + Vhalf·tanh(A·Vd / Vhalf)</code></td></tr>
+    <tr><td>Transformer</td><td>ideal: <code>Vp = n·Vs</code>, <code>Is = −n·Ip</code> (power conserving)</td></tr>
+    <tr><td>Relay / contactor</td><td>coil = resistance; contacts change at pick-up / drop-out thresholds; iterated to a consistent state; oscillation detected</td></tr>
+    <tr><td>Logic gate</td><td>input HIGH if V ≥ VIH, LOW if V ≤ VIL (CMOS: 0.7/0.3 × Vcc; 74LS: 2.0/0.8 V); output VOH/VOL through Rout; zero delay</td></tr>
+    <tr><td>PLC</td><td>Structured Text scan each iteration: inputs from node voltage ≥ threshold, outputs switch a sourcing supply onto the terminal</td></tr>
+  </table>
+  <h3>4.3 Energy-storage elements — transient analysis</h3>
+  <div class="eq">Capacitor  i = C·dv/dt   trapezoidal companion:  i(n+1) = (2C/h)·v(n+1) − [(2C/h)·v(n) + i(n)]
+Inductor   v = L·di/dt   trapezoidal companion:  v(n+1) = (2L/h)·[i(n+1) − i(n)] − v(n)
+First step after t = 0 uses backward Euler to avoid trapezoidal start-up error.</div>
+  <h3>4.4 Frequency domain — AC analysis</h3>
+  <div class="eq">Linearised at the operating point; capacitor admittance Y = jωC; inductor impedance Z = jωL;
+complex MNA solved per frequency on a logarithmic sweep → magnitude (dB) and phase (°).</div>
+</section>
+
+<section class="page">
+  <h3 style="margin-top:0">4.5 Building-installation physics</h3>
+  <table>
+    <tr><th style="width:24%">Quantity</th><th>Formula implemented</th><th style="width:28%">Source</th></tr>
+    <tr><td>Apparent power, demand</td><td><code>S = P / cos φ</code>; <code>S_d = Σ S × demand factor</code> (arithmetic sum, conservative)</td><td>basic AC power</td></tr>
+    <tr><td>Design current</td><td>single-phase <code>Ib = S_d / U0</code>; three-phase <code>Ib = S_d / (3·U0)</code></td><td>basic AC power</td></tr>
+    <tr><td>Conductor resistivity</td><td>ρ20 Cu = 0.017241 Ω·mm²/m; Al = 0.028264; in service <code>ρ1 = 1.25 × ρ20</code></td><td>IEC 60028; IEC 60364-5-52 Annex G</td></tr>
+    <tr><td>Cable length</td><td>plan length of the drawn route + vertical drops (route height ↔ mounting heights)</td><td>model geometry</td></tr>
+    <tr><td>Voltage drop</td><td><code>u = b·(ρ1·L/S·cos φ + λ·L·sin φ)·I</code>, λ = 0.08 mΩ/m, b = 2 (1-ph) or 1 (3-ph), per segment with downstream current; <code>ΔU% = 100·Σu / U0</code></td><td>IEC 60364-5-52 Annex G</td></tr>
+    <tr><td>Breaker suggestion</td><td>smallest rated current In ≥ Ib from 6, 8, 10, 13, 16, 20, 25, 32, 40, 50, 63, 80, 100, 125 A</td><td>IEC 60898-1</td></tr>
+    <tr><td>Conductor suggestion</td><td>smallest IEC 60228 size ≥ 1.5 mm² (Cu) meeting the ΔU limit (3 % lighting / 5 % other, configurable)</td><td>IEC 60228; IEC 60364-5-52</td></tr>
+    <tr><td>Earth-fault loop</td><td><code>Zs = Ze + L·ρ1·(1/S + 1/S_PE)</code>; TN condition <code>Zs·Ia ≤ U0</code>, Ia = 5/10/20 × In for curve B/C/D</td><td>IEC 60364-4-41 411.4.4; IEC 60898-1 Table 7</td></tr>
+    <tr><td>TT systems</td><td><code>RA·IΔn ≤ 50 V</code> and an RCD present</td><td>IEC 60364-4-41 411.5.3</td></tr>
+    <tr><td>Breaking capacity</td><td>prospective fault current at the board <code>U0 / Ze ≤ Icn</code></td><td>IEC 60364-4-43 434.5.1</td></tr>
+    <tr><td>Current-carrying capacity</td><td>In ≤ Iz only from rows the designer enters with their source</td><td>user-supplied (no table invented)</td></tr>
+  </table>
+  <h3>4.6 Engineering disciplines involved</h3>
+  <table>
+    <tr><th style="width:24%">Discipline</th><th>Where it appears in the product</th></tr>
+    <tr><td>Circuit theory &amp; electronics</td><td>MNA solver, device models, rating checks, examples</td></tr>
+    <tr><td>Power &amp; installation engineering</td><td>load, cable sizing, voltage drop, protection, fault loop, boards, schedules</td></tr>
+    <tr><td>Control &amp; automation</td><td>relay logic, contactors, PLC I/O, Structured Text interpreter</td></tr>
+    <tr><td>Numerical methods</td><td>LU decomposition, Newton–Raphson, continuation, implicit integration, complex solving</td></tr>
+    <tr><td>Computer graphics</td><td>Three.js scene, parametric meshes, incremental sync, clipping, picking</td></tr>
+    <tr><td>Computer vision &amp; signal processing</td><td>MediaPipe hand landmarks, gesture features, One Euro filter</td></tr>
+    <tr><td>Graph algorithms</td><td>union-find net extraction, Dijkstra routing through cable trays</td></tr>
+    <tr><td>Technical drawing</td><td>ISO sheet sizes, frames, title blocks, scales, vector output</td></tr>
+    <tr><td>Software engineering</td><td>immutable model, command history, schema migration, automated testing, CI</td></tr>
+  </table>
+</section>
+
+<!-- ============================== VALIDATION -->
+<section class="page">
+  <h2><span class="n">5</span>Validation against independent references</h2>
+  <p>Every value below comes from an automated test that runs on each build <span class="tag t-m">MEASURED</span>.</p>
+  <table>
+    <tr><th>Case</th><th>Independent reference</th><th class="num">Expected</th><th class="num">Software</th><th>Tolerance</th></tr>
+    <tr><td>Ohm's law, 9 V / 1 kΩ</td><td>I = V/R</td><td class="num">9.000 mA</td><td class="num">9.000 mA</td><td>10⁻⁹</td></tr>
+    <tr><td>Two-source network, node A</td><td>KCL by hand: 75/11 V</td><td class="num">6.8182 V</td><td class="num">6.8182 V</td><td>10⁻⁶</td></tr>
+    <tr><td>Voltage divider 10 k / 4.7 k from 10 V</td><td>Vin·R2/(R1+R2)</td><td class="num">3.1973 V</td><td class="num">3.1973 V</td><td>10⁻⁶</td></tr>
+    <tr><td>RC charging at t = τ = 0.1 s</td><td>5·(1 − e⁻¹)</td><td class="num">3.1606 V</td><td class="num">3.161 V</td><td>5×10⁻⁴</td></tr>
+    <tr><td>RC low-pass at fc</td><td>−20·log₁₀√2, −45°</td><td class="num">−3.010 dB</td><td class="num">−3.010 dB</td><td>10⁻³</td></tr>
+    <tr><td>Ideal transformer 10:1, 23 Ω load</td><td>power balance 23 W / 230 V</td><td class="num">0.100 A</td><td class="num">0.100 A</td><td>10⁻⁶</td></tr>
+    <tr><td>All DC examples (11 circuits)</td><td><b>ngspice-42</b> operating point</td><td class="num" colspan="2">every node agrees</td><td>0.1 mV + 0.01 %</td></tr>
+    <tr><td>Rectifier and op-amp transients</td><td><b>ngspice-42</b> transient</td><td class="num" colspan="2">waveforms agree</td><td>2 % / 0.01 V</td></tr>
+    <tr><td>Voltage drop, 2 kW, 20 m, 2.5 mm² Cu</td><td>Annex G by hand</td><td class="num">2.998 V</td><td class="num">2.998 V</td><td>10⁻³</td></tr>
+    <tr><td>R1+R2, 20 m, 2.5 / 1.5 mm²</td><td>L·ρ1·(1/S + 1/S_PE)</td><td class="num">0.4598 Ω</td><td class="num">0.4598 Ω</td><td>10⁻⁹</td></tr>
+    <tr><td>Max Zs, B16 breaker, 230 V</td><td>U0 / (5·In)</td><td class="num">2.875 Ω</td><td class="num">2.875 Ω</td><td>10⁻⁹</td></tr>
+    <tr><td>Cable routed through trays</td><td>sum of route segments</td><td class="num">10 000 mm</td><td class="num">10 000 mm</td><td>10⁻⁶</td></tr>
+  </table>
+  <h3>Behaviour checks (pass / fail)</h3>
+  <ul>
+    <li>LED over-current, resistor over-power, capacitor reverse polarity → reported as <span class="status s-err">ERROR</span>, never silently accepted.</li>
+    <li>Missing ground, voltage-source loops, PLC syntax errors → simulation refused with a precise message.</li>
+    <li>Inverter ring oscillator → oscillation detected instead of a fake steady state.</li>
+    <li>Motor-starter seal-in, relay pick-up, PLC start/stop, AND-gate truth table → correct states in every combination.</li>
+    <li>Without supply impedance Ze, the fault-loop check is <span class="status s-ne">NOT EVALUATED</span> — never passed.</li>
+  </ul>
+  <h3>Performance on the development machine <span class="tag t-m">MEASURED</span></h3>
+  <table>
+    <tr><th>Operation</th><th class="num">Time</th><th>Operation</th><th class="num">Time</th></tr>
+    <tr><td>DC operating point, LED circuit</td><td class="num">0.37 ms</td><td>Installation calculation, 6-circuit flat</td><td class="num">0.22 ms</td></tr>
+    <tr><td>Transient, rectifier, 2 000 steps</td><td class="num">11.6 ms</td><td>Vector PDF of one A3 sheet</td><td class="num">1.7 ms</td></tr>
+    <tr><td>AC sweep, 1 Hz–1 MHz, 121 points</td><td class="num">2.0 ms</td><td>DXF export of the flat</td><td class="num">0.32 ms</td></tr>
+    <tr><td>Gesture recognition + commands, per frame</td><td class="num">0.011 ms</td><td>Main application bundle (gzip)</td><td class="num">≈ 0.33 MB</td></tr>
+  </table>
+  <p class="small">Timings are from a cloud development container; they show the calculations are far below interactive limits, not a guarantee for every device. Webcam landmark detection time depends on the camera and CPU and has not yet been measured on real hardware.</p>
+</section>
+
+<!-- ============================== ARCHITECTURE -->
+<section class="page">
+  <h2><span class="n">6</span>System architecture</h2>
+  <svg class="diagram" viewBox="0 0 760 330" font-family="Arial" font-size="11">
+    <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0e9f57"/></marker></defs>
+    <rect x="10" y="20" width="150" height="40" rx="5" fill="#f6f8fa" stroke="#c3cad2"/><text x="85" y="44" text-anchor="middle">Mouse / keyboard</text>
+    <rect x="10" y="90" width="150" height="40" rx="5" fill="#f6f8fa" stroke="#c3cad2"/><text x="85" y="108" text-anchor="middle">Webcam → Python service</text><text x="85" y="122" text-anchor="middle" font-size="9" fill="#5b6570">landmarks · gestures · smoothing</text>
+    <rect x="10" y="160" width="150" height="40" rx="5" fill="#f6f8fa" stroke="#c3cad2"/><text x="85" y="184" text-anchor="middle">Assistant · importers</text>
+    <rect x="200" y="70" width="140" height="80" rx="6" fill="#eef7f2" stroke="#0e9f57"/><text x="270" y="100" text-anchor="middle" font-weight="bold">Shared input system</text><text x="270" y="118" text-anchor="middle" font-size="9.5">pointer + commands</text><text x="270" y="132" text-anchor="middle" font-size="9.5">(device-independent)</text>
+    <rect x="380" y="70" width="140" height="80" rx="6" fill="#eef7f2" stroke="#0e9f57"/><text x="450" y="96" text-anchor="middle" font-weight="bold">Engineering tools</text><text x="450" y="113" text-anchor="middle" font-size="9.5">preview → validate</text><text x="450" y="127" text-anchor="middle" font-size="9.5">→ confirm / reject</text>
+    <rect x="560" y="70" width="190" height="80" rx="6" fill="#0d1014"/><text x="655" y="98" text-anchor="middle" fill="#2bd97a" font-weight="bold">Authoritative project model</text><text x="655" y="116" text-anchor="middle" fill="#d8dee6" font-size="9.5">immutable · versioned · undo/redo</text><text x="655" y="131" text-anchor="middle" fill="#d8dee6" font-size="9.5">nets derived, never stored</text>
+    <line x1="160" y1="40" x2="200" y2="95" stroke="#0e9f57" marker-end="url(#a)"/><line x1="160" y1="110" x2="200" y2="110" stroke="#0e9f57" marker-end="url(#a)"/><line x1="160" y1="180" x2="200" y2="128" stroke="#0e9f57" marker-end="url(#a)"/>
+    <line x1="340" y1="110" x2="380" y2="110" stroke="#0e9f57" marker-end="url(#a)"/><line x1="520" y1="110" x2="560" y2="110" stroke="#0e9f57" marker-end="url(#a)"/>
+    <g font-size="10">
+      <rect x="215" y="230" width="85" height="50" rx="5" fill="#fff" stroke="#c3cad2"/><text x="257" y="252" text-anchor="middle">2D canvas</text><text x="257" y="266" text-anchor="middle" font-size="8.5" fill="#5b6570">primitives</text>
+      <rect x="310" y="230" width="85" height="50" rx="5" fill="#fff" stroke="#c3cad2"/><text x="352" y="252" text-anchor="middle">3D scene</text><text x="352" y="266" text-anchor="middle" font-size="8.5" fill="#5b6570">incremental</text>
+      <rect x="405" y="230" width="85" height="50" rx="5" fill="#fff" stroke="#c3cad2"/><text x="447" y="252" text-anchor="middle">Simulator</text><text x="447" y="266" text-anchor="middle" font-size="8.5" fill="#5b6570">Web Worker</text>
+      <rect x="500" y="230" width="85" height="50" rx="5" fill="#fff" stroke="#c3cad2"/><text x="542" y="252" text-anchor="middle">Calculations</text><text x="542" y="266" text-anchor="middle" font-size="8.5" fill="#5b6570">IEC methods</text>
+      <rect x="595" y="230" width="85" height="50" rx="5" fill="#fff" stroke="#c3cad2"/><text x="637" y="252" text-anchor="middle">Drawings</text><text x="637" y="266" text-anchor="middle" font-size="8.5" fill="#5b6570">PDF · SVG · DXF</text>
+      <rect x="690" y="230" width="65" height="50" rx="5" fill="#fff" stroke="#c3cad2"/><text x="722" y="252" text-anchor="middle">Exports</text><text x="722" y="266" text-anchor="middle" font-size="8.5" fill="#5b6570">SPICE · GLB</text>
+    </g>
+    <path d="M655 150 L655 200 L257 200 L257 230 M352 200 L352 230 M447 200 L447 230 M542 200 L542 230 M637 200 L637 230 M722 200 L722 230 M655 200 L722 200" fill="none" stroke="#0e9f57"/>
+    <text x="10" y="306" font-size="9.5" fill="#5b6570">The Python service only emits input commands over a local WebSocket (127.0.0.1, localhost origins only).</text><text x="10" y="320" font-size="9.5" fill="#5b6570">It never receives or changes the project. ngspice can be called through it for independent verification.</text>
+  </svg>
+  <table>
+    <tr><th style="width:24%">Decision</th><th>Reason</th></tr>
+    <tr><td>Web technology (TypeScript, React, Three.js) + Tauri desktop shell</td><td>One codebase for browser and desktop; WebGL for 3D; small installers using the system web view.</td></tr>
+    <tr><td>Python local service</td><td>Mature computer-vision stack (OpenCV, MediaPipe) and easy ngspice integration.</td></tr>
+    <tr><td>Built-in simulator + ngspice as reference</td><td>Works with nothing installed; ngspice provides independent verification.</td></tr>
+    <tr><td>Local-first, no server</td><td>Offline use, privacy, near-zero running cost.</td></tr>
+    <tr><td>Reference data as cited JSON</td><td>Rules can be replaced per jurisdiction without code changes.</td></tr>
+  </table>
+  <p class="small">Codebase size <span class="tag t-m">MEASURED</span>: ≈ 13 000 lines of TypeScript (application), ≈ 1 000 lines of Python (service), ≈ 1 800 lines of tests.</p>
+</section>
+
+<!-- ============================== MODELS -->
+<section class="page">
+  <h2><span class="n">7</span>Models</h2>
+  <h3>7.1 Simulation models</h3>
+  <p>44 of the 59 component types take part in simulation; the remaining 15 are documentation or installation devices (generic ICs, microcontrollers, boards, luminaires …) and are reported as <i>not evaluated</i> where relevant. Device equations are listed in §4.2.</p>
+  <h3>7.2 Engineering data model</h3>
+  <svg class="diagram" viewBox="0 0 760 200" font-family="Arial" font-size="10.5">
+    <g fill="#fff" stroke="#c3cad2"><rect x="10" y="10" width="130" height="64" rx="5"/><rect x="170" y="10" width="140" height="64" rx="5"/><rect x="340" y="10" width="130" height="64" rx="5"/><rect x="500" y="10" width="120" height="64" rx="5"/><rect x="640" y="10" width="110" height="64" rx="5"/>
+    <rect x="10" y="120" width="130" height="64" rx="5"/><rect x="170" y="120" width="140" height="64" rx="5"/><rect x="340" y="120" width="130" height="64" rx="5"/><rect x="500" y="120" width="120" height="64" rx="5"/><rect x="640" y="120" width="110" height="64" rx="5"/></g>
+    <g text-anchor="middle"><text x="75" y="32" font-weight="bold">Project</text><text x="75" y="48" font-size="9" fill="#5b6570">meta · settings</text><text x="75" y="61" font-size="9" fill="#5b6570">layers · sheets</text>
+    <text x="240" y="32" font-weight="bold">Component instance</text><text x="240" y="48" font-size="9" fill="#5b6570">type · ref · position</text><text x="240" y="61" font-size="9" fill="#5b6570">rotation · elevation · props</text>
+    <text x="405" y="32" font-weight="bold">Wire</text><text x="405" y="48" font-size="9" fill="#5b6570">endpoint A/B (pin|junction)</text><text x="405" y="61" font-size="9" fill="#5b6570">bend points · role</text>
+    <text x="560" y="32" font-weight="bold">Junction</text><text x="560" y="48" font-size="9" fill="#5b6570">position</text>
+    <text x="695" y="32" font-weight="bold">Annotation</text><text x="695" y="48" font-size="9" fill="#5b6570">text · dimension</text><text x="695" y="61" font-size="9" fill="#5b6570">line · arc · DXF</text>
+    <text x="75" y="142" font-weight="bold">Room</text><text x="75" y="158" font-size="9" fill="#5b6570">polygon · height</text><text x="75" y="171" font-size="9" fill="#5b6570">wall thickness</text>
+    <text x="240" y="142" font-weight="bold">Circuit</text><text x="240" y="158" font-size="9" fill="#5b6570">board · devices · phase</text><text x="240" y="171" font-size="9" fill="#5b6570">protection · cable spec</text>
+    <text x="405" y="142" font-weight="bold">Cable</text><text x="405" y="158" font-size="9" fill="#5b6570">from · to · route path</text><text x="405" y="171" font-size="9" fill="#5b6570">route height</text>
+    <text x="560" y="142" font-weight="bold">Derived: nets</text><text x="560" y="158" font-size="9" fill="#5b6570">union-find</text><text x="560" y="171" font-size="9" fill="#5b6570">never stored</text>
+    <text x="695" y="142" font-weight="bold">Derived: results</text><text x="695" y="158" font-size="9" fill="#5b6570">simulation · calcs</text><text x="695" y="171" font-size="9" fill="#5b6570">findings · BOM</text></g>
+    <g stroke="#0e9f57"><line x1="140" y1="42" x2="170" y2="42"/><line x1="310" y1="42" x2="340" y2="42"/><line x1="470" y1="42" x2="500" y2="42"/><line x1="240" y1="74" x2="240" y2="120"/><line x1="310" y1="152" x2="340" y2="152"/><line x1="470" y1="152" x2="500" y2="152" stroke-dasharray="4 3"/><line x1="620" y1="152" x2="640" y2="152" stroke-dasharray="4 3"/><line x1="75" y1="74" x2="75" y2="120"/></g>
+  </svg>
+  <p>All lengths in millimetres; stable random IDs; JSON Schema published in <code>shared/schemas/project.schema.json</code>; schema version and step-wise migrations.</p>
+  <h3>7.3 Computer-vision model</h3>
+  <table>
+    <tr><th style="width:24%">Stage</th><th>Model / method</th></tr>
+    <tr><td>Hand landmarks</td><td>MediaPipe Hands (pre-trained by Google, used as-is): 21 landmarks per hand, up to 2 hands.</td></tr>
+    <tr><td>Gesture classification</td><td>Deterministic geometric rules (joint angles, distances normalised by palm size) — no training data needed, fully explainable. Verified for all poses at three hand sizes and ±35° tilt.</td></tr>
+    <tr><td>Temporal filtering</td><td>State machine: N stable frames (default 4; pinch 2), pinch hysteresis 0.32 / 0.45 × palm, 0.6 s command cool-down.</td></tr>
+    <tr><td>Cursor smoothing</td><td>One Euro filter (Casiez et al., 2012), min cut-off 1 Hz, β = 4.</td></tr>
+  </table>
+  <h3>7.4 3D models</h3>
+  <p>Parametric meshes for about 40 model types (axial resistor with IEC 60062 colour bands computed from the resistance value, capacitors sized by capacitance, LEDs, TO-92/TO-220, DIP packages with real pin count, relays, transformers, boards, luminaires, sockets, appliances, cable trays …). See §8.</p>
+  <h3>7.5 Business model options <span class="tag t-e">FOR DECISION</span></h3>
+  <table>
+    <tr><th style="width:24%">Option</th><th>Description</th><th style="width:30%">Fit</th></tr>
+    <tr><td>Free student edition</td><td>Full electronic and control modes; installation mode for study</td><td>Adoption in universities</td></tr>
+    <tr><td>Institutional licence</td><td>Per-laboratory or campus licence, teaching material, support</td><td>Universities, training centres</td></tr>
+    <tr><td>Professional licence</td><td>Per-seat; installation drawings, schedules, regional rule packs</td><td>Design offices, contractors</td></tr>
+    <tr><td>Open-core</td><td>Core open source; paid rule packs, support and desktop builds</td><td>Community growth, trust in calculations</td></tr>
+  </table>
+</section>
+
+<!-- ============================== 3D -->
+<section class="page">
+  <h2><span class="n">8</span>3D pipeline</h2>
+  <table>
+    <tr><th style="width:26%">Aspect</th><th>Specification</th></tr>
+    <tr><td>Coordinate system</td><td>2D plan (x, y↓) → 3D (X = x, Z = y, Y = elevation). Units millimetres. 2D rotation θ → 3D rotation about Y of −θ; mirror = scale X −1.</td></tr>
+    <tr><td>Correspondence</td><td>Lead tips and terminals of every 3D model sit on the library pin coordinates — verified by an automated test (within 1 mm).</td></tr>
+    <tr><td>Rendering</td><td>Three.js WebGL; physically based materials; hemisphere + directional light with soft shadow maps (2048²); sRGB output.</td></tr>
+    <tr><td>Performance</td><td>Incremental synchronisation: each entity has a content hash, only changed entities are rebuilt; shared materials are cached.</td></tr>
+    <tr><td>Interaction</td><td>Orbit, pan, zoom; perspective/orthographic; Top/Front/Side/ISO; fit to project/selection; picking into the shared selection; move gizmo that writes back to the model (snapped to grid); hand-gesture orbit and selection.</td></tr>
+    <tr><td>Analysis views</td><td>Horizontal section plane, exploded view, hide/isolate/show all, point-to-point measuring, simplified vs realistic materials.</td></tr>
+    <tr><td>Simulation feedback</td><td>LEDs glow in proportion to simulated current; pilot lamps and relay indicators light when energised.</td></tr>
+    <tr><td>Installation scenes</td><td>Floors and walls extruded from room polygons (shared walls de-duplicated); devices at mounting height; cables as tubes along the route with vertical drops; conductor colours configurable (IEC 60445 defaults).</td></tr>
+    <tr><td>Export</td><td>GLB / glTF (metres, component ID, reference, type and pin nets in node extras), OBJ and STL (geometry only — format limitation).</td></tr>
+  </table>
+  <h3>3D needs for the next stage</h3>
+  <ul>
+    <li><b>Manufacturer-accurate models:</b> import STEP/GLB models from manufacturers for selected parts (licence review needed per vendor).</li>
+    <li><b>Building context:</b> IFC import for walls, ceilings and openings; multi-floor display.</li>
+    <li><b>Performance on large buildings:</b> instanced rendering for repeated devices; level-of-detail meshes.</li>
+    <li><b>Hardware:</b> any GPU with WebGL 2 is sufficient for current scenes <span class="tag t-e">ESTIMATE</span>; integrated graphics have not yet been benchmarked.</li>
+  </ul>
+  <div class="two">
+    <figure><img src="s1-split.png"><figcaption>Fig. 7 — 2D and 3D side by side from one model; simulated voltages on the schematic, LED lit in 3D.</figcaption></figure>
+    <figure><img src="s2-plan.png"><figcaption>Fig. 8 — Installation plan that generates the 3D building in Fig. 2.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============================== DATA -->
+<section class="page">
+  <h2><span class="n">9</span>Data</h2>
+  <h3>9.1 Data inventory</h3>
+  <table>
+    <tr><th style="width:22%">Data</th><th>Content</th><th style="width:20%">Where stored</th><th style="width:18%">Personal data?</th></tr>
+    <tr><td>Project files</td><td>Components, wiring, rooms, circuits, settings, revisions</td><td>User's computer (<code>.ntcs.json</code>)</td><td>Author name only, if entered</td></tr>
+    <tr><td>Autosave &amp; snapshots</td><td>Copy of the current project, up to 10 snapshots</td><td>Browser storage on the user's computer</td><td>As above</td></tr>
+    <tr><td>Engineering reference data</td><td>Resistivities, standard sizes, breaker ratings, ΔU limits, trip multiples — each with its source</td><td>Shipped with the software (JSON)</td><td>No</td></tr>
+    <tr><td>User ampacity tables &amp; prices</td><td>Values the designer enters, with source</td><td>Inside the project file</td><td>No</td></tr>
+    <tr><td>Camera frames</td><td>Live video for landmark detection</td><td>Memory only; newest frame kept, never written to disk</td><td>Yes (image) — never leaves the machine</td></tr>
+    <tr><td>Hand landmarks</td><td>21 points per hand per frame</td><td>Memory; optional recording with <code>--record</code></td><td>Low (no image)</td></tr>
+    <tr><td>Shortcuts, favourites</td><td>UI preferences</td><td>Browser storage</td><td>No</td></tr>
+  </table>
+  <h3>9.2 Data flows and privacy</h3>
+  <ul>
+    <li>No account, no telemetry, no cloud upload: the application works fully offline.</li>
+    <li>The camera service listens only on 127.0.0.1 and refuses browser connections from non-local origins (tested).</li>
+    <li>ngspice verification runs locally; netlists with control blocks, includes or shell commands are rejected (tested).</li>
+    <li>Recommendation for institutional roll-out: a short privacy notice explaining camera use, and an explicit on/off control (already present).</li>
+  </ul>
+  <h3>9.3 Exchange formats</h3>
+  <table>
+    <tr><th>Format</th><th>Direction</th><th>Preserves</th><th>Limits</th></tr>
+    <tr><td>.ntcs.json</td><td>read / write</td><td>everything; versioned, schema-validated</td><td>—</td></tr>
+    <tr><td>PDF / SVG</td><td>write</td><td>vector drawings at true scale, title block</td><td>not re-importable</td></tr>
+    <tr><td>PNG / JPEG</td><td>write</td><td>raster drawings (200 dpi)</td><td>raster</td></tr>
+    <tr><td>DXF R12</td><td>read / write</td><td>geometry, layers, text, units</td><td>blocks, hatches, splines not imported</td></tr>
+    <tr><td>SPICE (.cir)</td><td>read / write</td><td>R C L V I D Q M, models, connectivity</td><td>subcircuits, controlled sources reported</td></tr>
+    <tr><td>GLB / glTF</td><td>write</td><td>geometry, materials, component identity</td><td>—</td></tr>
+    <tr><td>OBJ / STL</td><td>write</td><td>geometry</td><td>no identity (format)</td></tr>
+    <tr><td>CSV / HTML</td><td>write</td><td>bill of materials; engineering / lab report</td><td>—</td></tr>
+  </table>
+  <h3>9.4 Data quality controls</h3>
+  <p>Every file is parsed, migrated and validated on open (unknown component types, broken wire references, missing boards and malformed polygons are reported precisely). All 15 sample projects are validated against the published JSON Schema in the test suite.</p>
+</section>
+
+<!-- ============================== HAND TRACKING -->
+<section class="page">
+  <h2><span class="n">10</span>Hand tracking and human factors</h2>
+  <div class="two">
+    <div>
+      <table>
+        <tr><th>Gesture</th><th>Command</th></tr>
+        <tr><td>Index finger pointing</td><td>move cursor</td></tr>
+        <tr><td>Thumb–index pinch</td><td>select / drag / draw</td></tr>
+        <tr><td>Release pinch</td><td>finish operation</td></tr>
+        <tr><td>Open palm (held)</td><td>cancel + pause</td></tr>
+        <tr><td>Fist (held)</td><td>confirm preview</td></tr>
+        <tr><td>V-sign (held)</td><td>reject preview</td></tr>
+        <tr><td>Two hands pinching</td><td>pan / zoom</td></tr>
+      </table>
+      <svg class="diagram" viewBox="0 0 360 120" font-family="Arial" font-size="9.5">
+        <defs><marker id="b" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#0e9f57"/></marker></defs>
+        <g fill="#f6f8fa" stroke="#c3cad2"><rect x="5" y="40" width="60" height="30" rx="4"/><rect x="95" y="40" width="70" height="30" rx="4"/><rect x="195" y="40" width="70" height="30" rx="4"/><rect x="290" y="5" width="65" height="26" rx="4"/><rect x="290" y="80" width="65" height="26" rx="4"/></g>
+        <g text-anchor="middle"><text x="35" y="59">Point</text><text x="130" y="59">Pinch</text><text x="230" y="53">Preview</text><text x="230" y="64" font-size="8">(staged)</text><text x="322" y="22">Fist → commit</text><text x="322" y="97">V → discard</text></g>
+        <g stroke="#0e9f57" marker-end="url(#b)"><line x1="65" y1="55" x2="95" y2="55"/><line x1="165" y1="55" x2="195" y2="55"/><line x1="265" y1="48" x2="290" y2="20"/><line x1="265" y1="62" x2="290" y2="92"/></g>
+        <text x="130" y="88" text-anchor="middle" font-size="8" fill="#5b6570">release ends the drag</text>
+      </svg>
+    </div>
+    <figure><img src="s8-hand.png"><figcaption>Fig. 9 — Hand-tracking panel: connection, camera status, landmark preview, sensitivity and calibration, gesture guide.</figcaption></figure>
+  </div>
+  <h3>Robustness built in</h3>
+  <ul>
+    <li>Newest-frame capture (no backlog); hand lost during a drag → automatic release after 0.35 s; reconnect with back-off; mouse and keyboard always active.</li>
+    <li>Calibration from a relaxed open hand; adjustable smoothing, pinch thresholds, stable-frame count and active camera region.</li>
+    <li>Every gesture-initiated change is previewed and requires a confirm gesture — accidental gestures cannot change the design.</li>
+  </ul>
+  <h3>Human-factors work still required</h3>
+  <table>
+    <tr><th style="width:30%">Study</th><th>Purpose</th><th style="width:26%">Measure</th></tr>
+    <tr><td>Real-webcam latency</td><td>End-to-end delay from hand movement to cursor</td><td>ms, by camera and CPU class</td></tr>
+    <tr><td>Recognition accuracy</td><td>Different hands, skin tones, lighting, backgrounds</td><td>false accept / reject per gesture</td></tr>
+    <tr><td>Task performance</td><td>Place, wire, confirm — hand vs mouse</td><td>time, errors, SUS score</td></tr>
+    <tr><td>Fatigue</td><td>“Gorilla-arm” over longer sessions</td><td>self-reported effort (Borg scale)</td></tr>
+    <tr><td>Accessibility</td><td>Users with limited fine motor control</td><td>task completion</td></tr>
+  </table>
+</section>
+
+<!-- ============================== REQUIREMENTS -->
+<section class="page">
+  <h2><span class="n">11</span>Requirements: hardware, software, people</h2>
+  <h3>11.1 End-user computer <span class="tag t-e">ESTIMATE</span></h3>
+  <table>
+    <tr><th style="width:22%">Item</th><th>Minimum</th><th>Recommended</th></tr>
+    <tr><td>Processor</td><td>dual-core, 64-bit</td><td>quad-core (hand tracking + 3D at the same time)</td></tr>
+    <tr><td>Memory</td><td>4 GB</td><td>8 GB</td></tr>
+    <tr><td>Graphics</td><td>WebGL 2 capable (integrated is fine)</td><td>any discrete or recent integrated GPU</td></tr>
+    <tr><td>Display</td><td>1366 × 768</td><td>1920 × 1080 or larger; second screen for drawings</td></tr>
+    <tr><td>Browser / OS</td><td>recent Chrome or Edge; Windows 10+, macOS 12+, Linux</td><td>desktop app (Tauri)</td></tr>
+    <tr><td>Webcam (optional)</td><td>720p at 30 fps</td><td>1080p at 30–60 fps, fixed mount, even lighting</td></tr>
+    <tr><td>Python (optional)</td><td>3.10+ for hand tracking</td><td>bundled in the future desktop installer</td></tr>
+    <tr><td>Disk</td><td>a few MB in the browser; desktop installer size not yet measured</td><td>+ project files (typically &lt; 1 MB each)</td></tr>
+  </table>
+  <p class="small">Basis: the main application bundle is ≈ 0.33 MB compressed and calculations take milliseconds (measured, §5). These requirements have not yet been benchmarked on low-end machines; doing so is part of the pilot.</p>
+  <h3>11.2 Development and test environment</h3>
+  <table>
+    <tr><th style="width:22%">Need</th><th>Detail</th></tr>
+    <tr><td>Toolchain</td><td>Node.js 20+, TypeScript 5.9, Vite 7, React 19, Three.js; Python 3.10+, OpenCV, MediaPipe, websockets; Rust + Tauri 2 for desktop builds; ngspice for verification.</td></tr>
+    <tr><td>Continuous integration</td><td>Type-check, 88 application tests, 65 service tests, production build, 5 browser workflows on every change (GitHub Actions workflow included).</td></tr>
+    <tr><td>Test hardware</td><td>Windows, macOS and Linux machines; 3–5 webcam models; a low-end laptop; projector for classroom tests.</td></tr>
+    <tr><td>Signing</td><td>Apple Developer Program, Windows code-signing certificate.</td></tr>
+  </table>
+  <h3>11.3 Non-technical needs</h3>
+  <ul>
+    <li><b>Licensed electrical engineer</b> to review every calculation rule and reference value (mandatory before professional use).</li>
+    <li><b>Standards access:</b> current editions of IEC 60364 parts 4-41, 4-43, 5-52; IEC 60898-1; IEC 60228; and the applicable national rules.</li>
+    <li><b>Regional rules:</b> written requirements for Iraq / Kurdistan Region from the competent authority.</li>
+    <li><b>Translators</b> for Arabic and Kurdish (Sorani) with technical vocabulary.</li>
+    <li><b>Pilot partners:</b> at least one university department or training centre.</li>
+    <li><b>Legal:</b> licence terms, disclaimer wording, privacy notice, third-party licence review (all current dependencies are open source).</li>
+  </ul>
+</section>
+
+<!-- ============================== ROLES -->
+<section class="page">
+  <h2><span class="n">12</span>Team roles and responsibilities</h2>
+  <table>
+    <tr><th style="width:22%">Role</th><th>Responsibilities</th><th style="width:16%">Involvement</th></tr>
+    <tr><td>Product owner / project manager</td><td>scope, priorities, pilot partners, schedule, budget, reporting</td><td>0.5 FTE</td></tr>
+    <tr><td>Electrical engineer (licensed)</td><td>review and sign-off of calculation rules, reference data, regional rules, test cases</td><td>0.3–0.5 FTE</td></tr>
+    <tr><td>Senior software engineer (frontend / 3D)</td><td>model, tools, 2D/3D views, drawings, performance</td><td>1 FTE</td></tr>
+    <tr><td>Software engineer (simulation / calculations)</td><td>solver, device models, installation engine, verification against references</td><td>1 FTE</td></tr>
+    <tr><td>Computer-vision / Python engineer</td><td>hand tracking, calibration, latency and accuracy studies, desktop sidecar</td><td>0.5 FTE</td></tr>
+    <tr><td>QA / test engineer</td><td>test plans, regression, cross-platform and webcam testing, accessibility</td><td>0.5 FTE</td></tr>
+    <tr><td>UX / UI designer</td><td>usability studies, RTL layout, onboarding, teaching material design</td><td>0.3 FTE</td></tr>
+    <tr><td>Education content author</td><td>tutorials, exercises, lab sheets aligned with courses</td><td>0.3 FTE (phase 1, 3)</td></tr>
+    <tr><td>DevOps / release engineer</td><td>CI, signed installers, update channel</td><td>0.3 FTE (phase 4)</td></tr>
+    <tr><td>Translators</td><td>Arabic, Kurdish (Sorani)</td><td>contract</td></tr>
+  </table>
+  <h3>Responsibility matrix (R = responsible, A = accountable, C = consulted, I = informed)</h3>
+  <table>
+    <tr><th>Activity</th><th>PO/PM</th><th>Elec. eng.</th><th>SW frontend</th><th>SW sim.</th><th>CV eng.</th><th>QA</th><th>UX</th></tr>
+    <tr><td>Calculation rules &amp; reference data</td><td>I</td><td>A</td><td>C</td><td>R</td><td></td><td>C</td><td></td></tr>
+    <tr><td>Simulation accuracy</td><td>I</td><td>C</td><td></td><td>A/R</td><td></td><td>R</td><td></td></tr>
+    <tr><td>2D/3D/drawings</td><td>I</td><td>C</td><td>A/R</td><td>C</td><td></td><td>R</td><td>C</td></tr>
+    <tr><td>Hand tracking</td><td>I</td><td></td><td>C</td><td></td><td>A/R</td><td>R</td><td>C</td></tr>
+    <tr><td>Localisation &amp; RTL</td><td>A</td><td>C</td><td>R</td><td></td><td></td><td>R</td><td>R</td></tr>
+    <tr><td>Pilot &amp; user studies</td><td>A</td><td>C</td><td>C</td><td>C</td><td>C</td><td>R</td><td>R</td></tr>
+    <tr><td>Release &amp; installers</td><td>A</td><td></td><td>R</td><td></td><td>R</td><td>R</td><td></td></tr>
+  </table>
+</section>
+
+<!-- ============================== ROADMAP -->
+<section class="page">
+  <h2><span class="n">13</span>Roadmap and timeline <span class="tag t-e">ESTIMATE</span></h2>
+  <table class="gantt">
+    <tr><th style="width:34%">Phase</th>
+      <th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>M7</th><th>M8</th><th>M9</th><th>M10</th><th>M11</th><th>M12</th></tr>
+    <tr><td>1 · Pilot, engineering review, webcam studies</td><td><div class="bar"></div></td><td><div class="bar"></div></td><td><div class="bar"></div></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>2 · Safety calculations completion</td><td></td><td></td><td><div class="bar lite"></div></td><td><div class="bar"></div></td><td><div class="bar"></div></td><td><div class="bar"></div></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>3 · Localisation &amp; regional rules</td><td></td><td></td><td></td><td></td><td><div class="bar lite"></div></td><td><div class="bar"></div></td><td><div class="bar"></div></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>4 · Desktop release (signed installers)</td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="bar"></div></td><td><div class="bar"></div></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>5 · Extensions (PLC timers, ladder, IFC, timing)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="bar"></div></td><td><div class="bar"></div></td><td><div class="bar"></div></td><td><div class="bar lite"></div></td></tr>
+  </table>
+  <table>
+    <tr><th style="width:12%">Phase</th><th>Main deliverables</th><th style="width:30%">Exit criterion</th></tr>
+    <tr><td>1</td><td>pilot deployment; rule review report; webcam latency/accuracy study; usability findings</td><td>review sign-off; success criteria in §15 met</td></tr>
+    <tr><td>2</td><td>line-to-line short circuit, selectivity, k²S² thermal withstand, IT systems, grouping/temperature derating with sourced tables</td><td>each formula tested against hand calculation and reviewed</td></tr>
+    <tr><td>3</td><td>Arabic and Kurdish interface with RTL; regional rule pack</td><td>native-speaker review; rule pack signed off</td></tr>
+    <tr><td>4</td><td>signed Windows/macOS/Linux installers with bundled hand-tracking service; update channel</td><td>clean install on all three platforms</td></tr>
+    <tr><td>5</td><td>PLC timers/counters and ladder view; timed digital simulation; conduit routing; IFC exchange; manufacturer 3D models</td><td>per-feature tests and documentation</td></tr>
+  </table>
+  <h3>Already completed (version 0.1)</h3>
+  <p>Foundation model, component library, simulator with ngspice validation, installation engine with fault-loop checks, tray routing, logic and PLC simulation, 2D/3D views, drawings and exports, hand-tracking service, shared input system, assistant, examples, documentation, desktop shell, automated test suites.</p>
+</section>
+
+<!-- ============================== COST -->
+<section class="page compact">
+  <h2><span class="n">14</span>Cost estimate</h2>
+  <div class="callout warn"><b>How to read this section.</b> Effort (person-months) is an engineering estimate <span class="tag t-e">ESTIMATE</span>. Monetary values use two <b>illustrative blended rates</b> <span class="tag t-a">ASSUMPTION</span> — replace them with your local salary or contractor rates; every total is simply effort × rate.</div>
+  <h3>14.1 Development effort by phase and role (person-months)</h3>
+  <table>
+    <tr><th>Role</th><th class="num">Ph 1</th><th class="num">Ph 2</th><th class="num">Ph 3</th><th class="num">Ph 4</th><th class="num">Ph 5</th><th class="num">Total</th></tr>
+    <tr><td>Product owner / PM</td><td class="num">1.5</td><td class="num">1.5</td><td class="num">1.0</td><td class="num">1.0</td><td class="num">2.0</td><td class="num">7.0</td></tr>
+    <tr><td>Electrical engineer (review)</td><td class="num">1.5</td><td class="num">2.0</td><td class="num">1.0</td><td class="num">0.0</td><td class="num">1.0</td><td class="num">5.5</td></tr>
+    <tr><td>Software — frontend / 3D</td><td class="num">2.0</td><td class="num">2.0</td><td class="num">2.0</td><td class="num">1.0</td><td class="num">4.0</td><td class="num">11.0</td></tr>
+    <tr><td>Software — simulation / calculations</td><td class="num">1.0</td><td class="num">4.0</td><td class="num">1.0</td><td class="num">0.0</td><td class="num">3.0</td><td class="num">9.0</td></tr>
+    <tr><td>Computer-vision / Python</td><td class="num">1.5</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">1.0</td><td class="num">0.5</td><td class="num">3.0</td></tr>
+    <tr><td>QA / test</td><td class="num">1.5</td><td class="num">1.5</td><td class="num">1.0</td><td class="num">1.0</td><td class="num">1.5</td><td class="num">6.5</td></tr>
+    <tr><td>UX / UI</td><td class="num">1.0</td><td class="num">0.0</td><td class="num">1.0</td><td class="num">0.0</td><td class="num">0.5</td><td class="num">2.5</td></tr>
+    <tr><td>Education content</td><td class="num">1.0</td><td class="num">0.0</td><td class="num">0.5</td><td class="num">0.0</td><td class="num">0.5</td><td class="num">2.0</td></tr>
+    <tr><td>DevOps / release</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">1.5</td><td class="num">0.0</td><td class="num">1.5</td></tr>
+    <tfoot><tr><td>Total person-months</td><td class="num">11.0</td><td class="num">11.0</td><td class="num">7.5</td><td class="num">5.5</td><td class="num">13.0</td><td class="num">48.0</td></tr></tfoot>
+  </table>
+  <h3>14.2 Labour cost at illustrative rates <span class="tag t-a">ASSUMPTION</span></h3>
+  <table>
+    <tr><th>Phase</th><th class="num">Person-months</th><th class="num">at USD 1 500 / PM</th><th class="num">at USD 4 000 / PM</th></tr>
+    <tr><td>1 · Pilot &amp; review</td><td class="num">11.0</td><td class="num">16 500</td><td class="num">44 000</td></tr>
+    <tr><td>2 · Safety calculations</td><td class="num">11.0</td><td class="num">16 500</td><td class="num">44 000</td></tr>
+    <tr><td>3 · Localisation</td><td class="num">7.5</td><td class="num">11 250</td><td class="num">30 000</td></tr>
+    <tr><td>4 · Release</td><td class="num">5.5</td><td class="num">8 250</td><td class="num">22 000</td></tr>
+    <tr><td>5 · Extensions</td><td class="num">13.0</td><td class="num">19 500</td><td class="num">52 000</td></tr>
+    <tfoot><tr><td>Total</td><td class="num">48.0</td><td class="num">72 000</td><td class="num">192 000</td></tr></tfoot>
+  </table>
+  <h3>14.3 Non-labour costs</h3>
+  <table>
+    <tr><th>Item</th><th>Basis</th><th class="num">Indicative amount</th></tr>
+    <tr><td>Apple Developer Program</td><td>required to sign/notarise macOS builds; published price</td><td class="num">USD 99 / year</td></tr>
+    <tr><td>Windows code-signing certificate</td><td>varies by provider and validation level <span class="tag t-e">ESTIMATE</span></td><td class="num">USD 200–700 / year</td></tr>
+    <tr><td>Standards documents</td><td>IEC 60364 parts, 60898-1, 60228 + national rules; per-document prices vary <span class="tag t-e">ESTIMATE</span></td><td class="num">USD 1 000–3 000 once</td></tr>
+    <tr><td>Test webcams</td><td>3–5 models for accuracy studies <span class="tag t-e">ESTIMATE</span></td><td class="num">USD 150–500 once</td></tr>
+    <tr><td>Test computers</td><td>low-end laptop + macOS machine if not available <span class="tag t-e">ESTIMATE</span></td><td class="num">USD 0–2 500 once</td></tr>
+    <tr><td>Translation</td><td>Arabic + Kurdish UI and documentation; quote required <span class="tag t-a">ASSUMPTION</span></td><td class="num">quote</td></tr>
+    <tr><td>Servers / cloud</td><td>none required (local-first); optional website and download hosting</td><td class="num">≈ USD 0–20 / month</td></tr>
+    <tr><td>Open-source licences</td><td>all current dependencies are permissive open source</td><td class="num">USD 0</td></tr>
+  </table>
+  <p class="small">Contingency of 15–20 % on labour is recommended for an engineering product of this kind. Phase 1 alone (≈ 11 person-months) is the smallest self-contained step and produces the evidence needed to decide on the remaining phases.</p>
+</section>
+
+<!-- ============================== PILOT -->
+<section class="page">
+  <h2><span class="n">15</span>Pilot plan and success criteria</h2>
+  <table>
+    <tr><th style="width:20%">Element</th><th>Plan</th></tr>
+    <tr><td>Participants</td><td>1–2 university departments or training centres; ≈ 30–60 students; 3–5 instructors; 2–3 practising electrical designers <span class="tag t-e">ESTIMATE</span></td></tr>
+    <tr><td>Duration</td><td>12 weeks: 2 weeks set-up and training, 8 weeks use in courses, 2 weeks evaluation</td></tr>
+    <tr><td>Activities</td><td>build the 15 examples manually; one design assignment per mode; installation exercise on a real floor plan; hand-tracking sessions</td></tr>
+    <tr><td>Engineering review</td><td>licensed engineer re-derives every formula and reference value; compares 20 installation circuits against independent calculations</td></tr>
+    <tr><td>Data collected</td><td>task times, errors, usability (SUS) questionnaire, instructor interviews, crash/bug reports, webcam latency and recognition logs (landmarks only, with consent)</td></tr>
+  </table>
+  <h3>Success criteria (proposed targets)</h3>
+  <table>
+    <tr><th>Criterion</th><th>Target</th><th>Measurement</th></tr>
+    <tr><td>Calculation correctness</td><td>no unresolved discrepancy in the engineering review</td><td>review report</td></tr>
+    <tr><td>Simulation agreement</td><td>all examples within 0.1 mV of ngspice (already met)</td><td>automated tests</td></tr>
+    <tr><td>Task completion</td><td>≥ 90 % of students complete the LED, divider and installation tasks unaided</td><td>observation</td></tr>
+    <tr><td>Usability</td><td>SUS score ≥ 70</td><td>questionnaire</td></tr>
+    <tr><td>Hand tracking</td><td>≥ 95 % gesture recognition in normal lighting; cursor latency acceptable to users</td><td>logged study</td></tr>
+    <tr><td>Stability</td><td>no data loss; crash-free sessions ≥ 99 %</td><td>bug reports, autosave recovery</td></tr>
+    <tr><td>Instructor value</td><td>≥ 3 of 5 instructors willing to use it next term</td><td>interviews</td></tr>
+  </table>
+  <h3>Key performance indicators after launch</h3>
+  <ul>
+    <li>Active institutions and users per term; projects created; examples completed.</li>
+    <li>Share of designs with zero errors at export; number of findings resolved before printing.</li>
+    <li>Reported calculation discrepancies (target: zero open); median time to fix a bug.</li>
+  </ul>
+</section>
+
+<!-- ============================== RISKS + GOVERNANCE -->
+<section class="page">
+  <h2><span class="n">16</span>Risks and mitigations</h2>
+  <table>
+    <tr><th style="width:28%">Risk</th><th style="width:10%">Likelihood</th><th style="width:10%">Impact</th><th>Mitigation</th></tr>
+    <tr><td>A calculation is used as if it were a compliance certificate</td><td>Medium</td><td>High</td><td>no “safe” status; disclaimers on every drawing and report; engineering review; “not evaluated” for missing checks</td></tr>
+    <tr><td>Error in a formula or reference value</td><td>Low–Medium</td><td>High</td><td>cited sources; hand-calculation tests; licensed review; versioned rule packs</td></tr>
+    <tr><td>Hand tracking unreliable in real classrooms</td><td>Medium</td><td>Medium</td><td>pilot study; calibration; mouse always available; preview/confirm</td></tr>
+    <tr><td>Regional rules unavailable or ambiguous</td><td>Medium</td><td>Medium</td><td>rules stored as data; work with competent authority; mark as “review”</td></tr>
+    <tr><td>Performance on low-end school computers</td><td>Medium</td><td>Medium</td><td>benchmark in pilot; simplified 3D mode; level of detail</td></tr>
+    <tr><td>Key-person dependency</td><td>Medium</td><td>Medium</td><td>documentation, tests and CI already in place; pair work</td></tr>
+    <tr><td>Third-party library changes</td><td>Low</td><td>Low–Medium</td><td>pinned versions, CI, small dependency set</td></tr>
+    <tr><td>Camera privacy concerns</td><td>Low</td><td>Medium</td><td>frames never leave the machine; explicit on/off; privacy notice</td></tr>
+  </table>
+
+  <h2 style="margin-top:5mm"><span class="n">17</span>Quality, safety and governance</h2>
+  <ul>
+    <li><b>Status vocabulary:</b> <span class="status s-valid">VALID within supported checks</span> <span class="status s-warn">WARNING</span> <span class="status s-err">ERROR</span> <span class="status s-ne">NOT EVALUATED</span> <span class="status s-rev">REQUIRES REVIEW</span>.</li>
+    <li><b>Traceability:</b> every result lists formula, inputs, assumptions and source; reference data carries its citation.</li>
+    <li><b>Change control:</b> calculation changes require a test against an independent calculation and engineering sign-off.</li>
+    <li><b>Release gates:</b> all automated suites green; ngspice agreement; manual exploratory test on each platform.</li>
+    <li><b>Physical-safety boundary:</b> the software is for design assistance and education; installation and machine-safety functions require qualified design, standards compliance and controlled commissioning.</li>
+  </ul>
+</section>
+
+<!-- ============================== DECISION + APPENDICES -->
+<section class="page">
+  <h2><span class="n">18</span>Decision requested</h2>
+  <ol>
+    <li>Approve <b>Phase 1 (pilot and engineering review)</b>: ≈ 11 person-months over 3 months.</li>
+    <li>Nominate the pilot institution(s) and the reviewing licensed electrical engineer.</li>
+    <li>Provide the regional regulations and the standards editions to be applied.</li>
+    <li>Choose a business-model option (§7.5) to guide Phases 3–4.</li>
+    <li>Confirm local rates so §14 can be converted from person-months to a final budget.</li>
+  </ol>
+
+  <h2 style="margin-top:6mm">Appendix A — Standards and references</h2>
+  <table>
+    <tr><th style="width:28%">Reference</th><th>Used for</th></tr>
+    <tr><td>IEC 60364-4-41</td><td>fault protection: TN condition Zs·Ia ≤ U0, TT condition RA·IΔn ≤ 50 V, RCD additional protection</td></tr>
+    <tr><td>IEC 60364-4-43</td><td>overcurrent protection Ib ≤ In ≤ Iz; breaking capacity</td></tr>
+    <tr><td>IEC 60364-5-52 (Annex G, Table 52.2)</td><td>voltage-drop method and limits; minimum conductor size</td></tr>
+    <tr><td>IEC 60898-1</td><td>breaker rated currents; instantaneous trip ranges B/C/D</td></tr>
+    <tr><td>IEC 60228 · IEC 60028</td><td>conductor sizes; copper resistivity</td></tr>
+    <tr><td>IEC 60617 · IEC 60445 · IEC 60062</td><td>graphical symbols; conductor colours; resistor colour code</td></tr>
+    <tr><td>IEC 61131-3 · IEC 61131-2</td><td>Structured Text subset; PLC input thresholds</td></tr>
+    <tr><td>ISO 216 · ISO 5457</td><td>paper sizes; drawing frames and zones</td></tr>
+    <tr><td>Ho, Ruehli &amp; Brennan (1975); Nagel, SPICE2 (1975)</td><td>modified nodal analysis; circuit simulation methods</td></tr>
+    <tr><td>Casiez, Roussel &amp; Vogel (2012)</td><td>One Euro filter</td></tr>
+  </table>
+
+  <h2 style="margin-top:6mm">Appendix B — Test inventory <span class="tag t-m">MEASURED</span></h2>
+  <table>
+    <tr><th>Suite</th><th class="num">Tests</th><th>Scope</th></tr>
+    <tr><td>Engineering (simulation, logic, PLC, installation)</td><td class="num">63</td><td>hand calculations, ngspice cross-checks, fault loop, routing</td></tr>
+    <tr><td>Integration (exchange, input system, 3D/2D)</td><td class="num">22</td><td>formats, mouse = hand, preview/confirm, undo/redo, pin coincidence</td></tr>
+    <tr><td>Unit (containment routing)</td><td class="num">3</td><td>tray graph routing</td></tr>
+    <tr><td><b>Application total</b></td><td class="num"><b>88</b></td><td>all passing</td></tr>
+    <tr><td>Python service</td><td class="num">65</td><td>gestures, smoothing, controller, protocol, security, schemas</td></tr>
+    <tr><td>End-to-end browser workflows</td><td class="num">5</td><td>real app + real hand-tracking service</td></tr>
+  </table>
+
+  <h2 style="margin-top:6mm">Appendix C — Glossary</h2>
+  <table>
+    <tr><td style="width:18%"><b>MNA</b></td><td>Modified Nodal Analysis — matrix method for solving circuits</td><td style="width:18%"><b>Ib / In / Iz</b></td><td>design current / breaker rating / cable current-carrying capacity</td></tr>
+    <tr><td><b>Ze / Zs</b></td><td>external / total earth-fault loop impedance</td><td><b>ΔU</b></td><td>voltage drop</td></tr>
+    <tr><td><b>RCD / RCBO</b></td><td>residual-current device / combined with overcurrent breaker</td><td><b>TN / TT / IT</b></td><td>earthing systems</td></tr>
+    <tr><td><b>ngspice</b></td><td>open-source SPICE circuit simulator used as reference</td><td><b>Structured Text</b></td><td>PLC programming language of IEC 61131-3</td></tr>
+    <tr><td><b>GLB / glTF</b></td><td>standard 3D formats for real-time use</td><td><b>DXF</b></td><td>CAD drawing exchange format</td></tr>
+    <tr><td><b>Landmarks</b></td><td>21 tracked points on a hand</td><td><b>SUS</b></td><td>System Usability Scale (0–100)</td></tr>
+  </table>
+  <p class="small" style="margin-top:5mm">NULL-TECH Circuit Studio is engineering assistance software. Designs produced with it must be verified by a qualified engineer against the applicable standards and local regulations before construction or installation. All measured values in this document were produced from version 0.1 of the software on the date of writing.</p>
+</section>
+</body></html>

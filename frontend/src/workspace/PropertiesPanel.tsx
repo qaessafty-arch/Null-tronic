@@ -389,7 +389,8 @@ export function PropertiesPanel() {
         </Row>
       </section>
     );
-  } else if (project.cables[id]) {
+  } else if (project.circuits[id]) body = <CircuitProps circuit={project.circuits[id]} project={project} />;
+  else if (project.cables[id]) {
     const cb = project.cables[id];
     body = (
       <>
