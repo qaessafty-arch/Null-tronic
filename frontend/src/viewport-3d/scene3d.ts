@@ -7,6 +7,7 @@ import { wirePolyline } from '../project-model/geometry';
 import type { Id, Project } from '../project-model/types';
 import type { SimResult } from '../simulation/simulate';
 import { buildModel, mat } from './models';
+import { wallSegments } from './walls';
 
 /**
  * Three.js scene synchronised incrementally from the authoritative project.
@@ -181,18 +182,10 @@ export class Scene3D {
     }
     // rooms (walls de-duplicated along shared edges) and cables
     if (isInst) {
-      const seen = new Set<string>();
+      const wallsByRoom = wallSegments(Object.values(project.rooms));
       for (const r of Object.values(project.rooms)) {
-        const segs: [number, number, number, number][] = [];
-        for (let i = 0; i < r.polygon.length; i++) {
-          const a = r.polygon[i];
-          const b = r.polygon[(i + 1) % r.polygon.length];
-          const key = [a, b].map((q) => `${Math.round(q.x)},${Math.round(q.y)}`).sort().join('|');
-          if (seen.has(key)) continue;
-          seen.add(key);
-          segs.push([a.x, a.y, b.x, b.y]);
-        }
-        const hash = JSON.stringify([r.polygon, r.height, r.wallThickness, segs.length, opts.realistic, opts.section]);
+        const segs = wallsByRoom.get(r.id) ?? [];
+        const hash = JSON.stringify([r.polygon, r.height, r.wallThickness, segs, opts.realistic, opts.section]);
         wanted.set(r.id, {
           hash,
           build: () => {
