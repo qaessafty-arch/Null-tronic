@@ -7,7 +7,7 @@ import { wirePolyline } from '../project-model/geometry';
 import type { Id, Project } from '../project-model/types';
 import type { SimResult } from '../simulation/simulate';
 import { buildModel, mat } from './models';
-import { wallSegments } from './walls';
+import { wallBoxes, wallSegments } from './walls';
 
 /**
  * Three.js scene synchronised incrementally from the authoritative project.
@@ -183,6 +183,7 @@ export class Scene3D {
     // rooms (walls de-duplicated along shared edges) and cables
     if (isInst) {
       const wallsByRoom = wallSegments(Object.values(project.rooms));
+      const allSegs = [...wallsByRoom.values()].flat();
       for (const r of Object.values(project.rooms)) {
         const segs = wallsByRoom.get(r.id) ?? [];
         const hash = JSON.stringify([r.polygon, r.height, r.wallThickness, segs, opts.realistic, opts.section]);
@@ -196,11 +197,10 @@ export class Scene3D {
             floor.receiveShadow = true;
             g.add(floor);
             const wallMat = mat('#e8e6e1', { rough: 0.85, realistic: opts.realistic, opacity: 0.55 });
-            for (const [x1, z1, x2, z2] of segs) {
-              const len = Math.hypot(x2 - x1, z2 - z1);
-              const wall = new THREE.Mesh(new THREE.BoxGeometry(len + r.wallThickness, r.height, r.wallThickness), wallMat);
-              wall.position.set((x1 + x2) / 2, r.height / 2, (z1 + z2) / 2);
-              wall.rotation.y = -Math.atan2(z2 - z1, x2 - x1);
+            for (const b of wallBoxes(segs, r.wallThickness, allSegs)) {
+              const wall = new THREE.Mesh(new THREE.BoxGeometry(b.length, r.height, b.thickness), wallMat);
+              wall.position.set(b.cx, r.height / 2, b.cy);
+              wall.rotation.y = -b.angle;
               wall.castShadow = true;
               wall.receiveShadow = true;
               g.add(wall);

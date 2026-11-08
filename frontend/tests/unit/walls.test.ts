@@ -25,3 +25,24 @@ describe('3D wall segments', () => {
     for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) expect(overlap(all[i], all[j])).toBe(0);
   });
 });
+
+import { wallBoxes } from '../../src/viewport-3d/walls';
+
+describe('3D wall boxes', () => {
+  const rect = (b: { cx: number; cy: number; length: number; thickness: number; angle: number }) => {
+    const h = Math.abs(Math.sin(b.angle)) < 0.5;
+    const w = h ? b.length : b.thickness;
+    const d = h ? b.thickness : b.length;
+    return [b.cx - w / 2, b.cy - d / 2, b.cx + w / 2, b.cy + d / 2];
+  };
+  const area = (a: number[], c: number[]) => Math.max(0, Math.min(a[2], c[2]) - Math.max(a[0], c[0])) * Math.max(0, Math.min(a[3], c[3]) - Math.max(a[1], c[1]));
+
+  it('no two wall boxes overlap in plan and corners are closed (sample flat)', () => {
+    const rooms = Object.values(sampleInstallation().rooms);
+    const segs = [...wallSegments(rooms).values()].flat();
+    const boxes = wallBoxes(segs, 150).map(rect);
+    for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) expect(area(boxes[i], boxes[j])).toBeLessThan(1);
+    // every room corner is covered by some wall box (closed corners, no holes)
+    for (const r of rooms) for (const p of r.polygon) expect(boxes.some((b) => p.x >= b[0] - 1e-6 && p.x <= b[2] + 1e-6 && p.y >= b[1] - 1e-6 && p.y <= b[3] + 1e-6)).toBe(true);
+  });
+});
