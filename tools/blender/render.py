@@ -69,6 +69,10 @@ for m in bpy.data.materials:
         if mode == "building" and m.name != "ground" and abs(bc[0] - bc[1]) < 0.03 and 0.55 < bc[0] < 0.62 and a >= 0.99:
             p.inputs["Base Color"].default_value = (0.42, 0.30, 0.20, 1)  # floor slabs → light oak
             p.inputs["Roughness"].default_value = 0.6
+        if mode == "technical":
+            c = p.inputs["Base Color"].default_value
+            m.diffuse_color = (c[0], c[1], c[2], 1.0)  # Workbench reads the viewport colour
+            m.blend_method = "OPAQUE"
         strength = p.inputs.get("Emission Strength")
         if strength is not None and strength.default_value > 0:
             strength.default_value = max(strength.default_value, 3.0)
