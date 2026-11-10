@@ -212,6 +212,43 @@ function plcIo(): Project {
   return b.build();
 }
 
+function plcTimer(): Project {
+  const b = new ProjectBuilder('control', 'PLC on-delay timer and counter (Structured Text)');
+  const v1 = b.add('vdc', { x: 0, y: 25 }, { voltage: 24 }, { ref: 'G1' });
+  const s1 = b.add('switch', { x: 20, y: 10 }, { closed: true }, { ref: 'S1' });
+  // 0…24 V clock, 5 Hz, starting at 0 V: the counter input
+  const v2 = b.add('vac', { x: 40, y: 15 }, { amplitude: 12, offset: 12, frequency: 5, phase: -90 }, { ref: 'G2' });
+  const i0 = b.add('plc_input', { x: 25, y: 25 }, { address: 'I0.0' }, { ref: 'I0' });
+  const i1 = b.add('plc_input', { x: 50, y: 5 }, { address: 'I0.1' }, { ref: 'I1' });
+  const q0 = b.add('plc_output', { x: 60, y: 40 }, { address: 'Q0.0', state: false }, { ref: 'Q0' });
+  const q1 = b.add('plc_output', { x: 85, y: 40 }, { address: 'Q0.1', state: false }, { ref: 'Q1' });
+  const h1 = b.add('lamp', { x: 75, y: 45 }, { resistance: 480 }, { ref: 'H1' });
+  const h2 = b.add('lamp', { x: 100, y: 45 }, { resistance: 480 }, { ref: 'H2' });
+  const r1 = b.add('resistor', { x: 20, y: 40 }, { resistance: 4700 }, { rotation: 90, ref: 'R1' });
+  const r2 = b.add('resistor', { x: 50, y: 25 }, { resistance: 4700 }, { rotation: 90, ref: 'R2' });
+  const g = b.add('ground', { x: 0, y: 60 });
+  b.wire(v1, '+', s1, '1', [{ x: 0, y: 10 }]).wire(v1, '-', g, '1');
+  b.wire(s1, '2', i0, '1', [{ x: 25, y: 18 }, { x: 20, y: 18 }, { x: 20, y: 25 }]).wire(r1, '1', i0, '1', [{ x: 20, y: 25 }]).wire(r1, '2', g, '1', [{ x: 20, y: 55 }, { x: 0, y: 55 }]);
+  b.wire(v2, '+', i1, '1', [{ x: 40, y: 5 }]).wire(v2, '-', g, '1', [{ x: 40, y: 55 }, { x: 0, y: 55 }]);
+  b.wire(r2, '1', v2, '+', [{ x: 50, y: 10 }, { x: 40, y: 10 }]).wire(r2, '2', g, '1', [{ x: 50, y: 55 }, { x: 0, y: 55 }]);
+  b.wire(q0, '1', h1, 'X1', [{ x: 75, y: 40 }]).wire(h1, 'X2', g, '1', [{ x: 75, y: 55 }, { x: 0, y: 55 }]);
+  b.wire(q1, '1', h2, 'X1', [{ x: 100, y: 40 }]).wire(h2, 'X2', g, '1', [{ x: 100, y: 55 }, { x: 0, y: 55 }]);
+  const plcProgram = [
+    '(* H1 lights 300 ms after S1 closes; H2 lights after 3 clock pulses *)',
+    'VAR',
+    '  T1 : TON;',
+    '  C1 : CTU;',
+    'END_VAR',
+    'T1(IN := I0.0, PT := T#300ms);',
+    'C1(CU := I0.1, R := NOT I0.0, PV := 3);',
+    'Q0.0 := T1.Q;',
+    'Q0.1 := C1.Q;',
+    '',
+  ].join('\n');
+  b.project = { ...b.project, settings: { ...b.project.settings, plcProgram } };
+  return b.build();
+}
+
 function logicGates(): Project {
   const b = new ProjectBuilder('electronic', 'Logic gates — AND driving an LED');
   const v1 = b.add('vdc', { x: 0, y: 25 }, { voltage: 5 });
@@ -423,6 +460,17 @@ export const EXAMPLES: ExampleDef[] = [
     theory: ['Inputs read ON when their terminal is ≥ 15 V (IEC 61131-2 type 1 at 24 V DC, verify with the module).', 'Q0.0 := (I0.0 OR Q0.0) AND NOT I0.1 — the output holds itself on (seal-in) until stop.'],
     steps: ['Open Tools ▸ PLC program to read the program.', 'Simulate, press S1: Q0.0 turns on and H1 lights.', 'Release S1: Q0.0 stays on.', 'Press S2: Q0.0 turns off.'],
     build: plcIo,
+  },
+  {
+    id: 'plc-timer',
+    title: 'PLC timer and counter (TON / CTU)',
+    topic: 'PLC',
+    type: 'control',
+    summary: 'An on-delay timer lights H1 300 ms after S1 closes; an up-counter lights H2 after three pulses of a 5 Hz clock.',
+    analysis: { kind: 'tran', tstop: 1, steps: 1000 },
+    theory: ['TON: output Q turns on when IN has been true for the preset time PT, and drops as soon as IN is false.', 'CTU: counts rising edges of CU; Q is true when the count reaches PV; R resets the count.', 'Timers follow simulation time, so use transient analysis. The time resolution is the simulation step (here 1 ms).'],
+    steps: ['Open Tools ▸ PLC program to read the program.', 'Run the 1 s transient: H1 current starts at 0.3 s.', 'H2 current starts at the third clock pulse (about 0.46 s).', 'Change PT or PV and run again.'],
+    build: plcTimer,
   },
   {
     id: 'logic-and',

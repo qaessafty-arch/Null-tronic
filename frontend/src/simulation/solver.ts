@@ -1,6 +1,6 @@
 import { solveComplex, solveReal, SingularMatrixError } from './linalg';
 import { VT_300K, type CircuitModel, type Element } from './circuit';
-import { scan } from './plc';
+import { scan, type PlcMemory } from './plc';
 
 /**
  * Modified Nodal Analysis solver.
@@ -451,7 +451,7 @@ function logicIn(states: Map<string, boolean>, key: string, v: number, vih: numb
  * (zero-delay combinational evaluation) and one PLC scan. Returns true if anything changed,
  * in which case the caller re-solves; the loop detects oscillation.
  */
-function updateDiscrete(model: CircuitModel, states: Map<string, boolean>, x: Float64Array): boolean {
+function updateDiscrete(model: CircuitModel, states: Map<string, boolean>, x: Float64Array, time = 0, mem: PlcMemory = new Map()): boolean {
   let changed = updateCoils(model, states, x);
   for (const g of model.gates) {
     const ins = g.inputs.map((n, i) => {
@@ -473,7 +473,7 @@ function updateDiscrete(model: CircuitModel, states: Map<string, boolean>, x: Fl
     for (const [k, v] of states) if (k.startsWith('plcm:')) env.set(k.slice(5), v);
     for (const o of model.plcOutputs) env.set(o.address, states.get(o.stateKey) ?? false);
     for (const i of model.plcInputs) env.set(i.address, V(x, i.node) >= i.threshold);
-    scan(model.plc, env);
+    scan(model.plc, env, time, mem);
     const outKeys = new Map(model.plcOutputs.map((o) => [o.address, o.stateKey]));
     for (const name of model.plc.written) {
       const key = outKeys.get(name) ?? `plcm:${name}`;
@@ -516,13 +516,13 @@ export interface OpSolution {
   oscillation: boolean;
 }
 
-export function solveOperatingPoint(model: CircuitModel, states?: Map<string, boolean>, time = 0): OpSolution {
+export function solveOperatingPoint(model: CircuitModel, states?: Map<string, boolean>, time = 0, mem: PlcMemory = new Map()): OpSolution {
   const st = new Map([...model.initialStates, ...(states ?? [])]);
   let sol = dcSolve(model, st, time);
   let relayIterations = 0;
   let oscillation = false;
   const seen = new Set<string>();
-  while (hasDiscrete(model) && updateDiscrete(model, st, sol.x)) {
+  while (hasDiscrete(model) && updateDiscrete(model, st, sol.x, time, mem)) {
     relayIterations++;
     const sig = [...st.entries()].map(([k, v]) => `${k}=${v}`).join(',');
     if (seen.has(sig) || relayIterations > 30) {
@@ -549,9 +549,10 @@ export interface TranResult {
 export function solveTransient(model: CircuitModel, tstop: number, steps: number, states?: Map<string, boolean>, uic = false): TranResult {
   if (!(tstop > 0) || steps < 2) throw new Error('Transient requires tstop > 0 and at least 2 steps');
   const h = tstop / steps;
+  const mem: PlcMemory = new Map(); // PLC timer / counter state, retained over the whole run
   const op: OpSolution = uic
     ? { x: new Float64Array(sz(model)), states: new Map([...model.initialStates, ...(states ?? [])]), iterations: 0, method: 'uic', relayIterations: 0, oscillation: false }
-    : solveOperatingPoint(model, states, 0);
+    : solveOperatingPoint(model, states, 0, mem);
   const st = op.states;
   const n = model.elements.length;
   const reactive: ReactiveState = { v: new Float64Array(n), i: new Float64Array(n) };
@@ -577,7 +578,7 @@ export function solveTransient(model: CircuitModel, tstop: number, steps: number
     const ctx: SolveContext = { model, states: st, sourceScale: 1, gminExtra: 0, time: t, h, reactive, junction, be };
     let r = newtonSolve(ctx, x);
     let guard = 0;
-    while (hasDiscrete(model) && updateDiscrete(model, st, r.x) && guard++ < 10) r = newtonSolve(ctx, r.x);
+    while (hasDiscrete(model) && updateDiscrete(model, st, r.x, t, mem) && guard++ < 10) r = newtonSolve(ctx, r.x);
     x = r.x;
     // update histories
     model.elements.forEach((e, idx) => {

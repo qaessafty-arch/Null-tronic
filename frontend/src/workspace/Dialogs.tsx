@@ -436,7 +436,7 @@ function AboutDialog() {
       <ul>
         <li>No status ever means “safe” or “compliant”. Fault-loop impedance, disconnection times, short-circuit levels and ampacity tables are not built in.</li>
         <li>Logic gates are zero-delay; generic ICs and microcontrollers are not simulated (reported as “not evaluated”). Op-amps are ideal macro-models.</li>
-        <li>PLC programs: Boolean Structured Text subset only (no timers/counters); no vendor PLC or protocol is emulated.</li>
+        <li>PLC programs: Boolean Structured Text subset with TON/TOF timers and CTU counter (no arithmetic or other function blocks); no vendor PLC or protocol is emulated.</li>
         <li>Cable routes are explicit polylines; automatic routing through trays/conduits is not yet implemented.</li>
         <li>IFC import/export is not implemented.</li>
       </ul>
@@ -477,9 +477,12 @@ function PlcDialog() {
             <li><code>X := expr;</code> assignment (outputs Q…, memory M… or any name)</li>
             <li><code>IF … THEN … ELSIF … ELSE … END_IF;</code></li>
             <li><code>NOT</code> &gt; <code>AND</code>/<code>&amp;</code> &gt; <code>XOR</code> &gt; <code>OR</code>, <code>TRUE</code>, <code>FALSE</code></li>
+            <li><code>VAR T1 : TON; C1 : CTU; END_VAR</code> declares timers / counters</li>
+            <li><code>T1(IN := I0.0, PT := T#2s);</code> on-delay (<code>TOF</code>: off-delay), read <code>T1.Q</code></li>
+            <li><code>C1(CU := I0.1, R := I0.2, PV := 3);</code> up-counter, read <code>C1.Q</code></li>
             <li>Comments <code>(* … *)</code> and <code>// …</code></li>
           </ul>
-          <p className="note">One scan runs per simulation iteration until outputs settle. Timers, counters and arithmetic are not supported yet and are rejected, not ignored. Vendor-neutral: no PLC brand or protocol is emulated.</p>
+          <p className="note">One scan runs per simulation iteration until outputs settle. Timers use simulation time, so run a transient analysis to see them act (resolution = the time step). Arithmetic, comparisons and other function blocks are rejected, not ignored. Vendor-neutral: no PLC brand or protocol is emulated.</p>
         </div>
       </div>
     </Dialog>

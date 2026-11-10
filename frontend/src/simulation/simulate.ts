@@ -73,7 +73,7 @@ function preflight(project: Project, model: CircuitModel): Finding[] {
     f.push({ id: 'sim-gnd', status: 'error', code: 'NO_GROUND', message: 'No ground (0 V reference) symbol is connected. Add a Ground component.', refs: [], basis: 'Nodal analysis needs a reference node.' });
   if (!model.elements.some((e) => e.kind === 'V' || e.kind === 'I'))
     f.push({ id: 'sim-src', status: 'warning', code: 'NO_SOURCE', message: 'No independent source: every voltage will be 0 V.', refs: [] });
-  if (model.plcError) f.push({ id: 'plc-syntax', status: 'error', code: 'PLC_SYNTAX', message: `PLC program: ${model.plcError}`, refs: [], basis: 'Structured Text subset: assignments, IF/ELSIF/ELSE, NOT/AND/XOR/OR.' });
+  if (model.plcError) f.push({ id: 'plc-syntax', status: 'error', code: 'PLC_SYNTAX', message: `PLC program: ${model.plcError}`, refs: [], basis: 'Structured Text subset: assignments, IF/ELSIF/ELSE, NOT/AND/XOR/OR, TON/TOF/CTU function blocks.' });
   if (model.plc) {
     const known = new Set([...model.plcInputs.map((i) => i.address), ...model.plcOutputs.map((o) => o.address)]);
     for (const name of model.plc.read) if (/^[IQ]\d/.test(name) && !known.has(name)) f.push({ id: `plc-io-${name}`, status: 'warning', code: 'PLC_UNWIRED_IO', message: `PLC program uses ${name}, but no PLC I/O component has that address (reads FALSE).`, refs: [] });
@@ -344,6 +344,7 @@ export function runOperatingPoint(project: Project, states?: Map<string, boolean
   if (findings.some((f) => f.status === 'error')) return { kind: 'op', ok: false, error: findings.find((f) => f.status === 'error')!.message, findings, timestamp: stamp() };
   try {
     const sol = solveOperatingPoint(model, states);
+    if (model.plc && [...model.plc.fbs.values()].some((t) => t !== 'CTU')) findings.push({ id: 'plc-timer-op', status: 'review', code: 'PLC_TIMER_OP', message: 'PLC timers follow simulation time: at the operating point no time has elapsed (TON outputs are off unless PT is 0). Run a transient analysis to see the timing.', refs: [] });
     const nodeVoltages: Record<string, number> = {};
     model.nodeNames.forEach((n, i) => {
       if (!n.includes('#')) nodeVoltages[n] = sol.x[i];

@@ -10,7 +10,8 @@ Safety & compliance
 
 Simulation
 - Logic gates are zero-delay combinational models (no propagation delay, no flip-flops); generic ICs/MCUs are documentation-only.
-- PLC programs: Boolean Structured Text subset (assignments, IF/ELSIF/ELSE); no timers, counters, arithmetic or function blocks; no vendor PLC or protocol emulation.
+- PLC programs: Boolean Structured Text subset (assignments, IF/ELSIF/ELSE) with TON / TOF timers and the CTU up-counter. Only the Boolean output `.Q` is readable (no ET / CV), and there is no arithmetic, comparison, CTD/CTUD, edge-detect (R_TRIG) or user function block; no vendor PLC or protocol emulation.
+- PLC timers follow simulation time: they act only in transient analysis, with a resolution of one time step. At the operating point no time has elapsed (reported as a review finding), and counter values are not kept between separate runs.
 - Op-amps: ideal macro-model; no bandwidth, slew rate, offsets. Device capacitances are not modelled.
 - Ideal transformer passes DC. Fixed-step transient (no adaptive timestep / breakpoints).
 
